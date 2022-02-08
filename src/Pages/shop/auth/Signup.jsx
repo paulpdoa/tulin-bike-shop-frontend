@@ -13,6 +13,7 @@ const Signup = () => {
     const [confirmPassword,setConfirmPassword] = useState('');
 
     const [success,setSuccess] = useState('');
+    const [isLoading,setIsLoading] = useState(true);
 
     const [passErr,setPassErr] = useState('');
     const [usernameErr,setUsernameErr] = useState('');
@@ -21,8 +22,9 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const onSignup = (e) => {
+    const onSignup = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         if(password !== confirmPassword) {
             setPassErr('Password doesn\'t match, please check your password');
@@ -30,8 +32,9 @@ const Signup = () => {
                 setPassErr('');
             },2000);
         } else {
-            axios.post('/customer',{ firstname,lastname,username,email,password })
+            await axios.post('/customer',{ firstname,lastname,username,email,password })
             .then((data) => {
+                setIsLoading(false);
                 setSuccess(data.data.mssg);
                 setTimeout(() => {
                     navigate(data.data.redirect);
@@ -53,7 +56,7 @@ const Signup = () => {
     <div className="content h-full">
         <div className="max-content signup-container">
             <h1 className="signup-title">Create your Account</h1>
-            <h2 className="signup-success">{ success && <span className="flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />{ success }</span> }</h2>
+            <h2 className="signup-success">{ isLoading && <span className="flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />{ success }</span> }</h2>
             <form onSubmit={onSignup} className="signup-box">
                 <div className="flex flex-wrap items-center justify-center gap-2 h-full">
                     <div className="flex flex-col">

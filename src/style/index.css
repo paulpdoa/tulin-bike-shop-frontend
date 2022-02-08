@@ -98,6 +98,12 @@ body {
   background:var(--bg-create);
   @apply text-gray-100 p-2 rounded-md w-full font-semibold;
 }
+
+/* Verify Page */
+.verify-input {
+  @apply outline-none w-14 h-14 text-2xl text-center font-bold border-gray-300 border;
+}
+
 /* Error page */
 .error-title {
   font-size:160px;
