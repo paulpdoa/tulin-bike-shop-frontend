@@ -34,8 +34,8 @@ const Signup = () => {
         } else {
             await axios.post('/customer',{ firstname,lastname,username,email,password })
             .then((data) => {
-                setIsLoading(false);
                 setSuccess(data.data.mssg);
+                setIsLoading(false);
                 setTimeout(() => {
                     navigate(data.data.redirect);
                 },2000)
@@ -56,9 +56,10 @@ const Signup = () => {
     <div className="content h-full">
         <div className="max-content signup-container">
             <h1 className="signup-title">Create your Account</h1>
-            <h2 className="signup-success">{ isLoading && <span className="flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />{ success }</span> }</h2>
+            <h2 className="signup-success">{ success && <span className="flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />{ success }</span> }</h2>
+            { isLoading && <h2 className="signup-success animate-pulse">Please wait for email upon registering</h2> }
             <form onSubmit={onSignup} className="signup-box">
-                <div className="flex flex-wrap items-center justify-center gap-2 h-full">
+                <div className="flex flex-wrap items-center justify-center gap-5 h-full">
                     <div className="flex flex-col">
                         <input className="user-auth" type="text" placeholder="First name" 
                             onChange={(e) => setFirstname(e.target.value)}
@@ -106,7 +107,7 @@ const Signup = () => {
                         <span className="pass-error">{ passErr }</span>
                     </div>
                     <div className="flex-col flex gap-2">
-                        <span className="signup-privacy-policy text-center">By clicking "SIGN UP"; I agree to Tulin's Term of Service and Privacy Policy</span>
+                        <span className="signup-privacy-policy">By clicking "SIGN UP"; I agree to Tulin's Term of Service and Privacy Policy</span>
                         <button className="signup-btn-user">Signup</button>
                     </div>
                 </div>

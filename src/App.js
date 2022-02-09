@@ -28,6 +28,7 @@ import Settings from './Pages/admin/Settings';
 import Login from './Pages/shop/auth/Login';
 import Signup from './Pages/shop/auth/Signup';
 import VerifyCode from './Pages/shop/auth/VerifyCode';
+import ForgotPassword from './Pages/shop/auth/ForgotPassword';
 import Home from './Pages/shop/Home';
 import About from './Pages/shop/About';
 import Contact from './Pages/shop/Contact';
@@ -81,6 +82,7 @@ const App = () => {
       <Route path='/login' element={ <Login setCustomerCookie={setCustomerCookie} /> } />
       <Route path='/signup' element={ <Signup /> } />
       <Route path='/verify/:id' element={ <VerifyCode /> } />
+      <Route path='/forgotpassword' element={ <ForgotPassword /> } />
 
       <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
         <Route path='/' element={ <Home /> } />

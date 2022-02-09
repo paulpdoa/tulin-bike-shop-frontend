@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -7,6 +7,7 @@ import { FaUserShield } from 'react-icons/fa';
 
 const VerifyCode = () => {
   const [code,setCode] = useState(0);
+  const [message,setMessage] = useState('');
   const [error,setError] = useState('');  
 
   const [numone,setNumone] = useState('');  
@@ -18,6 +19,7 @@ const VerifyCode = () => {
   const [email,setEmail] = useState('');
 
   const { id } = useParams();
+  const navigate = useNavigate();
   
   useEffect(() => {
       const abortCont = new AbortController();
@@ -35,11 +37,16 @@ const VerifyCode = () => {
     const codeInput = `${numone}${numtwo}${numthree}${numfour}${numfive}`;
     
     if(codeInput === code) {
-        console.log('make the verify field to true')
+        axios.put(`/customerverify/${id}`, { verified: true })
+        .then((data) => {
+            setMessage(data.data.mssg);
+            setTimeout(() => {
+                navigate(data.data.redirect);
+            },2000)
+        })
     } else {
-        console.log('The code entered was not matched, please check again');
+        setError('The code entered was not matched, please check again');
     }
-
   }
 
   return (
@@ -62,6 +69,7 @@ const VerifyCode = () => {
                             <input className="verify-input" type="number" value={numfour} onChange={(e) => setNumfour(e.target.value)} />
                             <input onKeyPress={(e) => e.key === 'Enter' && verifyAccount() } className="verify-input" type="number" value={numfive} onChange={(e) => setNumfive(e.target.value)} />
                         </form>
+                        <span className={error ? "text-xs text-red-500" : "text-sm text-green-500"}>{ error ? error : message }</span>
                         <button onClick={verifyAccount} className="bg-green-500 p-2 rounded text-gray-100">Submit Code</button>
                     </section>
                 </div>
