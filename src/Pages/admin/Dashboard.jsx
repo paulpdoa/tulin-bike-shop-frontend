@@ -1,11 +1,32 @@
 import { Helmet } from 'react-helmet';
+import DashboardCard from '../../components/dashboard/home/DashboardCard';
+import Datetime from '../../components/dashboard/partials/Datetime';
+import { BsBagCheck } from 'react-icons/bs';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
+import { HiOutlineClipboardList } from 'react-icons/hi';
+import { AiOutlineUser } from 'react-icons/ai';
+import MostSelling from '../../components/dashboard/home/MostSelling';
+import RecentOrders from '../../components/dashboard/home/RecentOrders';
 
 const Dashboard = () => {
   return (
     <>
       <Helmet><title>Tulin Bicycle Shop | Dashboard</title></Helmet>
       <div className="p-20">
-        <h1 className="font-semibold text-4xl text-gray-800 uppercase">Dashboard</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-semibold text-4xl text-gray-800 uppercase">Dashboard</h1>
+          <Datetime />
+        </div>
+        <div className="flex gap-10 justify-around">
+          <DashboardCard title='Total Orders' number='3245' color='bg-blue-500' icon={<BsBagCheck />} />
+          <DashboardCard title='Total Sales' sign='$' number='5141' color='bg-green-500' icon={<AiOutlineDollarCircle />} />
+          <DashboardCard title='Total Expenses' sign='$' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} />
+          <DashboardCard title='Total Users' number='12273' color='bg-yellow-500' icon={<AiOutlineUser />} />
+        </div>
+        <div className="grid grid-cols-5 gap-5 mt-10 rounded h-56">
+          <MostSelling />
+          <RecentOrders />
+        </div>
       </div>
     </>
   );

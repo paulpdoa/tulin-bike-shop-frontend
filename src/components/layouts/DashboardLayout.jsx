@@ -1,4 +1,4 @@
-import { useNavigate, Outlet, Navigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 
@@ -15,15 +15,15 @@ const DashboardLayout = () => {
   })
 
   return (
-    <div className="grid grid-cols-5">
+    <>
       <Sidebar />
-      <div className="col-span-4 content">
-        <div className="max-content">
+      <div className="content ml-72">
+        <div className="max-content w-full">
             <AdminNavbar />
             <Outlet />
         </div>
       </div>
-    </div>
+    </>
   )
 };
 

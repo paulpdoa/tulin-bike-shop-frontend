@@ -44,6 +44,7 @@ import OrderHistory from './components/shop/profile/OrderHistory';
 import ProfileDelete from './components/shop/profile/ProfileDelete';
 import Customization from './Pages/shop/Customization';
 import Reservation from './Pages/shop/Reservation';
+import ResetPassword from './Pages/shop/auth/ResetPassword';
 
 const App = () => {
 
@@ -83,7 +84,9 @@ const App = () => {
       <Route path='/signup' element={ <Signup /> } />
       <Route path='/verify/:id' element={ <VerifyCode /> } />
       <Route path='/forgotpassword' element={ <ForgotPassword /> } />
+      <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
 
+      {/* Client Page */}
       <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
         <Route path='/' element={ <Home /> } />
         <Route path='/about' element={ <About /> } />
@@ -104,7 +107,8 @@ const App = () => {
         <Route path='/customize' element={ <Customization /> } />
       </Route>
 
-      <Route element={ <DashboardLayout /> }>
+      {/* Admin Page */}
+      <Route element={ <DashboardLayout adminCookie={adminCookie} /> }>
         <Route path='/dashboard' element={ <Dashboard /> } />
         <Route path='/dashboard/orders' element={ <DashboardOrders /> } />
         <Route path='/dashboard/sales' element={ <DashboardSales /> } />

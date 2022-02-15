@@ -133,3 +133,8 @@ body {
   background: linear-gradient(to right,#33333E,#050506);
   @apply h-96;
 }
+/* Customize Page */
+.customize-bg {
+  background: url('../assets/blackbg.jpg');
+  @apply h-auto bg-no-repeat bg-center bg-cover bg-fixed;
+}

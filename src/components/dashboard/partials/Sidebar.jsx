@@ -44,7 +44,7 @@ const Sidebar = () => {
   }
 
   return (
-      <nav className="bg-gray-900 text-gray-100 h-screen col-span-1 relative select-none">
+      <nav className="bg-gray-900 text-gray-100 h-screen col-span-1 fixed overflow-x-hidden w-72 left-0 top-0 select-none">
         <div className="flex items-center justify-center">
             <img className="invert w-1/2 self-center" src="/image/tulin.png" alt="Tulin logo" />
         </div>
