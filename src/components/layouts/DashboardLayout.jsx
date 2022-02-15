@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import AdminNavbar from "../dashboard/partials/AdminNavbar";
 import Sidebar from "../dashboard/partials/Sidebar";
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ adminCookie }) => {
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -16,7 +16,7 @@ const DashboardLayout = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar adminCookie={adminCookie} />
       <div className="content ml-72">
         <div className="max-content w-full">
             <AdminNavbar />
