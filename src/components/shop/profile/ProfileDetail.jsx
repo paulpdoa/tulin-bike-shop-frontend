@@ -31,37 +31,30 @@ const ProfileDetail = () => {
  
   return (
     <div className="p-20 h-screen col-span-2">
-        <div className="bg-gray-900 w-full h-4/5 text-gray-100 rounded-md p-10 overflow-hidden">
-            <h1 className="font-semibold text-4xl border-b-2 border-gray-400 py-1">Personal Information</h1>
-            <div className="h-full flex justify-between gap-2">
-                <form onSubmit={onUpdate} className="flex gap-2 flex-wrap w-full">
-                    <div className="flex flex-col mt-4">
-                        <label htmlFor="firstname">First name</label>
-                        <input className="p-2 rounded outline-none text-gray-900" type="text" placeholder={ firstname } />
-                    </div>
-                    <div className="flex flex-col mt-4">
-                        <label htmlFor="firstname">Last name</label>
-                        <input className="p-2 rounded outline-none text-gray-900" type="text" placeholder={ lastname } />
-                    </div>
-                    <div className="flex flex-col mt-4">
-                        <label htmlFor="firstname">Username</label>
-                        <input className="p-2 rounded outline-none text-gray-900" type="text" placeholder={ username } />
-                    </div>
-                    <div className="flex flex-col mt-4">
-                        <label htmlFor="firstname">Email</label>
-                        <input className="p-2 rounded outline-none text-gray-900" type="text" placeholder={ email } />
-                    </div>
-                    <div className="flex flex-col mt-4">
-                        <label htmlFor="firstname">Password</label>
-                        <input className="p-2 rounded outline-none text-gray-900" type="password" placeholder="Password" />
-                    </div>
-                    <div className="flex flex-col mt-10 w-32">
-                        <button className="bg-green-700 h-10 w-full rounded text-gray-100">Update</button>
-                    </div>
-                    
-                </form>
+        <h1 className="text-gray-800 font-semibold text-4xl">Personal Information</h1>
+        <form className="grid grid-cols-2 grid-rows-3 gap-5" onSubmit={onUpdate}>
+            <div className="flex flex-col">
+                <label htmlFor="firstname">First Name:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={firstname} disabled />
             </div>
-        </div>
+            <div className="flex flex-col">
+                <label htmlFor="firstname">Last Name:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={lastname} disabled />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="firstname">Username:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={username} disabled />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="firstname">Email:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="email" placeholder={email} disabled />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="firstname">Password:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="password" placeholder={password} />
+            </div>
+            <button className="p-2 bg-green-500 text-gray-100 w-1/2 h-4/5 rounded self-end">Update</button>
+        </form>
     </div>
   );
 };

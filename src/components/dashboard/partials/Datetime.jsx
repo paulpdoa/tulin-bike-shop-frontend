@@ -6,7 +6,7 @@ const Datetime = () => {
     const today = months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 
   return (
-    <h1 className="font-bold text-gray-800">{ today }</h1>
+    <h1 className="font-bold text-gray-800 select-none">{ today }</h1>
   )
 }
 

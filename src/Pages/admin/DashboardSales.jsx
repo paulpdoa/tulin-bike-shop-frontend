@@ -23,7 +23,7 @@ const DashboardSales = () => {
     }
   ];
 
-  const [line,setLine] = useState({
+    const [line,setLine] = useState({
     labels: months.map(month => month),
     datasets: [{
       label: "Total Sales",
@@ -33,7 +33,6 @@ const DashboardSales = () => {
       borderWidth: 2
     }]
   });
-  console.log(data)
 
   return (
     <>

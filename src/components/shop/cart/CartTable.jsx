@@ -6,9 +6,9 @@ const CartTable = () => {
 
   return (
       <div className="content">
-        <table className="max-content py-10 w-full h-screen">
-            <tbody>
-                <tr className="bg-gray-200">
+        <table className="max-content w-full">
+            <tbody className="h-screen">
+                <tr className="bg-gray-200 h-10">
                     <th colSpan={2}>Product</th>
                     <th>Price</th>
                     <th>Quantity</th>
