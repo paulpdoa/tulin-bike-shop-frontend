@@ -1,6 +1,6 @@
 // Dependencies and Hooks
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,createContext } from 'react';
 import Cookies from 'js-cookie';
 
 // Components for Shop and Dashboard
@@ -45,85 +45,71 @@ import ProfileDelete from './components/shop/profile/ProfileDelete';
 import Customization from './Pages/shop/Customization';
 import Reservation from './Pages/shop/Reservation';
 import ResetPassword from './Pages/shop/auth/ResetPassword';
+import Checkout from './Pages/shop/Checkout';
+import ProductDetail from './Pages/shop/ProductDetail';
+
+import {GlobalContext} from './helper/Context';
 
 const App = () => {
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
-
-  const [bikes,setBikes] = useState([
-    {
-      productName:"Bike Name",
-      productBrand:"Bike Brand",
-      productPrice:2100.00
-    }
-  ]);
-
-  const [parts,setParts] = useState([
-    {
-      productName:"Part Name",
-      productBrand:"Part Brand",
-      productPrice:2100.00
-    }
-  ]);
-
-  const [accessories,setAccessories] = useState([
-    {
-      productName:"Accessory Name",
-      productBrand:"Accessory Brand",
-      productPrice:2100.00
-    }
-  ]);
+    
   
   return (
-    <Routes>
-      <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
-      <Route path='/adminsignup' element={ <AdminSignup /> } />
+    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie }}>
+      <Routes>
+        <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
+        <Route path='/adminsignup' element={ <AdminSignup /> } />
 
-      <Route path='/login' element={ <Login setCustomerCookie={setCustomerCookie} /> } />
-      <Route path='/signup' element={ <Signup /> } />
-      <Route path='/verify/:id' element={ <VerifyCode /> } />
-      <Route path='/forgotpassword' element={ <ForgotPassword /> } />
-      <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
+        <Route path='/login' element={ <Login setCustomerCookie={setCustomerCookie} /> } />
+        <Route path='/signup' element={ <Signup /> } />
+        <Route path='/verify/:id' element={ <VerifyCode /> } />
+        <Route path='/forgotpassword' element={ <ForgotPassword /> } />
+        <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
 
-      {/* Client Page */}
-      <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
-        <Route path='/' element={ <Home /> } />
-        <Route path='/about' element={ <About /> } />
-        <Route path='/contact' element={ <Contact /> } />
-        <Route path='/cart' element={ <Cart /> } />
-        <Route path='/products/' element={ <Products /> }>
-          <Route path='bikes' element={ <ShopBike bikes={bikes} /> } />
-          <Route path='parts' element={ <ShopPart parts={parts} /> } />
-          <Route path='accessories' element={ <ShopAccessories accessories={accessories} /> } />
+        {/* Client Page */}
+
+        <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
+          <Route path='/' element={ <Home /> } />
+          <Route path='/about' element={ <About /> } />
+          <Route path='/contact' element={ <Contact /> } />
+          <Route path='/cart/:id' element={ <Cart /> } />
+          <Route path='/products/' element={ <Products /> }>
+            <Route path='bikes' element={ <ShopBike /> } />
+            <Route path='parts' element={ <ShopPart /> } />
+            <Route path='accessories' element={ <ShopAccessories /> } />
+          </Route>
+          <Route path='/products/:id' element={ <ProductDetail /> } />
+          <Route path='/profile/' element={ <Profile /> }>
+            <Route path=":id" element={ <ProfileDetail /> } />
+            <Route path="orders/:id" element={ <ProfileOrders /> } />
+            <Route path="history/:id" element={ <OrderHistory /> } />
+            <Route path="delete/:id" element={ <ProfileDelete /> } />
+          </Route>
+          <Route path='/reservation' element={ <Reservation /> } />
+          <Route path='/customize' element={ <Customization /> } />
+          <Route path='/checkout' element={ <Checkout /> } />
         </Route>
-        <Route path='/profile/' element={ <Profile /> }>
-          <Route path=":id" element={ <ProfileDetail /> } />
-          <Route path="orders/:id" element={ <ProfileOrders /> } />
-          <Route path="history/:id" element={ <OrderHistory /> } />
-          <Route path="delete/:id" element={ <ProfileDelete /> } />
-        </Route>
-        <Route path='/reservation' element={ <Reservation /> } />
-        <Route path='/customize' element={ <Customization /> } />
-      </Route>
 
-      {/* Admin Page */}
-      <Route element={ <DashboardLayout adminCookie={adminCookie} /> }>
-        <Route path='/dashboard' element={ <Dashboard /> } />
-        <Route path='/dashboard/orders' element={ <DashboardOrders /> } />
-        <Route path='/dashboard/sales' element={ <DashboardSales /> } />
-        <Route path='/dashboard/messages' element={ <DashboardMessages /> } />
-        <Route path='/dashboard/addproduct' element={ <AddProduct /> } />
-        <Route path='/dashboard/inventory/' element={ <Inventory /> }>
-          <Route path='bikes' element={ <Bikes /> } />
-          <Route path='parts' element={ <Parts /> } />
-          <Route path='accessories' element={ <Accessories /> } />
+        {/* Admin Page */}
+        <Route element={ <DashboardLayout adminCookie={adminCookie} /> }>
+          <Route path='/dashboard' element={ <Dashboard /> } />
+          <Route path='/dashboard/orders' element={ <DashboardOrders /> } />
+          <Route path='/dashboard/sales' element={ <DashboardSales /> } />
+          <Route path='/dashboard/messages' element={ <DashboardMessages /> } />
+          <Route path='/dashboard/addproduct' element={ <AddProduct /> } />
+          <Route path='/dashboard/inventory/' element={ <Inventory /> }>
+            <Route path='bikes' element={ <Bikes /> } />
+            <Route path='parts' element={ <Parts /> } />
+            <Route path='accessories' element={ <Accessories /> } />
+          </Route>
+          <Route path='/dashboard/settings' element={ <Settings /> } />
         </Route>
-        <Route path='/dashboard/settings' element={ <Settings /> } />
-      </Route>
 
-      <Route path='*' element={ <NotFound /> } />
-    </Routes>
+        <Route path='*' element={ <NotFound /> } />
+      </Routes>
+    </GlobalContext.Provider>
   );
 }
 

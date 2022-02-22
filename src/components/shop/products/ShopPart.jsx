@@ -1,9 +1,19 @@
 import { Helmet } from 'react-helmet';
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
 
-const ShopPart = ({ parts }) => {
+const ShopPart = () => {
+  const [parts,setParts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const data = await axios.get('/inventory/part');
+      setParts(data.data);
+    }
+    fetchData();
+  },[])
 
   return (
     <div className="col-span-2 p-20 h-screen">

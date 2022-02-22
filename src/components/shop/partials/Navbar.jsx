@@ -69,7 +69,7 @@ const Navbar = ({ customerCookie }) => {
               <Link to='/'><li>Home</li></Link>
               <Link to='/about'><li>About</li></Link>
               <Link to='/contact'><li>Contact Us</li></Link>
-              <Link className="text-2xl" to='/cart'><AiOutlineShoppingCart /></Link>
+              <Link className="text-2xl" to={`/cart/${Cookies.get('customerId')}`}><AiOutlineShoppingCart /></Link>
               <li className="text-2xl relative">
                 <BsCaretDownSquare onClick={ () => setShowMenu(!showMenu) } className="cursor-pointer" />
                 <AnimatePresence>

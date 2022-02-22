@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion,AnimatePresence } from 'framer-motion';
 
 const enterVar = {
     hidden: {
@@ -10,6 +10,13 @@ const enterVar = {
         transition: {
             type:'spring',
             duration:2
+        }
+    },
+    exit: {
+        scale:0,
+        transition: {
+            type: 'spring',
+            duration:1
         }
     }
 }
@@ -70,14 +77,17 @@ const DateInput = () => {
         </form>
         { showImage && 
             <div className="flex items-center justify-center h-screen fixed bg-black w-full top-0 bg-opacity-50 z-50">
-                <motion.div className="relative bg-white shadow-lg"
-                    initial="hidden"
-                    animate="visible"
-                    variants={enterVar}
-                >
-                    <span onClick={() => setShowImage(!image)} className="absolute font-bold text-xl cursor-pointer right-0 -top-7 text-gray-100">X</span>
-                    <img className="w-72 h-72 z-50 rounded" src={image} alt="Uploaded Concern" />
-                </motion.div>
+                <AnimatePresence>
+                    <motion.div className="relative bg-white shadow-lg"
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        variants={enterVar}
+                    >
+                        <span onClick={() => setShowImage(!image)} className="absolute font-bold text-xl cursor-pointer right-0 -top-7 text-gray-100">X</span>
+                        <img className="w-72 h-72 z-50 rounded" src={image} alt="Uploaded Concern" />
+                    </motion.div>
+                </AnimatePresence>
             </div>
         }
     </>
