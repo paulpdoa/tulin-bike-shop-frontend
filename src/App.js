@@ -1,6 +1,6 @@
 // Dependencies and Hooks
 import { Route, Routes } from 'react-router-dom';
-import { useState,createContext } from 'react';
+import { useState } from 'react';
 import Cookies from 'js-cookie';
 
 // Components for Shop and Dashboard
@@ -23,6 +23,7 @@ import Parts from './components/dashboard/inventory/Parts';
 import Accessories from './components/dashboard/inventory/Accessories';
 import AddProduct from './Pages/admin/AddProduct';
 import Settings from './Pages/admin/Settings';
+import Schedule from './Pages/admin/Schedule';
 
 // Shop Page
 import Login from './Pages/shop/auth/Login';
@@ -48,14 +49,13 @@ import ResetPassword from './Pages/shop/auth/ResetPassword';
 import Checkout from './Pages/shop/Checkout';
 import ProductDetail from './Pages/shop/ProductDetail';
 
-import {GlobalContext} from './helper/Context';
+import { GlobalContext } from './helper/Context';
 
 const App = () => {
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
     
-  
   return (
     <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie }}>
       <Routes>
@@ -89,7 +89,7 @@ const App = () => {
           </Route>
           <Route path='/reservation' element={ <Reservation /> } />
           <Route path='/customize' element={ <Customization /> } />
-          <Route path='/checkout' element={ <Checkout /> } />
+          <Route path='/checkout/:id' element={ <Checkout /> } />
         </Route>
 
         {/* Admin Page */}
@@ -105,6 +105,7 @@ const App = () => {
             <Route path='accessories' element={ <Accessories /> } />
           </Route>
           <Route path='/dashboard/settings' element={ <Settings /> } />
+          <Route path='/dashboard/schedules' element={ <Schedule /> } />
         </Route>
 
         <Route path='*' element={ <NotFound /> } />

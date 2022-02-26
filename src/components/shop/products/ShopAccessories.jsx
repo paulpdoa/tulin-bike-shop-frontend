@@ -8,12 +8,16 @@ const ShopAccessories = () => {
   const [accessories,setAccessories] = useState([]);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+
     const fetchData = async() => {
-      const data = await axios.get('/inventory/accessory');
+      const data = await axios.get('/inventory/accessory',{signal:abortCont.signal});
       setAccessories(data.data);
     }
+    
     fetchData();
-  },[])
+    return () => abortCont.abort();
+  },[accessories])
 
   return ( 
     <div className="col-span-2 p-20 h-screen">

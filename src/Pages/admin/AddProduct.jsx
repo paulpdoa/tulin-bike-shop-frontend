@@ -25,6 +25,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     const productDetails = new FormData();
+    
     productDetails.append('product_image',image);
     productDetails.append('product_type',type);
     productDetails.append('brand_name',brand);

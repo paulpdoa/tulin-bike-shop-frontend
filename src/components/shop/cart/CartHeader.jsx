@@ -1,21 +1,38 @@
 import { useEffect,useState } from 'react';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const CartHeader = ({ cartContents }) => {
   const [totalPrice,setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const data = cartContents.reduce((prev,initial) => {
-      return (initial.inventory_id[0].product_price + prev) * initial.inventory_id[0].product_quantity;
-    },0)
-    setTotalPrice(data);
-  },[cartContents])
+   const abortCont = new AbortController();
+
+   const fetchData = async() => {
+    let previousNum = 0;
+    const data = await cartContents.map((content) => {
+      return content.inventory_id[0].product_price * content.order_quantity;
+    });
+    for(let i = 0; i < data.length; i++) {
+      previousNum += data[i];
+    }
+    setTotalPrice(previousNum);
+   }
+   fetchData();
+   return () => abortCont.abort();
+  },[cartContents,totalPrice])
+
   return (
       <header className="content">
         <div className="max-content flex justify-between py-20">
             <h1 className="font-semibold text-4xl text-gray-800">Your Shopping Cart({ cartContents.length } item)</h1>
             <div className="relative">
-                <h2 className="text-gray-800 text-xl font-semibold">SUBTOTAL ₱{totalPrice.toLocaleString()}</h2>
-                <button className="bg-green-700 text-gray-100 p-2 rounded-md absolute right-0">Checkout</button>
+            { cartContents.length > 0 && 
+              <>
+                <h2 className="text-gray-800 text-xl font-semibold">SUBTOTAL ₱{totalPrice}</h2>
+                <Link to={`/checkout/${Cookies.get('customerId')}`} className="bg-green-700 text-gray-100 p-2 rounded-md absolute right-0">Checkout</Link>
+              </>
+            }
             </div>
         </div>
       </header>

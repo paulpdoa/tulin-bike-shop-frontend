@@ -1,14 +1,25 @@
 import { Helmet } from 'react-helmet';
-import DashboardCard from '../../components/dashboard/home/DashboardCard';
-import Datetime from '../../components/dashboard/partials/Datetime';
+import axios from 'axios';
+import { useState,useEffect } from 'react';
 import { BsBagCheck } from 'react-icons/bs';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
 import MostSelling from '../../components/dashboard/home/MostSelling';
 import RecentOrders from '../../components/dashboard/home/RecentOrders';
+import DashboardCard from '../../components/dashboard/home/DashboardCard';
+import Datetime from '../../components/dashboard/partials/Datetime';
 
 const Dashboard = () => {
+  const [customers,setCustomers] = useState([]);
+  // get customers length
+  useEffect(() => {
+    axios.get('/customer')
+    .then((data) => {
+      setCustomers(data.data);
+    })
+  },[customers])
+  
   return (
     <>
       <Helmet><title>Tulin Bicycle Shop | Dashboard</title></Helmet>
@@ -21,7 +32,7 @@ const Dashboard = () => {
           <DashboardCard title='Total Orders' number='3245' color='bg-blue-500' icon={<BsBagCheck />} />
           <DashboardCard title='Total Sales' sign='$' number='5141' color='bg-green-500' icon={<AiOutlineDollarCircle />} />
           <DashboardCard title='Total Expenses' sign='$' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} />
-          <DashboardCard title='Total Users' number='12273' color='bg-yellow-500' icon={<AiOutlineUser />} />
+          <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} />
         </div>
         <div className="grid grid-cols-5 gap-5 mt-10 rounded h-56">
           <MostSelling />

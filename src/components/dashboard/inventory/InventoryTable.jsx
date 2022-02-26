@@ -1,7 +1,7 @@
 
 const InventoryTable = ({ products }) => {
 
-    const imgLocation = 'http://localhost:8000/uploads/images/'
+    const imgLocation = 'http://localhost:8000/uploads/products/'
 
   return (
     <table className="w-full">

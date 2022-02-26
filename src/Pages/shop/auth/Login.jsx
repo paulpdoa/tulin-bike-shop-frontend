@@ -61,6 +61,7 @@ const Login = ({ setCustomerCookie }) => {
               <img className="auth-logo" src="/image/tulin.png" alt="Tulin logo" />
               <form className="auth-form" onSubmit={onLogin}>
                   <h2 className="font-bold text-xl text-gray-800">Customer Login</h2>
+                  <Link className="text-blue-500 text-sm" to='/adminlogin'>login as admin?</Link>
                   { success === 'this user is not yet verified, please verify your account' ? 
                     <Link onClick={sendCodeToMail} to={`/verify/${verifyId}`} className="flex items-center text-lg text-red-500 gap-2">
                         { success }

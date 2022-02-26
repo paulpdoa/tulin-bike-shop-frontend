@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  const imgLocation = 'http://localhost:8000/uploads/images/'
+  const imgLocation = 'http://localhost:8000/uploads/products/'
 
   return (
     <div className="shadow-lg" key={product._id}>

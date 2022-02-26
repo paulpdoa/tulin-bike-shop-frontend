@@ -9,16 +9,18 @@ const ProductDetail = () => {
     const [product,setProduct] = useState([]);
     const [quantity,setQuantity] = useState(0);
     const [quantityErr,setQuantityErr] = useState('');
-    const imgLocation = 'http://localhost:8000/uploads/images/';
+    const imgLocation = 'http://localhost:8000/uploads/products/';
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        const abortCont = new AbortController();
         const fetchData = async() => {
             const data = await axios.get(`/inventory/${id}`);
             setProduct(data.data);
         }
         fetchData();
+        return () => abortCont.abort();
     },[id]);
 
     const addToCart = async () => {
@@ -27,8 +29,8 @@ const ProductDetail = () => {
             order_quantity: quantity,
             customer_id: Cookies.get('customerId')
         } 
-        console.log(productToAdd);
-        if(Cookies.get('customerId') === undefined) {
+        
+        if(!Cookies.get('customerId')) {
             navigate('/login');
         } else {
             if(quantity > 0) {
@@ -48,8 +50,8 @@ const ProductDetail = () => {
         <Helmet><title>Tulin Bicycle Shop | { `${product.product_name}` }</title></Helmet>
         <div className="content h-screen">
             <div className="max-content w-full flex gap-52 items-center justify-center">
-                <section className="w-1/2 overflow-hidden border-2">
-                    <img className="object-cover" src={`${imgLocation}${product.product_image}`} alt={product.product_name} />
+                <section className="w-1/2 overflow-hidden flex items-center justify-center">
+                    <img className="w-4/5 h-96 shadow-2xl border" src={`${imgLocation}${product.product_image}`} alt={product.product_name} />
                 </section>
                 <section>
                     <span className="font-semibold text-gray-500">{ product.product_type }</span>

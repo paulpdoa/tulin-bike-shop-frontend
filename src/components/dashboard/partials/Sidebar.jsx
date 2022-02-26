@@ -6,7 +6,7 @@ import axios from 'axios';
 import { BiLogOut } from 'react-icons/bi';
 import { MdOutlineDashboardCustomize,MdOutlineDirectionsBike,MdOutlineMessage,MdOutlineSettingsInputSvideo } from 'react-icons/md';
 import { BsBagCheck,BsHouseDoor } from 'react-icons/bs';
-import { AiOutlineDollar,AiFillCaretDown,AiFillCaretUp } from 'react-icons/ai';
+import { AiOutlineDollar,AiFillCaretDown,AiFillCaretUp,AiOutlineCalendar } from 'react-icons/ai';
 import { FiSettings } from 'react-icons/fi';
 import { RiEBikeFill } from 'react-icons/ri';
 
@@ -57,6 +57,9 @@ const Sidebar = ({ adminCookie }) => {
             </Link>
             <Link to='/dashboard/sales'>
                 <li className="flex items-center gap-2"><AiOutlineDollar />Sales</li>
+            </Link>
+            <Link to='/dashboard/schedules'>
+                <li className="flex items-center gap-2"><AiOutlineCalendar />Schedules</li>
             </Link>
             <li className="cursor-pointer flex justify-between items-center gap-2 relative" onClick={() => setShowInventory(!showInventory)}>
                 <div className="flex items-center gap-2"><BsHouseDoor />Inventory</div>

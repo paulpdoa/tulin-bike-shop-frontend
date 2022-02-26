@@ -1,14 +1,9 @@
 import ReactCalendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
 
-const Calendar = () => {
-
-    const [date,setDate] = useState(new Date());
-
-  return (
-    <ReactCalendar activeStartDate={date} value={date} />
-  )
+const Calendar = ({date,setDate}) => {
+    
+  return <ReactCalendar value={new Date(date)} onClickDay={() => setDate(new Date(date))} />
 }
 
 export default Calendar

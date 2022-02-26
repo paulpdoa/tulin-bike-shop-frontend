@@ -8,12 +8,15 @@ const ShopBike = () => {
   const [bikes,setBikes] = useState([]);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+
     const fetchData = async() => {
-      const data = await axios.get('/inventory/bike');
+      const data = await axios.get('/inventory/bike',{ signal:abortCont.signal });
       setBikes(data.data);
     }
     fetchData();
-  },[])
+    return () => abortCont.abort()
+  },[bikes])
 
   return (
     <div className="col-span-2 p-20 h-screen">

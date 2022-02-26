@@ -30,6 +30,8 @@ const showMenuVar = {
 
 const Navbar = ({ customerCookie }) => {
 
+  const [inventories,setInventories] = useState([]);
+  const [searchedItem,setSearchedItem] = useState('');
   const [showMenu,setShowMenu] = useState(false);
   const [showTopNav,setShowTopNav] = useState(true);
 
@@ -53,7 +55,32 @@ const Navbar = ({ customerCookie }) => {
     })
     
     return () => abortCont.abort();
-  })
+  });
+
+  // Get items for searching
+  useEffect(() => {
+    const abortCont = new AbortController();
+    const fetchData = async () => {
+      try {
+        const data = await axios.get('/inventory',{ signal:abortCont.signal });
+        setInventories(data.data);
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+    fetchData();
+    return () => abortCont.abort();
+  },[inventories]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const product = e.target.value;
+    const data = inventories.filter((inventory) => {
+      return inventory.product_name.toLowerCase().includes(product.toLowerCase());
+    })
+    product === '' ? setSearchedItem([]) : setSearchedItem(data);
+  }
 
   return (
     <nav className="content navbar">
@@ -63,7 +90,19 @@ const Navbar = ({ customerCookie }) => {
               <Link to='/'>
                 <img className="navbar-logo" src="/image/tulin.png" alt="Tulin logo" />
               </Link>
-              <input className="p-2 w-full rounded outline-none" type="search" placeholder="Search parts/brand" />
+              <div className="w-full relative">
+                <input onChange={handleSearch} className="p-2 w-full rounded outline-none" type="search" placeholder="Search parts/brand" />
+                <div className=" bg-white rounded-b-sm rounded-t-none absolute top-10 w-full">
+                { searchedItem && searchedItem.slice(0,10).map((item) => (
+                  <Link to={`/products/${item._id}`} key={item._id}>
+                    <div className="cursor-pointer hover:bg-gray-300 p-2" key={item._id}>
+                      <h1>{item.product_name}</h1>
+                    </div>
+                  </Link>
+                  
+                )) }
+                </div>
+              </div>
             </div>
             <ul className="flex items-center justify-center gap-3 text-gray-100">
               <Link to='/'><li>Home</li></Link>
