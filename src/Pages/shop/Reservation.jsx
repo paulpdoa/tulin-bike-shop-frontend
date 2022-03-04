@@ -1,16 +1,38 @@
 import { Helmet } from 'react-helmet';
-import { useState } from 'react'; 
+import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 import Calendar from '../../components/shop/scheduling/Calendar';
 import DateInput from '../../components/shop/scheduling/DateInput';
 
 const Reservation = () => {
 
     const d = new Date();
-    const today = d.getFullYear() + '-' + ((d.getMonth() + 1) < 10 ? (0 + '' + (d.getMonth() + 1)) : (d.getMonth() + 1) ) + '-' + d.getDate();
-    const [date,setDate] = useState(today);
-    const hour = d.getHours();
-    const minute = d.getMinutes();
+    const hour = d.getHours() < 10 ? 0 + '' + d.getHours() : d.getHours();
+    const minute = d.getMinutes() < 10 ? 0 + '' + d.getMinutes() : d.getMinutes();
+    const fixedDate = d.getDate() < 10 ? 0 + '' + d.getDate() : d.getDate();
+    const fixedMonth = d.getMonth() < 10 ? 0 + '' + d.getMonth() : d.getMonth();
 
+    const [isAuth,setIsAuth] = useState(false);
+    const [date,setDate] = useState(d.getFullYear() + '-' + fixedMonth + '-' + fixedDate);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+      const abortCont = new AbortController();
+      
+      axios.get('/reservation',{ signal:abortCont.signal })
+      .then((data) => {
+        setIsAuth(data.data.isAuth);
+        navigate(data.data.redirect);
+        console.log(data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      }) 
+
+      return () => abortCont.abort();
+    },[isAuth,navigate])
+    
   return (
       <>
           <Helmet><title>Tulin Bicycle Shop | Schedule</title></Helmet>

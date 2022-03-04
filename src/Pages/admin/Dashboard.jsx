@@ -14,10 +14,13 @@ const Dashboard = () => {
   const [customers,setCustomers] = useState([]);
   // get customers length
   useEffect(() => {
-    axios.get('/customer')
+    const abortCont = new AbortController();
+
+    axios.get('/customer',{ signal:abortCont.signal })
     .then((data) => {
       setCustomers(data.data);
     })
+    return () => abortCont.abort()
   },[customers])
   
   return (

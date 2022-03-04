@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 
-const ScheduleTable = () => {
+const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
 
@@ -22,6 +22,18 @@ const ScheduleTable = () => {
         return () => abortCont.abort();
     },[details])
 
+    const viewDetail = (id) => {
+        const abortCont = new AbortController();
+        setShowDetail(true);
+        axios.get(`/schedule/${id}`,{ signal:abortCont.signal })
+        .then((data) => {
+            setGetDetail(data.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+        return () => abortCont.abort();
+    }
+
   return (
     <div className="h-96 mt-5 overflow-y-scroll">
         <table className="w-full table-auto">
@@ -40,9 +52,9 @@ const ScheduleTable = () => {
                     <td>{detail.customer_id.email}</td>
                     <td>{detail.reserved_date}</td>
                     <td>{detail.reserved_time}</td>
-                    <td>{detail.schedule_status}</td>
+                    <td className={detail.schedule_status === 'pending' ? 'text-yellow-500 font-semibold' : 'text-green-500 font-semibold'}>{detail.schedule_status}</td>
                     <td>
-                        <button onClick={() => console.log('view details')} className="bg-gray-900 text-gray-100 p-2 rounded">View Details</button>
+                        <button onClick={() => viewDetail(detail._id)} className="bg-gray-900 text-gray-100 p-2 rounded">View Details</button>
                     </td>
                 </tr>
                )) }

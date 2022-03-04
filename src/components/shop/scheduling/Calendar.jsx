@@ -1,9 +1,16 @@
 import ReactCalendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-const Calendar = ({date,setDate}) => {
-    
-  return <ReactCalendar value={new Date(date)} onClickDay={() => setDate(new Date(date))} />
+const Calendar = ({setDate}) => {
+      
+  return <ReactCalendar 
+  minDate={new Date()} 
+  value={new Date()} 
+  onChange={(e) => {
+    const fixedDate = e.getDate() < 10 ? 0 + '' + e.getDate() : e.getDate();
+    const fixedMonth = e.getMonth() < 10 ? 0 + '' + e.getMonth() : e.getMonth();
+    setDate(e.getFullYear() + '-' + fixedMonth + '-' + fixedDate)
+  } } />
 }
 
 export default Calendar

@@ -42,7 +42,6 @@ const ProductDetail = () => {
                 setQuantityErr('your order cannot be zero');
             }
         }  
-        
     }
 
   return (
