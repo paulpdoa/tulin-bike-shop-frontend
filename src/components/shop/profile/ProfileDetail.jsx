@@ -8,6 +8,7 @@ const ProfileDetail = () => {
     const [lastname,setLastname] = useState('');
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
+    const [address,setAddress] = useState('')
     const [password,setPassword] = useState('');
 
     const { id } = useParams();
@@ -21,6 +22,7 @@ const ProfileDetail = () => {
             setLastname(data.data.lastname);
             setUsername(data.data.username);
             setEmail(data.data.email);
+            setAddress(data.data.address);
         })
         return () => abortCont.abort;
     })
@@ -32,22 +34,26 @@ const ProfileDetail = () => {
   return (
     <div className="p-20 h-screen col-span-2">
         <h1 className="text-gray-800 font-semibold text-4xl">Personal Information</h1>
-        <form className="grid grid-cols-2 grid-rows-3 gap-5" onSubmit={onUpdate}>
+        <form className="grid grid-cols-2 grid-rows-4 gap-5" onSubmit={onUpdate}>
             <div className="flex flex-col">
                 <label htmlFor="firstname">First Name:</label>
                 <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={firstname} disabled />
             </div>
             <div className="flex flex-col">
-                <label htmlFor="firstname">Last Name:</label>
+                <label htmlFor="lastname">Last Name:</label>
                 <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={lastname} disabled />
             </div>
             <div className="flex flex-col">
-                <label htmlFor="firstname">Username:</label>
+                <label htmlFor="username">Username:</label>
                 <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={username} disabled />
             </div>
             <div className="flex flex-col">
-                <label htmlFor="firstname">Email:</label>
+                <label htmlFor="email">Email:</label>
                 <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="email" placeholder={email} disabled />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="address">Address:</label>
+                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="email" placeholder={address} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="firstname">Password:</label>

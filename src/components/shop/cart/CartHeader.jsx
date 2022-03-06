@@ -22,10 +22,13 @@ const CartHeader = ({ cartContents }) => {
    return () => abortCont.abort();
   },[cartContents,totalPrice])
 
+  const itemsCount = cartContents.map((cart) => cart.order_quantity).reduce((initial,curr) => initial + curr,0);
+
   return (
       <header className="content">
         <div className="max-content flex justify-between py-20">
-            <h1 className="font-semibold text-4xl text-gray-800">Your Shopping Cart({ cartContents.length } item)</h1>
+            { cartContents.length > 0 ? <h1 className="font-semibold text-4xl text-gray-800">Your Shopping Cart({ itemsCount } item)</h1> :
+            <Link className="text-gray-100 p-2 rounded bg-green-500" to='/'>Order Now</Link> }
             <div className="relative">
             { cartContents.length > 0 && 
               <>

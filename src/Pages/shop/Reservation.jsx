@@ -24,7 +24,6 @@ const Reservation = () => {
       .then((data) => {
         setIsAuth(data.data.isAuth);
         navigate(data.data.redirect);
-        console.log(data.data)
       })
       .catch(err => {
         console.log(err)

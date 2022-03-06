@@ -4,7 +4,7 @@ const ProductCard = ({ product }) => {
   const imgLocation = 'http://localhost:8000/uploads/products/'
 
   return (
-    <div className="shadow-lg" key={product._id}>
+    <div className="shadow-lg">
         <div className="h-44 overflow-hidden rounded-lg">
           <Link to={`/products/${product._id}`}>
             <img className="object-cover cursor-pointer duration-300 transition hover:scale-150" src={ `${imgLocation}${product.product_image}` } alt={product.product_name} />

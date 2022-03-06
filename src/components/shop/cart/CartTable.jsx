@@ -11,7 +11,7 @@ const CartTable = ({ cartContents,setCartContents }) => {
     setCartContents(deletedItem);
     
     axios.delete(`/cart/${id}`,id).then((data) => {
-        console.log(data)
+        alert(data.data.mssg);
     }).catch(err => console.log(err))
   }
     

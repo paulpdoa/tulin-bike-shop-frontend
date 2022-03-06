@@ -9,6 +9,7 @@ const Signup = () => {
     const [lastname,setLastname] = useState('')
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
+    const [address,setAddress] = useState('');
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
 
@@ -32,7 +33,7 @@ const Signup = () => {
                 setPassErr('');
             },2000);
         } else {
-            await axios.post('/customer',{ firstname,lastname,username,email,password })
+            await axios.post('/customer',{ firstname,lastname,username,email,address,password })
             .then((data) => {
                 setSuccess(data.data.mssg);
                 setIsLoading(false);
@@ -89,6 +90,13 @@ const Signup = () => {
                             required
                         />
                         <span className="username-error">{ emailErr }</span>
+                    </div>
+                    <div className="flex flex-col">
+                        <input className="user-auth" type="text" placeholder="Address" 
+                            onChange={(e) => setAddress(e.target.value)}
+                            value={address}
+                            required
+                        />
                     </div>
                     <div className="flex flex-col">
                         <input className="user-auth" type="password" placeholder="Password" 

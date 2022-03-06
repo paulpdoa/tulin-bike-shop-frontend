@@ -1,28 +1,20 @@
 import { useRef,useEffect,useState } from "react"
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
-const Paypal = ({ setShowPaypal,paymentVal,products }) => {
+const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
 
     const paypal = useRef();
-    const [cartId,setCartId] = useState({});
-    const [customerId,setCustomerId] = useState({});
+    const [customerId] = useState(id);
     
-    // Extract information of user transaction
+    const cartItemId = products.map((product) => product._id);
+    const inventoryId = products.map((product) => product.inventory_id[0]._id);
+
+    const navigate = useNavigate();
     useEffect(() => {
         const abortCont = new AbortController();
-
-        const cart_id = products.map((product) => product._id);
-        const customer_id = products.map((product) => product.inventory_id[0]._id);
-        setCustomerId(customer_id);
-        setCartId(cart_id);
-
-        return () => abortCont.abort();
-    },[products])
-
-    useEffect(() => {
-        const abortCont = new AbortController();
-
+        
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
@@ -38,17 +30,25 @@ const Paypal = ({ setShowPaypal,paymentVal,products }) => {
             },
             onApprove: async(data,actions) => {
                 const order = await actions.order.capture()
-                const transaction = await axios.post('/order',{ cartId,customerId })
-                console.log(order);
-                console.log(transaction)
+                console.log(order)
+                postOrder();
             },
             onError: (err) => {
                 console.log(err);
             } 
         }).render(paypal.current);
 
+        // Post the order
+        
+
+        const postOrder = async () => {
+            const transaction = await axios.post('/order',{ customerId,cartItemId,inventoryId })
+            navigate(transaction.data.redirect);
+        }
+        
+
         return () => abortCont.abort();
-    },[paymentVal,cartId,paypal])
+    },[paymentVal,paypal])
 
   return (
     <div className="absolute h-screen bg-gray-900 bg-opacity-50 w-full flex items-center justify-center z-50">

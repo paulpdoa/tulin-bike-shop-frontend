@@ -38,6 +38,7 @@ const ProductDetail = () => {
                 alert(data.data.mssg)
                 navigate(data.data.redirect);
                 setQuantityErr('');
+                
             } else {
                 setQuantityErr('your order cannot be zero');
             }

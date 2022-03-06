@@ -10,7 +10,7 @@ const OrderedItem = ({ image,brand,item,description,quantity,price }) => {
             <p className="text-sm">{description}</p>
             <div className="flex w-full items-center justify-between mt-5">
             <span>Qty. {quantity}</span>
-            <span className="font-semibold text-orange-500">₱{price.toLocaleString()}</span>
+            <span className="font-semibold text-orange-500">₱{(price * quantity).toLocaleString()}</span>
             </div>
         </div>
     </div>

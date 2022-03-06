@@ -6,16 +6,19 @@ import axios from 'axios';
 import OrderedItem from '../../components/shop/checkout/OrderedItem';
 import PaymentCard from '../../components/shop/checkout/PaymentCard';
 import Paypal from '../../components/shop/checkout/Paypal';
+import Cod from '../../components/shop/checkout/Cod';
 
 const Checkout = () => {
 
   const [showPaypal,setShowPaypal] = useState(false);
+  const [showCod,setShowCod] = useState(false);
   const [products,setProducts] = useState([]);
   const [paymentVal,setPaymentVal] = useState(0);
 
   const {id} = useParams();
   useEffect(() => {
     const abortCont = new AbortController();
+    
     const fetchData = async () => {
       const data = await axios.get(`/cart/${id}`,{ signal:abortCont.signal });
       setProducts(data.data);
@@ -51,12 +54,13 @@ const Checkout = () => {
                     </section>
                     <section className="shadow-2xl bg-white p-5 w-1/2 h-auto rounded">
                       <h2 className="text-3xl font-semibold text-gray-800">Order Summary</h2>
-                      <PaymentCard products={products} setShowPaypal={setShowPaypal} setPaymentVal={setPaymentVal} />
+                      <PaymentCard products={products} setShowPaypal={setShowPaypal} setPaymentVal={setPaymentVal} setShowCod={setShowCod} />
                     </section>
                 </div>
             </div>
             {/* Show Paypal Button */}
-            { showPaypal && <Paypal paymentVal={paymentVal} setShowPaypal={setShowPaypal} products={products} /> }
+            { showPaypal && <Paypal paymentVal={paymentVal} setShowPaypal={setShowPaypal} products={products} id={id} /> }
+            { showCod && <Cod setShowCod={setShowCod} /> }
         </div>
     </>
   )

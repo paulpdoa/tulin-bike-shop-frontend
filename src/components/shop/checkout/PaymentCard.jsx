@@ -2,10 +2,9 @@ import { useState,useEffect } from 'react';
 import { BsPaypal } from 'react-icons/bs';
 import { FiTruck } from 'react-icons/fi';
 
-const PaymentCard = ({ products,setShowPaypal,setPaymentVal }) => {
+const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
 
     const [totalPrice,setTotalPrice] = useState(0);
-    const [quantity,setQuantity] = useState(0);
 
     useEffect(() => {
         const abortCont = new AbortController();
@@ -20,10 +19,6 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal }) => {
                 previousNum += data[i];
               }
 
-            const orderQuantity = await products.map((content) => {
-                return content.order_quantity;
-            })
-            setQuantity(orderQuantity);
             setTotalPrice(previousNum);
             setPaymentVal(previousNum);
         }
@@ -31,11 +26,13 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal }) => {
         return () => abortCont.abort();
         
     },[products,setPaymentVal])
+    
+    const itemsCount = products.map((product) => product.order_quantity).reduce((initial,curr) => curr + initial,0);
 
   return (
     <div className="w-full select-none">
         <div className="flex justify-between items-center mt-5">
-            <span>Subtotal({products.length * quantity} item/s)</span>
+            <span>Subtotal({itemsCount} item/s)</span>
             <span>₱{totalPrice.toLocaleString()}</span>
         </div>
         <div className="flex justify-between items-center mt-5">
@@ -52,7 +49,7 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal }) => {
             </section>
             <section className="w-1/2 flex items-center justify-between p-2 rounded shadow-xl mt-5 border border-gray-300">
                 <span>Cash on Delivery</span>
-                <button className="p-2 bg-gray-900 text-gray-100 rounded">
+                <button onClick={() => setShowCod(true)} className="p-2 bg-gray-900 text-gray-100 rounded">
                     <FiTruck />
                 </button>
             </section>
