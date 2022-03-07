@@ -42,12 +42,12 @@ const Checkout = () => {
                       { products && products.map((product) => (
                         <div key={product._id}>
                           <OrderedItem 
-                            image={product.inventory_id[0].product_image}
-                            brand={product.inventory_id[0].brand_name}
-                            item={product.inventory_id[0].product_name}
-                            description={product.inventory_id[0].product_description}
+                            image={product.inventory_id.product_image}
+                            brand={product.inventory_id.brand_name}
+                            item={product.inventory_id.product_name}
+                            description={product.inventory_id.product_description}
                             quantity={product.order_quantity}
-                            price={product.inventory_id[0].product_price}
+                            price={product.inventory_id.product_price}
                           />   
                         </div>
                       )) }

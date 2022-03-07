@@ -13,7 +13,7 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
             let previousNum = 0;
 
             const data = await products.map((content) => {
-            return content.inventory_id[0].product_price * content.order_quantity;
+                return content.inventory_id.product_price * content.order_quantity;
             });
             for(let i = 0; i < data.length; i++) {
                 previousNum += data[i];

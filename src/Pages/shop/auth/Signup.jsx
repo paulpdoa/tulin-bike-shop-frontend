@@ -1,39 +1,51 @@
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { Helmet } from 'react-helmet';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
+import StepOne from '../../../components/shop/signup.jsx/StepOne';
+import StepTwo from '../../../components/shop/signup.jsx/StepTwo';
+import StepThree from '../../../components/shop/signup.jsx/StepThree';
 
 const Signup = () => {
-    
+   
     const [firstname,setFirstname] = useState('');
     const [lastname,setLastname] = useState('')
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
+    const [mobile,setMobile] = useState('');
     const [address,setAddress] = useState('');
+    const [barangay,setBarangay] = useState('');
+    const [city,setCity] = useState('');
+    const [province,setProvince] = useState('');
+    const [postalCode,setPostalCode] = useState('');
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
 
     const [success,setSuccess] = useState('');
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
 
     const [passErr,setPassErr] = useState('');
     const [usernameErr,setUsernameErr] = useState('');
     const [emailErr,setEmailErr] = useState('');
+    const [mobileErr,setMobileErr] = useState('');
     const [passLimitErr,setPassLimitErr] = useState('');
+
+    const [activeStep,setActiveStep] = useState('step one'); 
 
     const navigate = useNavigate();
 
-    const onSignup = async (e) => {
+    const onSignup = (e) => {
         e.preventDefault();
         setIsLoading(true);
-
+       
         if(password !== confirmPassword) {
             setPassErr('Password doesn\'t match, please check your password');
             setTimeout(() => {
                 setPassErr('');
             },2000);
         } else {
-            await axios.post('/customer',{ firstname,lastname,username,email,address,password })
+            axios.post('/customer',{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password })
             .then((data) => {
                 setSuccess(data.data.mssg);
                 setIsLoading(false);
@@ -41,9 +53,11 @@ const Signup = () => {
                     navigate(data.data.redirect);
                 },2000)
             }).catch((err) => {
+                setIsLoading(false);
                 setEmailErr(err.response.data.errors.email);
                 setPassLimitErr(err.response.data.errors.password);
                 setUsernameErr(err.response.data.errors.username);
+                setMobileErr(err.response.data.errors.mobile);
                 setTimeout(() => {
                     setEmailErr('');
                     setUsernameErr('');
@@ -54,74 +68,81 @@ const Signup = () => {
     }
 
   return (
-    <div className="content h-full">
-        <div className="max-content signup-container">
-            <h1 className="signup-title">Create your Account</h1>
-            <h2 className="signup-success">{ success && <span className="flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />{ success }</span> }</h2>
-            { isLoading && <h2 className="signup-success animate-pulse">Please wait for email upon registering</h2> }
-            <form onSubmit={onSignup} className="signup-box">
-                <div className="flex flex-wrap items-center justify-center gap-5 h-full">
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="text" placeholder="First name" 
-                            onChange={(e) => setFirstname(e.target.value)}
-                            value={firstname}
-                            required
-                        />
+    <>
+        <Helmet><title>Tulin Bicycle Shop | Signup</title></Helmet>
+        <div className="content signup-bg h-full overflow-hidden">
+            <div className="max-content flex items-center justify-center w-1/2">
+                <img className="object-cover h-4/5" src="/image/bike-bg.png" alt="Bike background" />
+                <div className="bg-white h-4/5 w-2/5 relative" onSubmit={onSignup}>
+                    <div className="absolute flex items-center gap-2 top-0 right-0 p-4">
+                        <h2>Already have an account?</h2>
+                        <Link to='/login' className="rounded-full border border-gray-700 p-2 shadow-xl">Sign in</Link>
                     </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="text" placeholder="Last name" 
-                            onChange={(e) => setLastname(e.target.value)}
-                            value={lastname}
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="text" placeholder="Username" 
-                            onChange={(e) => setUsername(e.target.value)}
-                            value={username}
-                            required
-                        />
-                        <span className="username-error">{ usernameErr }</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="email" placeholder="Email" 
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                        />
-                        <span className="username-error">{ emailErr }</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="text" placeholder="Address" 
-                            onChange={(e) => setAddress(e.target.value)}
-                            value={address}
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="password" placeholder="Password" 
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                        />
-                        <span className="pass-error">{ passLimitErr }</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <input className="user-auth" type="password" placeholder="Confirm password" 
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            value={confirmPassword}
-                            required
-                        />
-                        <span className="pass-error">{ passErr }</span>
-                    </div>
-                    <div className="flex-col flex gap-2">
-                        <span className="signup-privacy-policy">By clicking "SIGN UP"; I agree to Tulin's Term of Service and Privacy Policy</span>
-                        <button className="signup-btn-user">Signup</button>
+                    <div className="px-8 py-24">
+                        <h1 className="text-gray-800 text-5xl">Sign up</h1>
+                        <span>Create your account</span>
+                        { isLoading && <h2 className="text-sm text-green-500">Please wait...</h2> }
+                        { emailErr && <h2 className="text-sm text-red-500">{ emailErr }</h2> } 
+                        { usernameErr && <h2 className="text-sm text-red-500">{ usernameErr }</h2> }
+                        { mobileErr && <h2 className="text-sm text-red-500">{ mobileErr }</h2> }
+                        <p className="text-sm text-green-500">{ success }</p>
+                        <div className="flex items-center justify-center gap-2">
+                        {/* Pages button */}
+                            <button onClick={() => setActiveStep('step one')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step one' && 'bg-gray-300'}`}>1</button>
+                            <button onClick={() => setActiveStep('step two')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step two' && 'bg-gray-300'}`}>2</button>
+                            <button onClick={() => setActiveStep('step three')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step three' && 'bg-gray-300'}`}>3</button>
+
+                        </div>
+                        <form className="flex flex-col gap-2 mt-1" onSubmit={onSignup}>
+                            {/* First Step */}
+                            { activeStep === 'step one' && 
+                            <StepOne 
+                                firstname={firstname}
+                                setFirstname={setFirstname}
+                                lastname={lastname}
+                                setLastname={setLastname}
+                                username={username}
+                                setUsername={setUsername}
+                                email={email}
+                                setEmail={setEmail}
+                                usernameErr={usernameErr}
+                                emailErr={emailErr}
+                                setActiveStep={setActiveStep}
+                            /> }
+                            {/* Second Step */}
+                            { activeStep === 'step two' && 
+                            <StepTwo 
+                                mobile={mobile}
+                                address={address}
+                                barangay={barangay}
+                                city={city}
+                                province={province}
+                                postalCode={postalCode}
+                                setMobile={setMobile}
+                                setAddress={setAddress}
+                                setBarangay={setBarangay}
+                                setCity={setCity}
+                                setProvince={setProvince}
+                                setPostalCode={setPostalCode}
+                                setActiveStep={setActiveStep}
+                            /> }
+                            {/* Step Three */}
+                            { activeStep === 'step three' && 
+                            <StepThree 
+                                password={password}
+                                setPassword={setPassword}
+                                confirmPassword={confirmPassword}
+                                setConfirmPassword={setConfirmPassword}
+                                passLimitErr={passLimitErr}
+                                passErr={passErr}
+                                setActiveStep={setActiveStep}
+                            /> }
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </>
   );
 };
 

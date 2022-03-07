@@ -62,6 +62,13 @@ body {
 }
 
 /* Signup box */
+.signup-bg {
+  background: url('../assets/black-wp.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .signup-container {
   @apply flex flex-col justify-center items-center;
 }
@@ -92,7 +99,7 @@ body {
   @apply text-red-500 font-bold text-xs w-1/2
 }
 .user-auth { 
-  @apply w-full border border-gray-400 p-3 rounded-md outline-none;
+  @apply w-full border border-gray-400 p-2 rounded-md outline-none;
 }
 .signup-btn-user {
   background:var(--bg-create);

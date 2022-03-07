@@ -9,7 +9,6 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
     const [customerId] = useState(id);
     
     const cartItemId = products.map((product) => product._id);
-    const inventoryId = products.map((product) => product.inventory_id[0]._id);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -40,9 +39,9 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
 
         // Post the order
         
-
+        const paymentMethod = "paypal"
         const postOrder = async () => {
-            const transaction = await axios.post('/order',{ customerId,cartItemId,inventoryId })
+            const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod })
             navigate(transaction.data.redirect);
         }
         

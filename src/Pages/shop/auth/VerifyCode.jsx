@@ -29,9 +29,9 @@ const VerifyCode = () => {
           setCode(data.data.code);
           setEmail(data.data.email);
       }).catch(err => console.log(err));
-
+      
       return () => abortCont.abort;
-  });
+  },[]);
 
   const verifyAccount = () => {
     const codeInput = `${numone}${numtwo}${numthree}${numfour}${numfive}`;

@@ -3,6 +3,7 @@ import { motion,AnimatePresence } from 'framer-motion';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { fetchData } from '../../../helper/fetching';
 
 import { BsCaretDownSquare } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -34,6 +35,14 @@ const Navbar = ({ customerCookie }) => {
   const [searchedItem,setSearchedItem] = useState('');
   const [showMenu,setShowMenu] = useState(false);
   const [showTopNav,setShowTopNav] = useState(true);
+  const [cartCount,setCartCount] = useState(0);
+
+  // Get length of cart for display
+  useEffect(() => {
+    const abortCont = new AbortController();
+    fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount);
+    return () => abortCont.abort();
+  },[cartCount])
 
   const navigate = useNavigate();
 
@@ -108,7 +117,10 @@ const Navbar = ({ customerCookie }) => {
               <Link to='/'><li>Home</li></Link>
               <Link to='/about'><li>About</li></Link>
               <Link to='/contact'><li>Contact Us</li></Link>
-              <Link className="text-2xl" to={`/cart/${Cookies.get('customerId')}`}><AiOutlineShoppingCart /></Link>
+              <Link className="text-2xl relative" to={`/cart/${Cookies.get('customerId')}`}>
+                <span className={ cartCount.length > 0 ? "absolute -top-2 -right-1 text-gray-100 bg-red-500 text-xs rounded-full flex items-center justify-center h-4 w-4" : 'hidden' }>{ cartCount.length }</span>
+                <AiOutlineShoppingCart />
+              </Link>
               <li className="text-2xl relative">
                 <BsCaretDownSquare onClick={ () => setShowMenu(!showMenu) } className="cursor-pointer" />
                 <AnimatePresence>

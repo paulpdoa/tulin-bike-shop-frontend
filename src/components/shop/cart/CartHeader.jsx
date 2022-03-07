@@ -11,7 +11,7 @@ const CartHeader = ({ cartContents }) => {
    const fetchData = async() => {
     let previousNum = 0;
     const data = await cartContents.map((content) => {
-      return content.inventory_id[0].product_price * content.order_quantity;
+      return content.inventory_id.product_price * content.order_quantity;
     });
     for(let i = 0; i < data.length; i++) {
       previousNum += data[i];
@@ -28,7 +28,11 @@ const CartHeader = ({ cartContents }) => {
       <header className="content">
         <div className="max-content flex justify-between py-20">
             { cartContents.length > 0 ? <h1 className="font-semibold text-4xl text-gray-800">Your Shopping Cart({ itemsCount } item)</h1> :
-            <Link className="text-gray-100 p-2 rounded bg-green-500" to='/'>Order Now</Link> }
+            <div className="flex items-center gap-5">
+              <Link className="text-gray-100 p-2 rounded bg-green-500" to='/'>Order Now</Link>
+              <h1 className="text-gray-800 font-semibold text-4xl">Browse products in Tulin Bicycle Shop</h1>
+            </div>
+            }
             <div className="relative">
             { cartContents.length > 0 && 
               <>
