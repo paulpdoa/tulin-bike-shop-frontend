@@ -62,6 +62,7 @@ const Signup = () => {
                     setEmailErr('');
                     setUsernameErr('');
                     setPassLimitErr('');
+                    setMobileErr('');
                 },2000)
             })
         }
@@ -81,7 +82,7 @@ const Signup = () => {
                     <div className="px-8 py-24">
                         <h1 className="text-gray-800 text-5xl">Sign up</h1>
                         <span>Create your account</span>
-                        { isLoading && <h2 className="text-sm text-green-500">Please wait...</h2> }
+                        { isLoading && <h2 className="text-sm text-green-500 flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />Please wait...</h2> }
                         { emailErr && <h2 className="text-sm text-red-500">{ emailErr }</h2> } 
                         { usernameErr && <h2 className="text-sm text-red-500">{ usernameErr }</h2> }
                         { mobileErr && <h2 className="text-sm text-red-500">{ mobileErr }</h2> }
