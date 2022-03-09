@@ -9,6 +9,7 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
     const [customerId] = useState(id);
     
     const cartItemId = products.map((product) => product._id);
+    
 
     const navigate = useNavigate();
     useEffect(() => {

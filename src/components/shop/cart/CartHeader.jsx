@@ -36,7 +36,7 @@ const CartHeader = ({ cartContents }) => {
             <div className="relative">
             { cartContents.length > 0 && 
               <>
-                <h2 className="text-gray-800 text-xl font-semibold">SUBTOTAL ₱{totalPrice}</h2>
+                <h2 className="text-gray-800 text-xl font-semibold">SUBTOTAL ₱{totalPrice.toLocaleString()}</h2>
                 <Link to={`/checkout/${Cookies.get('customerId')}`} className="bg-green-700 text-gray-100 p-2 rounded-md absolute right-0">Checkout</Link>
               </>
             }

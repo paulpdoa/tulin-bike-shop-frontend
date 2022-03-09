@@ -63,7 +63,7 @@ const Login = ({ setCustomerCookie }) => {
                   <h2 className="font-bold text-xl text-gray-800">Customer Login</h2>
                   <Link className="text-blue-500 text-sm" to='/adminlogin'>login as admin?</Link>
                   { success === 'this user is not yet verified, please verify your account' ? 
-                    <Link onClick={sendCodeToMail} to={`/verify/${verifyId}`} className="flex items-center text-lg text-red-500 gap-2">
+                    <Link onClick={sendCodeToMail} to={`/verify/${verifyId}`} className="flex items-center text-sm underline text-red-500 gap-2">
                         { success }
                     </Link> : 
                     <span className="flex items-center font-semibold text-lg text-green-500 gap-2">

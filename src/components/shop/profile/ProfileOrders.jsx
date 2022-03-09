@@ -12,7 +12,7 @@ const ProfileOrders = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },`/order/${id}`,setOrders);
+    fetchData({ signal:abortCont.signal },`/neworders/${id}`,setOrders);
 
     return () => abortCont.abort();
   },[orders,id])

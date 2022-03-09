@@ -63,10 +63,10 @@ const VerifyCode = () => {
                     <section className="flex flex-col gap-5 items-center mt-5">
                         <p className="text-center text-lg text-gray-800">Please confirm your account to verify and allow you to use the website. Ignoring this will disable you to use the store. The code was sent to { email }</p>
                         <form onSubmit={verifyAccount} className="flex gap-3">
-                            <input className="verify-input" type="number" value={numone} onChange={(e) => setNumone(e.target.value)} />
-                            <input className="verify-input" type="number" value={numtwo} onChange={(e) => setNumtwo(e.target.value)} />
-                            <input className="verify-input" type="number" value={numthree} onChange={(e) => setNumthree(e.target.value)} />
-                            <input className="verify-input" type="number" value={numfour} onChange={(e) => setNumfour(e.target.value)} />
+                            <input className="verify-input" type="number" value={numone} onChange={(e) => setNumone(e.target.value)} maxLength="1" />
+                            <input className="verify-input" type="number" value={numtwo} onChange={(e) => setNumtwo(e.target.value)} maxLength="1" />
+                            <input className="verify-input" type="number" value={numthree} onChange={(e) => setNumthree(e.target.value)} maxLength="1" />
+                            <input className="verify-input" type="number" value={numfour} onChange={(e) => setNumfour(e.target.value)} maxLength="1" />
                             <input onKeyPress={(e) => e.key === 'Enter' && verifyAccount() } className="verify-input" type="number" value={numfive} onChange={(e) => setNumfive(e.target.value)} />
                         </form>
                         <span className={error ? "text-xs text-red-500" : "text-sm text-green-500"}>{ error ? error : message }</span>

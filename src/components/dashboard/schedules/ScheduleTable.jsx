@@ -28,6 +28,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
         axios.get(`/schedule/${id}`,{ signal:abortCont.signal })
         .then((data) => {
             setGetDetail(data.data)
+            console.log(data.data);
         }).catch((err) => {
             console.log(err)
         })
@@ -46,7 +47,11 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
                     <th>Status</th>
                     <th>Details</th>
                 </tr>
-               { details && details.map((detail) => (
+               { details.length < 1 ? 
+               <tr className="w-full h-52">
+                <td colSpan={6} className="font-semibold text-gray-800 text-4xl animate-pulse">No schedules yet...</td>
+               </tr>  : 
+               details.map((detail) => (
                 <tr className="border-b-2 border-gray-300 h-12" key={detail._id}>
                     <td>{detail.customer_id.firstname} {detail.customer_id.lastname}</td>
                     <td>{detail.customer_id.email}</td>

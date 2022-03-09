@@ -55,9 +55,10 @@ const App = () => {
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
+  const imgLocation = "http://localhost:8000/uploads/products/";
     
   return (
-    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie }}>
+    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation }}>
       <Routes>
         <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
         <Route path='/adminsignup' element={ <AdminSignup /> } />

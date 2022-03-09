@@ -1,8 +1,9 @@
 import { useState,useEffect } from 'react';
 import { BsPaypal } from 'react-icons/bs';
 import { FiTruck } from 'react-icons/fi';
+import axios from 'axios';
 
-const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
+const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod,id }) => {
 
     const [totalPrice,setTotalPrice] = useState(0);
 
@@ -28,6 +29,13 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
     },[products,setPaymentVal])
     
     const itemsCount = products.map((product) => product.order_quantity).reduce((initial,curr) => curr + initial,0);
+
+    // const cartItemId = products.map((product) => product._id);
+    // const paymentMethod = "cod";
+    // const onOrder = async () => {
+    //     const transaction = await axios.post('/order',{ customerId:id,cartItemId, paymentMethod })
+    //     console.log(transaction)
+    // }
 
   return (
     <div className="w-full select-none">

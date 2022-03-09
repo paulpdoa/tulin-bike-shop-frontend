@@ -26,7 +26,9 @@ const CartTable = ({ cartContents,setCartContents }) => {
                     <th>Total</th>
                 </tr>
                 { cartContents.length < 1 ? 
-                <h1 className="text-4xl text-gray-800 animate-pulse font-semibold mt-10">No items were added to cart...</h1> : 
+                <tr className="h-24">
+                    <td className="text-4xl text-gray-800 animate-pulse font-semibold mt-10">No items were added to cart...</td> 
+                </tr> :
                 cartContents.map((cartContent) => (
                     <tr className="text-center border-b border-gray-900 h-24" key={cartContent._id}>
                         <td>

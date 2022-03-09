@@ -54,7 +54,7 @@ const Checkout = () => {
                     </section>
                     <section className="shadow-2xl bg-white p-5 w-1/2 h-auto rounded">
                       <h2 className="text-3xl font-semibold text-gray-800">Order Summary</h2>
-                      <PaymentCard products={products} setShowPaypal={setShowPaypal} setPaymentVal={setPaymentVal} setShowCod={setShowCod} />
+                      <PaymentCard products={products} setShowPaypal={setShowPaypal} setPaymentVal={setPaymentVal} setShowCod={setShowCod} id={id} />
                     </section>
                 </div>
             </div>

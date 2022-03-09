@@ -37,6 +37,17 @@ const Navbar = ({ customerCookie }) => {
   const [showTopNav,setShowTopNav] = useState(true);
   const [cartCount,setCartCount] = useState(0);
 
+  const [customer,setCustomer] = useState('');
+
+  // Set customer name to none or with name
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    setCustomer(localStorage.getItem('customer_name'));
+
+    return () => abortCont.abort();
+  },[customer,customerCookie])
+
   // Get length of cart for display
   useEffect(() => {
     const abortCont = new AbortController();
@@ -134,10 +145,10 @@ const Navbar = ({ customerCookie }) => {
                       { customerCookie ? 
                       <>
                         <button onClick={onLogout} className="flex items-center gap-2"><FiLogOut /> Logout</button>
-                        <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2"><BsPersonCircle /> {localStorage.getItem('customer_name')}</Link> 
+                        <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2"><BsPersonCircle />{customer}</Link> 
                       </>
                       : 
-                        <Link to='/login' className="flex items-center gap-2"><FiLogIn /> Login</Link> 
+                        <Link to='/login' className="flex items-center gap-2"><FiLogIn />Login</Link> 
                       }
                     </motion.div>
                   }

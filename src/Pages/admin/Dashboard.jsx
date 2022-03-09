@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { BsBagCheck } from 'react-icons/bs';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
@@ -9,20 +8,27 @@ import MostSelling from '../../components/dashboard/home/MostSelling';
 import RecentOrders from '../../components/dashboard/home/RecentOrders';
 import DashboardCard from '../../components/dashboard/home/DashboardCard';
 import Datetime from '../../components/dashboard/partials/Datetime';
+import { fetchData } from '../../helper/fetching';
 
 const Dashboard = () => {
+
+  const [isLoading,setIsLoading] = useState(true);
+
   const [customers,setCustomers] = useState([]);
+  const [orders,setOrders] = useState([]);
   // get customers length
   useEffect(() => {
     const abortCont = new AbortController();
-
-    axios.get('/customer',{ signal:abortCont.signal })
-    .then((data) => {
-      setCustomers(data.data);
-    })
-    return () => abortCont.abort()
-  },[customers])
   
+    fetchData({ signal:abortCont.signal },'/customer',setCustomers,setIsLoading);
+
+    fetchData({ signal:abortCont.signal },'/order',setOrders,setIsLoading);
+
+    return () => abortCont.abort()
+  },[customers,orders])
+  
+  const test = orders.map((order) => order.cart_id.map((cart) => cart.order_quantity));
+
   return (
     <>
       <Helmet><title>Tulin Bicycle Shop | Dashboard</title></Helmet>
@@ -32,10 +38,10 @@ const Dashboard = () => {
           <Datetime />
         </div>
         <div className="flex gap-10 justify-around">
-          <DashboardCard title='Total Orders' number='3245' color='bg-blue-500' icon={<BsBagCheck />} />
-          <DashboardCard title='Total Sales' sign='$' number='5141' color='bg-green-500' icon={<AiOutlineDollarCircle />} />
-          <DashboardCard title='Total Expenses' sign='$' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} />
-          <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} />
+          <DashboardCard title='Total Orders' number={orders.length} color='bg-blue-500' icon={<BsBagCheck />} isLoading={isLoading} />
+          <DashboardCard title='Total Sales' sign='$' number='5141' color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
+          <DashboardCard title='Total Expenses' sign='$' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
+          <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} isLoading={isLoading} />
         </div>
         <div className="grid grid-cols-5 gap-5 mt-10 rounded h-56">
           <MostSelling />
