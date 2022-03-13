@@ -25,6 +25,7 @@ const ShopAccessories = () => {
     pageNumbers.push(i);
   }
 
+
   return ( 
     <div className="col-span-2 p-20 h-screen">
         <Helmet><title>Tulin Bicycle Shop | Accessories</title></Helmet>
@@ -32,11 +33,11 @@ const ShopAccessories = () => {
         <ProductHeader pageNumbers={pageNumbers} />
         <div className="grid grid-cols-3 gap-5 mt-5">
             { isLoading && <h2>Please wait...</h2> }
-            { accessories.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There is no items yet</h1> : 
+            { accessories.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There are no items yet</h1> : 
               accessoryLists && accessoryLists.map((product) => (
-                  <div key={product._id}>
-                    <ProductCard product={product} />
-                  </div>
+                <div key={product._id}>
+                  <ProductCard product={product} />
+                </div>  
               )) 
             }
         </div>

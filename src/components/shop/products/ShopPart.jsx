@@ -32,13 +32,12 @@ const ShopPart = () => {
       <ProductHeader pageNumbers={pageNumbers} />
       <div className="grid grid-cols-3 gap-5 mt-5">
           { isLoading && <h2>Please wait...</h2> }
-          { parts.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There is no items yet</h1> : 
+          { parts.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There are no items yet</h1> : 
             partLists && partLists.map((product) => (
               <div key={product._id}>
                 <ProductCard product={product} />
-              </div>
-            )) 
-          }
+              </div> 
+            ))}
       </div>
     </div>
       
