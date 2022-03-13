@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import axios from 'axios';
+import { GlobalContext } from '../../../helper/Context';
 
 const CartTable = ({ cartContents,setCartContents }) => {
 
   const [quantity,setQuantity] = useState(0);
-  const imgLocation = "http://localhost:8000/uploads/products/"
+  const { imgLocation } = useContext(GlobalContext);
 
   const removeItem = (id) => {
     const deletedItem = cartContents.filter(cartContent => cartContent._id !== id);

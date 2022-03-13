@@ -55,10 +55,19 @@ const App = () => {
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
+  const [customerId] = useState(Cookies.get('customerId'));
   const imgLocation = "http://localhost:8000/uploads/products/";
-    
+
+  // For Paginations
+  const [currentPage,setCurrentPage] = useState(1);
+  const [productPerPage] = useState(9);
+  const lastIndex = currentPage * productPerPage;
+  const startIndex = productPerPage - lastIndex;
+  // For changing pages
+  const paginate = page => setCurrentPage(page);
+  
   return (
-    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation }}>
+    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,startIndex,lastIndex,productPerPage,paginate,customerId }}>
       <Routes>
         <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
         <Route path='/adminsignup' element={ <AdminSignup /> } />

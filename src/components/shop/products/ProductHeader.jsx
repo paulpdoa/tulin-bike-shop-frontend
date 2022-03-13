@@ -1,5 +1,10 @@
+import { GlobalContext } from "../../../helper/Context";
+import { useContext } from 'react';
 
-const ProductHeader = () => {
+const ProductHeader = ({ pageNumbers }) => {
+
+  const { paginate } = useContext(GlobalContext);
+
   return (
     <header className="flex justify-between items-center">
         <div className="flex gap-2 items-center mt-2">
@@ -9,8 +14,9 @@ const ProductHeader = () => {
             </select>
         </div>
         <div className="flex gap-3 items-center">
-            <span className="cursor-pointer">Previous</span>
-            <span className="cursor-pointer">Next</span>
+            { pageNumbers && pageNumbers.map((page,key) => (
+              <button onClick={() => paginate(page)} key={key} className="cursor-pointer p-2 border-gray-800 border rounded">{ page }</button>
+            )) }
         </div>
     </header>
   );

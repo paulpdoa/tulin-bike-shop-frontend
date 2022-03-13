@@ -4,11 +4,11 @@ import { BsBell } from 'react-icons/bs';
 
 import { Link } from 'react-router-dom';
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
   return (
     <nav className="bg-gray-100 p-3 flex justify-between shadow-md">
         <div className="flex items-center gap-10">
-            <span className="text-2xl font-bold cursor-pointer"><GiHamburgerMenu /></span>
+            <span onClick={() => setShowSidebar(!showSidebar)} className="text-2xl font-bold cursor-pointer"><GiHamburgerMenu /></span>
             <Link to='/dashboard/addproduct' className="flex gap-2 items-center p-2 border-2 rounded border-gray-900">
                 <span><FaRegPlusSquare className="text-gray-900 text-2xl" /></span>
                 <span>Add Product</span>

@@ -8,16 +8,18 @@ const Parts = () => {
   const [parts,setParts] = useState([]);
 
   useEffect(() => {
+    const abortCont = new AbortController();
     const fetchData = async () => {
       try {
-      const data = await axios.get('/inventory/part');
-      setParts(data.data);
+        const data = await axios.get('/inventory/part',{ signal:abortCont.signal });
+        setParts(data.data);
       }
       catch(err) {
         console.log(err)
       }
     }
     fetchData();
+    return () => abortCont.abort();
   },[])
 
   return (

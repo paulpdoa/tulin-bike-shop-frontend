@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 
 const ProductCard = ({ product }) => {
-  const imgLocation = 'http://localhost:8000/uploads/products/'
+  
+  const { imgLocation } = useContext(GlobalContext);
 
   return (
     <div className="shadow-lg">

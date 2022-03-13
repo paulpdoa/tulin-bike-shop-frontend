@@ -1,23 +1,15 @@
-import axios from 'axios';
 import { useState,useEffect } from 'react';
+import { fetchData } from '../../../helper/fetching';
 
 const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
+    const [isLoading,setIsLoading] = useState(true);
 
     useEffect(() => {
         const abortCont = new AbortController();
-        
-        const fetchData = async () => {
-           try {
-            const data = await axios.get('/schedule',{ signal:abortCont.signal });
-            setDetails(data.data);
-           }
-           catch(err) {
-               console.log(err);
-           }
-        }
-        fetchData();
+
+        fetchData({ signal:abortCont.signal },'/schedule',setDetails,setIsLoading);
 
         return () => abortCont.abort();
     },[details])
@@ -25,13 +17,8 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
     const viewDetail = (id) => {
         const abortCont = new AbortController();
         setShowDetail(true);
-        axios.get(`/schedule/${id}`,{ signal:abortCont.signal })
-        .then((data) => {
-            setGetDetail(data.data)
-            console.log(data.data);
-        }).catch((err) => {
-            console.log(err)
-        })
+        fetchData({ signal:abortCont.signal },`/schedule/${id}`,setGetDetail,setIsLoading);
+       
         return () => abortCont.abort();
     }
 
@@ -49,6 +36,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
                 </tr>
                { details.length < 1 ? 
                <tr className="w-full h-52">
+                { isLoading && <td>Please wait...</td>}
                 <td colSpan={6} className="font-semibold text-gray-800 text-4xl animate-pulse">No schedules yet...</td>
                </tr>  : 
                details.map((detail) => (

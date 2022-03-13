@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { useEffect,useState } from 'react';
-import axios from 'axios';
+import { fetchData } from '../../helper/fetching';
 
 import OrderedItem from '../../components/shop/checkout/OrderedItem';
 import PaymentCard from '../../components/shop/checkout/PaymentCard';
@@ -14,16 +14,12 @@ const Checkout = () => {
   const [showCod,setShowCod] = useState(false);
   const [products,setProducts] = useState([]);
   const [paymentVal,setPaymentVal] = useState(0);
+  const [isLoading,setIsLoading] = useState(true);
 
   const {id} = useParams();
   useEffect(() => {
     const abortCont = new AbortController();
-    
-    const fetchData = async () => {
-      const data = await axios.get(`/cart/${id}`,{ signal:abortCont.signal });
-      setProducts(data.data);
-    }
-    fetchData();
+    fetchData({ signal:abortCont.signal },`/cart/${id}`,setProducts,setIsLoading);
     return () => abortCont.abort();
   },[id]);
 
@@ -39,6 +35,7 @@ const Checkout = () => {
                 <div className="flex gap-20">
                     <section className="shadow-2xl bg-white p-5 w-1/2 h-96 rounded overflow-y-scroll">
                       <h2 className="text-3xl font-semibold text-gray-800">Ordered Items</h2>
+                      { isLoading && <h2>Please wait...</h2>}
                       { products && products.map((product) => (
                         <div key={product._id}>
                           <OrderedItem 
@@ -60,7 +57,7 @@ const Checkout = () => {
             </div>
             {/* Show Paypal Button */}
             { showPaypal && <Paypal paymentVal={paymentVal} setShowPaypal={setShowPaypal} products={products} id={id} /> }
-            { showCod && <Cod setShowCod={setShowCod} /> }
+            { showCod && <Cod setShowCod={setShowCod} products={products} /> }
         </div>
     </>
   )

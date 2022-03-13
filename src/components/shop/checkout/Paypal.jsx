@@ -40,7 +40,7 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
 
         // Post the order
         
-        const paymentMethod = "paypal"
+        const paymentMethod = "Paypal";
         const postOrder = async () => {
             const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod })
             navigate(transaction.data.redirect);

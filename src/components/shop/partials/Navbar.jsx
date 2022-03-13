@@ -38,6 +38,7 @@ const Navbar = ({ customerCookie }) => {
   const [cartCount,setCartCount] = useState(0);
 
   const [customer,setCustomer] = useState('');
+  const [isLoading,setIsLoading] = useState(true);
 
   // Set customer name to none or with name
   useEffect(() => {
@@ -51,7 +52,7 @@ const Navbar = ({ customerCookie }) => {
   // Get length of cart for display
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount);
+    fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount,setIsLoading);
     return () => abortCont.abort();
   },[cartCount])
 

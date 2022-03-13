@@ -6,20 +6,20 @@ const NewOrders = () => {
 
     const [newOrders,setNewOrders] = useState([]);
     const { imgLocation } = useContext(GlobalContext);
+    const [isLoading,setIsLoading] = useState(true);
     
     useEffect(() => {
         const abortCont = new AbortController();
         
-        fetchData({ signal:abortCont.signal },'/neworders',setNewOrders);
+        fetchData({ signal:abortCont.signal },'/neworders',setNewOrders,setIsLoading);
 
         return () => abortCont.abort()
     },[newOrders]);
 
-    console.log(newOrders);
   return (
     <div className="p-10 rounded bg-gray-100 text-gray-800 shadow-lg col-span-1 h-96 overflow-y-scroll">
         <h1 className="text-2xl uppercase font-semibold">New Orders</h1>
-        
+        { isLoading && <h2>Please wait...</h2> }
         { newOrders && newOrders.map((newOrder) => (
             newOrder.cart_id.map((order) => (
                 <div className="flex justify-between" key={order._id}>

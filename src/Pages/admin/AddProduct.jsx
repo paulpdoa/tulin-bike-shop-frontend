@@ -11,7 +11,7 @@ const AddProduct = () => {
   const [type,setType] = useState('');
   const [size,setSize] = useState('');
   const [brand,setBrand] = useState('');
-  const [color,setColor] = useState('');
+  const [color,setColor] = useState([]);
   const [price,setPrice] = useState(0);
   const [description,setDescription] = useState('');
   const [itemName,setItemName] = useState('');
@@ -35,7 +35,7 @@ const AddProduct = () => {
     productDetails.append('product_quantity',quantity);
     productDetails.append('product_price',price);
     productDetails.append('product_description',description);
-
+    
     axios.post('/inventory', productDetails)
     .then((data) => {
       console.log(data.data.mssg);
@@ -43,6 +43,7 @@ const AddProduct = () => {
     }).catch(err => console.log(err))
 
   }
+  
 
   // Preview image before upload
   const readImage = (e) => {
@@ -87,14 +88,13 @@ const AddProduct = () => {
               </section>
               <section className="flex flex-col">
                 <label htmlFor="brandname">Product Size:</label>
-                <select onChange={(e) => setSize(e.target.value)} value={size} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
+                <select onChange={(e) => setSize(e.target.value)} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
                   <option value="" disabled selected hidden>Size</option>
                   <option value="XS">XS</option>
                   <option value="S">S</option>
                   <option value="M">M</option>
                   <option value="XL">XL</option>
                   <option value="L">L</option>
-                  
                 </select>
               </section>
               <section className="flex flex-col">
@@ -103,7 +103,22 @@ const AddProduct = () => {
               </section>
               <section className="flex flex-col">
                 <label htmlFor="brandname">Product Color:</label>
-                <input required type="text" onChange={(e) => setColor(e.target.value)} value={color} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer" />
+                <div className="flex items-center gap-2">
+                  <label htmlFor="red">Red</label>
+                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="red" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="green">Green</label>
+                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="green" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="blue">Blue</label>
+                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="blue" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="yellow">Yellow</label>
+                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="yellow" />
+                </div>
               </section>
               <section className="flex flex-col">
                 <label htmlFor="brandname">Brand Name:</label>

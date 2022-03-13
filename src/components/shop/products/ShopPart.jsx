@@ -1,31 +1,39 @@
 import { Helmet } from 'react-helmet';
-import { useState,useEffect } from 'react';
-import axios from 'axios';
+import { useState,useEffect,useContext } from 'react';
+import { fetchData } from '../../../helper/fetching';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
+import { GlobalContext } from '../../../helper/Context';
 
 const ShopPart = () => {
+
+  const { startIndex,lastIndex,productPerPage } = useContext(GlobalContext);
   const [parts,setParts] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
 
   useEffect(() => {
     const abortCont = new AbortController();
-
-    const fetchData = async() => {
-      const data = await axios.get('/inventory/part',{ signal:abortCont.signal });
-      setParts(data.data);
-    }
-    fetchData();
+    fetchData({signal:abortCont.signal},'/inventory/part',setParts,setIsLoading);
     return () => abortCont.abort();
   },[parts])
+
+  const partLists = parts.slice(startIndex,lastIndex);
+  const pageLength = Math.ceil(parts.length / productPerPage);
+  const pageNumbers = [];
+
+  for(let i = 1; i <= pageLength; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="col-span-2 p-20 h-screen">
       <Helmet><title>Tulin Bicycle Shop | Parts</title></Helmet>
       <h1 className="text-4xl text-gray-800 font-semibold uppercase">Parts</h1>
-      <ProductHeader />
+      <ProductHeader pageNumbers={pageNumbers} />
       <div className="grid grid-cols-3 gap-5 mt-5">
+          { isLoading && <h2>Please wait...</h2> }
           { parts.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There is no items yet</h1> : 
-            parts && parts.map((product) => (
+            partLists && partLists.map((product) => (
               <div key={product._id}>
                 <ProductCard product={product} />
               </div>

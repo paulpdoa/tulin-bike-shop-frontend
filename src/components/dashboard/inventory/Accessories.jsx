@@ -8,16 +8,20 @@ const Accessories = () => {
   const [accessories,setAccessories] = useState([]);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+    
     const fetchData = async () => {
       try {
-      const data = await axios.get('/inventory/accessory');
-      setAccessories(data.data);
+        const data = await axios.get('/inventory/accessory',{ signal:abortCont.signal });
+        setAccessories(data.data);
       }
       catch(err) {
         console.log(err)
       }
     }
     fetchData();
+
+    return () => abortCont.abort();
   },[])
 
   return (

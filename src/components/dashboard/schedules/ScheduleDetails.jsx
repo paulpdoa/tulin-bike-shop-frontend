@@ -1,5 +1,6 @@
 import { AiOutlineCloseCircle,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useEffect,useState } from 'react';
+import { putData } from '../../../helper/fetching';
 
 const ScheduleDetails = ({ setShowDetail,getDetail }) => {
    
@@ -10,7 +11,12 @@ const ScheduleDetails = ({ setShowDetail,getDetail }) => {
         setTimeout(() => {
             setIsLoading(false);
         },1000)
-    },[])
+    },[]);
+
+    const approveSchedule = (id) => {
+        putData(`/schedule/${id}`,{schedule_status : 'approved'});
+        setShowDetail(false);
+    }
 
   return (
     <>
@@ -37,7 +43,7 @@ const ScheduleDetails = ({ setShowDetail,getDetail }) => {
                             <h2>{ getDetail.reserved_time }</h2>
                         </div>
                         <div className="flex items-center">
-                            { getDetail.schedule_status === 'pending' && <button className="bg-green-500 text-gray-100 rounded p-3">Approve Schedule</button> }
+                            { getDetail.schedule_status === 'pending' && <button onClick={() => approveSchedule(getDetail._id)} className="bg-green-500 text-gray-100 rounded p-3">Approve Schedule</button> }
                         </div>
                     </div>
                 </div>

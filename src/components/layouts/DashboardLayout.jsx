@@ -8,6 +8,7 @@ import Sidebar from "../dashboard/partials/Sidebar";
 const DashboardLayout = ({ adminCookie }) => {
 
   const [isAuth,setIsAuth] = useState(false);
+  const [showSidebar,setShowSidebar] = useState(true);
 
   // To protect dashboard routes
   const navigate = useNavigate();
@@ -32,10 +33,10 @@ const DashboardLayout = ({ adminCookie }) => {
 
   return (
     <>
-      <Sidebar adminCookie={adminCookie} />
-      <div className="content ml-72">
-        <div className="max-content w-full">
-            <AdminNavbar />
+      <Sidebar adminCookie={adminCookie} showSidebar={showSidebar} />
+      <div className={`content ${!showSidebar ? 'ml-0' : 'ml-72'}`}>
+        <div className={`w-full ${showSidebar && 'max-content'}`}>
+            <AdminNavbar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
             { isAuth ? <Outlet /> : <h1>Verifying User</h1> }
         </div>
       </div>

@@ -8,16 +8,20 @@ const Bikes = () => {
   const [bikes,setBikes] = useState([]);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+
     const fetchData = async () => {
       try {
-      const data = await axios.get('/inventory/bike');
-      setBikes(data.data);
+        const data = await axios.get('/inventory/bike',{ signal:abortCont.signal });
+        setBikes(data.data);
       }
       catch(err) {
         console.log(err)
       }
     }
    fetchData();
+
+   return () => abortCont.abort();
   },[])
 
 

@@ -1,18 +1,20 @@
 
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../helper/fetching';
+import { GlobalContext } from '../../../helper/Context';
 
 const ProfileOrders = () => {
 
   const { id } = useParams();
   const [orders,setOrders] = useState([]);
-  const imgLocation = "http://localhost:8000/uploads/products/";
+  const [isLoading,setIsLoading] = useState(true);
+  const { imgLocation } = useContext(GlobalContext);
 
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },`/neworders/${id}`,setOrders);
+    fetchData({ signal:abortCont.signal },`/neworders/${id}`,setOrders,setIsLoading);
 
     return () => abortCont.abort();
   },[orders,id])
@@ -22,7 +24,7 @@ const ProfileOrders = () => {
         <div className="bg-gray-900 w-full h-4/5 text-gray-100 rounded-md p-10 overflow-y-scroll">
             <h1 className="font-semibold text-4xl py-1">Orders</h1>
             <h2 className="font-semibold text-lg border-b-2 border-gray-400">Items</h2>
-
+            { isLoading && <h2>Please wait...</h2> }
             { orders.length < 1 ? <h1 className="text-gray-300 animate-pulse mt-5 font-bold text-3xl">No items yet...</h1> : 
             orders.map((order) => (
               order.cart_id.map((item) => (

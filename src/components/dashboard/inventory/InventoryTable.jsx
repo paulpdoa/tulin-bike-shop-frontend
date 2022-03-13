@@ -1,7 +1,10 @@
 
+import { useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
+
 const InventoryTable = ({ products }) => {
 
-    const imgLocation = 'http://localhost:8000/uploads/products/'
+  const { imgLocation } = useContext(GlobalContext);
 
   return (
     <table className="w-full">

@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 
 const OrderedItem = ({ image,brand,item,description,quantity,price }) => {
-  const imgLocation = 'http://localhost:8000/uploads/products/'
+ 
+  const { imgLocation } = useContext(GlobalContext);
+
   return (
     <div className="flex gap-5 w-full mt-5">
         <img className="w-32 h-32 object-cover rounded" src={`${imgLocation}${image}`} alt="cycle" />

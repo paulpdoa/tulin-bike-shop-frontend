@@ -1,4 +1,3 @@
-import React from 'react'
 
 const DashboardCard = ({ title,icon,number,sign,color,isLoading }) => {
   
@@ -8,7 +7,7 @@ const DashboardCard = ({ title,icon,number,sign,color,isLoading }) => {
             <h1 className="text-lg">{ title }</h1>
             <span className="text-2xl font-bold">{ icon }</span>
         </div>
-        <h2 className="font-bold text-2xl">{ isLoading ? <h1 className="text-sm text-red-500">Please wait...</h1> : <>{sign} {Number(number.toLocaleString())}</> }</h2>
+        <h2 className="font-bold text-2xl">{ isLoading ? <span className="text-sm text-red-500">Please wait...</span> : <>{sign} {number.toLocaleString()}</> }</h2>
     </div>
   )
 }
