@@ -58,6 +58,12 @@ const App = () => {
   const [customerId] = useState(Cookies.get('customerId'));
   const imgLocation = "http://localhost:8000/uploads/products/";
 
+  // Closing Modal
+  const [showModal,setShowModal] = useState(false);
+
+  // Getting Id for modal
+  const [idDetail,setIdDetail] = useState();
+
   // For Paginations
   const [currentPage,setCurrentPage] = useState(1);
   const [productPerPage] = useState(9);
@@ -67,7 +73,10 @@ const App = () => {
   const paginate = page => setCurrentPage(page);
   
   return (
-    <GlobalContext.Provider value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,startIndex,lastIndex,productPerPage,paginate,customerId }}>
+    <GlobalContext.Provider 
+      value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
+      showModal,setShowModal,idDetail,setIdDetail }}
+    >
       <Routes>
         <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
         <Route path='/adminsignup' element={ <AdminSignup /> } />

@@ -14,7 +14,7 @@ const ProfileOrders = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },`/neworders/${id}`,setOrders,setIsLoading);
+    fetchData({ signal:abortCont.signal },`/neworders`,setOrders,setIsLoading);
 
     return () => abortCont.abort();
   },[orders,id])
@@ -27,7 +27,7 @@ const ProfileOrders = () => {
             { isLoading && <h2>Please wait...</h2> }
             { orders.length < 1 ? <h1 className="text-gray-300 animate-pulse mt-5 font-bold text-3xl">No items yet...</h1> : 
             orders.map((order) => (
-              order.cart_id.map((item) => (
+              order.cart_id.filter((item) => id === item.customer_id).map((item) => (
                 <div key={item._id} className="flex mt-3 border-b-2 border-gray-400 justify-between gap-2 select-none">
                 <div className="flex gap-2 py-2">
                   <img className="object-cover w-20 h-20 rounded" src={ `${imgLocation}${item.inventory_id.product_image}` } alt="cycle" />

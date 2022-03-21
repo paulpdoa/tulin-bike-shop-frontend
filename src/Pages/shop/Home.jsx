@@ -5,7 +5,7 @@ import Description from '../../components/shop/home/Description';
 import { Helmet } from 'react-helmet';
 
 const Home = () => {
-
+  
   return (
     <>
         <Helmet><title>Tulin Bicycle Shop | Home</title></Helmet>

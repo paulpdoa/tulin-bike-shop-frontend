@@ -8,8 +8,8 @@ const Cod = ({ setShowCod,products }) => {
   
   const { customerId } = useContext(GlobalContext);  
   const cartItemId = products.map((product) => product._id);
-  const [customer,setCustomer] = useState([]);
-  const [isLoading,setIsLoading] = useState(true);
+  // const [customer,setCustomer] = useState([]);
+  // const [isLoading,setIsLoading] = useState(true);
 
   const [firstname,setFirstname] = useState('');
   const [lastname,setLastname] = useState('');
@@ -39,7 +39,7 @@ const Cod = ({ setShowCod,products }) => {
     })
 
     return abortCont.abort();
-  },[]);
+  },[id]);
  
 
   const navigate = useNavigate();

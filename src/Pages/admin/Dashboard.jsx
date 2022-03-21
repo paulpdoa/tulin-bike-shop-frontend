@@ -36,12 +36,12 @@ const Dashboard = () => {
   },[orders])
   
   // Get total sales depending on orders
-  const extractOrdersTotal = orders.map((order) => order.cart_id.map((cart) => cart.inventory_id.product_price * cart.order_quantity));
-  let totalSales = 0;
-  for(let i = 0; i < extractOrdersTotal.length; i++) {
-    totalSales += extractOrdersTotal.reduce((curr,init) => curr + init[i],0);
-  }
-  console.log(totalSales);
+  // const extractOrdersTotal = orders.map((order) => order.cart_id.map((cart) => cart.inventory_id.product_price * cart.order_quantity));
+  // let totalSales = 0;
+  // for(let i = 0; i < extractOrdersTotal.length; i++) {
+  //   totalSales += extractOrdersTotal.reduce((curr,init) => curr + init[i],0);
+  // }
+  // console.log(totalSales);
   
   return (
     <>
@@ -53,7 +53,7 @@ const Dashboard = () => {
         </div>
         <div className="flex gap-10 justify-around">
           <DashboardCard title='Total Orders' number={orders.length} color='bg-blue-500' icon={<BsBagCheck />} isLoading={isLoading} />
-          <DashboardCard title='Total Sales' sign='₱' number={totalSales} color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
+          <DashboardCard title='Total Sales' sign='₱' number={123} color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
           <DashboardCard title='Total Expenses' sign='₱' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
           <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} isLoading={isLoading} />
         </div>

@@ -52,7 +52,7 @@ const Navbar = ({ customerCookie }) => {
   // Get length of cart for display
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount,setIsLoading);
+    Cookies.get('customerId') !== undefined && fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount,setIsLoading);
     return () => abortCont.abort();
   },[cartCount])
 
