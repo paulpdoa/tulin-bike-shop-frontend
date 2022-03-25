@@ -20,7 +20,7 @@ const Login = ({ setCustomerCookie }) => {
     // protect login page when the customer is already logged in
     useEffect(() => {
         if(Cookies.get('customerJwt')) {
-            navigate('/');
+            navigate(-1);
         }
     })
 

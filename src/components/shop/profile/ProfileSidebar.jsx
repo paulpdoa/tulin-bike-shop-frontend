@@ -11,6 +11,10 @@ const ProfileSidebar = () => {
   return (
       <nav className="col-span-1 p-20">
         <h1 className="font-semibold text-4xl text-gray-800">{sideTitle}</h1>
+        <div className="overflow-hidden flex justify-center relative">
+            <img className="object-cover rounded-full w-32 h-32 cursor-pointer" src="/image/blank-profile.png" alt="Blank Profile" />
+            <input className="absolute h-full w-full opacity-0" type="file" accept='image/*' />
+        </div>
         <ul className="flex flex-col gap-5 mt-5 text-gray-800 text-lg">
             <Link onClick={() => setSideTitle('My Account')} to={`/profile/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiUserCircle />My Account</li>

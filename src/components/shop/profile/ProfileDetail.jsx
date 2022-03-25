@@ -1,6 +1,7 @@
 import { useEffect,useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 
 const ProfileDetail = () => {
 
@@ -13,10 +14,12 @@ const ProfileDetail = () => {
 
     const { id } = useParams();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const abortCont = new AbortController();
 
-        axios.get(`/customer/${id}`)
+        axios.get(`/customer/${id}`,{ signal:abortCont.signal })
         .then((data) => {
             setFirstname(data.data.firstname);
             setLastname(data.data.lastname);
@@ -24,16 +27,26 @@ const ProfileDetail = () => {
             setEmail(data.data.email);
             setAddress(data.data.address);
         })
-        return () => abortCont.abort;
-    })
+        return () => abortCont.abort();
+    },[id])
 
     const onUpdate = (e) => {
         e.preventDefault();
+        if(password !== '') {
+            axios.patch(`/customer/${id}`,{ password })
+            .then(data => {
+                console.log(data);
+                navigate('/');
+            })
+        } else {
+            alert('Enter password');
+        }
     }
  
   return (
     <div className="p-20 h-screen col-span-2">
         <h1 className="text-gray-800 font-semibold text-4xl">Personal Information</h1>
+        
         <form className="grid grid-cols-2 grid-rows-4 gap-5" onSubmit={onUpdate}>
             <div className="flex flex-col">
                 <label htmlFor="firstname">First Name:</label>
@@ -57,9 +70,9 @@ const ProfileDetail = () => {
             </div>
             <div className="flex flex-col">
                 <label htmlFor="firstname">Password:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="password" placeholder={password} />
+                <input onChange={(e) => setPassword(e.target.value)} value={password} className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="password" placeholder={password} />
             </div>
-            <button className="p-2 bg-green-500 text-gray-100 w-1/2 h-4/5 rounded self-end">Update</button>
+            <button onClick={onUpdate} className="p-2 bg-green-500 text-gray-100 w-1/2 h-4/5 rounded self-end">Update</button>
         </form>
     </div>
   );

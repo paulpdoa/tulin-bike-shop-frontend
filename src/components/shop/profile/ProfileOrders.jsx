@@ -3,6 +3,7 @@ import { useState,useEffect,useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../helper/fetching';
 import { GlobalContext } from '../../../helper/Context';
+import ProfileOrderModal from '../../modals/ProfileOrderModal';
 
 const ProfileOrders = () => {
 
@@ -10,6 +11,8 @@ const ProfileOrders = () => {
   const [orders,setOrders] = useState([]);
   const [isLoading,setIsLoading] = useState(true);
   const { imgLocation } = useContext(GlobalContext);
+  const [showOrderModal,setShowOrderModal] = useState(false);
+  const [detailId,setDetailId] = useState('');
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -19,8 +22,13 @@ const ProfileOrders = () => {
     return () => abortCont.abort();
   },[orders,id])
 
+  const viewOrderDetail = (id) => {
+    setDetailId(id);
+    setShowOrderModal(true);
+  }
+
   return (
-    <div className="p-20 h-screen col-span-2">
+    <div className="p-20 h-screen col-span-2 relative">
         <div className="bg-gray-900 w-full h-4/5 text-gray-100 rounded-md p-10 overflow-y-scroll">
             <h1 className="font-semibold text-4xl py-1">Orders</h1>
             <h2 className="font-semibold text-lg border-b-2 border-gray-400">Items</h2>
@@ -38,11 +46,12 @@ const ProfileOrders = () => {
                     <span className="text-sm">Qty. { item.order_quantity }</span>
                   </div>
                 </div>
-                <button className="bg-green-500 tracking-wide h-1/2 self-end p-2 rounded m-2">Details</button>
+                <button onClick={() => viewOrderDetail(item._id)} className="bg-green-500 tracking-wide h-1/2 self-end p-2 rounded m-2">Details</button>
               </div>
               ))
             )) }
         </div>
+        { showOrderModal && <ProfileOrderModal detailId={detailId} close={setShowOrderModal} /> }
     </div>
   );
 };

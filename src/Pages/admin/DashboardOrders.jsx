@@ -17,7 +17,7 @@ const DashboardOrders = () => {
   const [isLoading,setIsLoading] = useState(true);
 
   // For Found items
-  const [foundUniqueId,setFoundUniqueId] = useState([]);
+  const [foundUniqueId,setFoundUniqueId] = useState('');
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -37,18 +37,6 @@ const DashboardOrders = () => {
     return () => abortCont.abort();
   },[])
 
-  // Allow to search id
-  const searchUniqueId = (e) => {
-    const searchedId = e.target.value;
-    
-    const data = orderedItems.filter((order) => {
-      return order.uniqueOrder_id.toLowerCase().includes(searchedId.toLowerCase());
-    });
-    setFoundUniqueId(data);
-  }
-  
-
-
   return (
     <>
       <Helmet><title>Tulin Bicycle Shop | Orders</title></Helmet>
@@ -57,15 +45,16 @@ const DashboardOrders = () => {
           <h1 className="font-semibold text-4xl text-gray-800 uppercase">Orders</h1>
           <Datetime />
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="search">Search Unique ID</label>
+        <div className="flex flex-col mt-5">
+          <label htmlFor="search">Search Unique ID:</label>
           <input type="text" 
             className="outline-none p-2 rounded w-1/3 border border-gray-300" 
-            onChange={searchUniqueId} 
+            onChange={(e) => setFoundUniqueId(e.target.value)} 
+            placeholder="Enter id here..."
           />
         </div>
         <div className="grid grid-cols-2 gap-5 mt-10">
-         <NewOrders />
+         <NewOrders foundUniqueId={foundUniqueId} />
          <OrderHistory />
         </div>
         { showModal && <OrderDetailModal /> }

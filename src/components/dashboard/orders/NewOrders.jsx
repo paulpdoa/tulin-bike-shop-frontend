@@ -1,17 +1,21 @@
-import { fetchData } from '../../../helper/fetching';
+import axios from 'axios';
 import { useState,useEffect,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
 
-const NewOrders = () => {
+const NewOrders = ({ foundUniqueId }) => {
 
     const [newOrders,setNewOrders] = useState([]);
     const { imgLocation,setShowModal,setIdDetail } = useContext(GlobalContext);
     const [isLoading,setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         const abortCont = new AbortController();
         
-        fetchData({ signal:abortCont.signal },'/neworders',setNewOrders,setIsLoading);
+        axios.get('/neworders',{signal: abortCont.signal})
+        .then(data => {
+            setIsLoading(false);
+            setNewOrders(data.data);
+        })
 
         return () => abortCont.abort();
     },[newOrders]);
@@ -26,7 +30,13 @@ const NewOrders = () => {
         <h1 className="text-2xl uppercase font-semibold">New Orders</h1>
         { isLoading && <h2>Please wait...</h2> }
         { newOrders.length < 1 ? <h2 className="text-lg animate-pulse text-gray-800">No orders yet...</h2> : 
-            newOrders.map((newOrder) => (
+            newOrders.filter(item => {
+                if(foundUniqueId === ''){
+                    return item
+                } else if(item.uniqueOrder_id.toLowerCase().includes(foundUniqueId.toLowerCase())) {
+                    return item
+                }
+            }).map((newOrder) => (
             newOrder.cart_id.map((order) => (
                 <div className="flex justify-between" key={order._id}>
                     <div className="flex gap-2 items-center mt-4">
@@ -42,6 +52,7 @@ const NewOrders = () => {
                 </div>
             ))
         )) }
+        
     </div>
   )
 }
