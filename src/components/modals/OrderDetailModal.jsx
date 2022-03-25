@@ -1,4 +1,4 @@
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useContext,useEffect,useState } from 'react';
 import { GlobalContext } from '../../helper/Context';
 import axios from 'axios';
@@ -27,16 +27,16 @@ const OrderDetailModal = () => {
     <div className="absolute bg-gray-900 bg-opacity-50 top-0 w-full left-0 h-screen flex justify-center items-center">
         <div className="bg-gray-900 text-gray-100 w-1/2 p-4 h-1/2 rounded-md">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl">Order Details</h1>
-            <AiOutlineClose onClick={() => setShowModal(false)} className="font-semibold text-xl cursor-pointer" />
+            <h1 className="text-2xl font-semibold">Order Details</h1>
+            <AiOutlineClose onClick={() => setShowModal(false)} className="font-semibold text-xl cursor-pointer transform hover:scale-150 transition" />
           </div>
           { isLoading ?
            <div>
-             <p>Please wait...</p>
+             <p className="flex gap-2 text-xl"><AiOutlineLoading3Quarters className="animate-spin" />Please wait...</p>
            </div>
            : 
            <>
-           <div className="flex justify-between">
+           <div className="flex justify-between mt-5">
             <div className="flex gap-2">
               <img className="w-32 rounded" src={`${imgLocation}${orderDetail.inventory_id.product_image}`} alt={orderDetail.inventory_id.product_name} />
               <div className="flex flex-col">
@@ -54,7 +54,7 @@ const OrderDetailModal = () => {
           </div>
           <div className="flex items-center justify-end gap-2 py-14">
             <button className="bg-green-500 p-2 rounded">Mark as claimed/delivered</button>
-            <button>Delete</button>
+            <button className="bg-red-500 p-2 rounded">Delete</button>
           </div>
           </>
            }

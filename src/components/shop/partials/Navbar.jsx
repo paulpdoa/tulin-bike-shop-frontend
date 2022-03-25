@@ -31,6 +31,9 @@ const showMenuVar = {
 
 const Navbar = ({ customerCookie }) => {
 
+  // Check if logged to change state inside the dropdown
+  const [isLogged,setIsLogged] = useState(false);
+
   const [inventories,setInventories] = useState([]);
   const [searchedItem,setSearchedItem] = useState('');
   const [showMenu,setShowMenu] = useState(false);
@@ -39,7 +42,7 @@ const Navbar = ({ customerCookie }) => {
 
   const [customer,setCustomer] = useState('');
   const [isLoading,setIsLoading] = useState(true);
-
+  
   // Set customer name to none or with name
   useEffect(() => {
     const abortCont = new AbortController();
@@ -103,6 +106,10 @@ const Navbar = ({ customerCookie }) => {
     product === '' ? setSearchedItem([]) : setSearchedItem(data);
   }
 
+  useEffect(() => {
+    if(customerCookie) setIsLogged(true);
+  },[customerCookie])
+
   return (
     <nav className="content navbar">
       <div className="max-content">
@@ -143,7 +150,7 @@ const Navbar = ({ customerCookie }) => {
                       exit="exit"
                       variants={showMenuVar}
                     >
-                      { customerCookie ? 
+                      { isLogged && customer !== null ? 
                       <>
                         <button onClick={onLogout} className="flex items-center gap-2"><FiLogOut /> Logout</button>
                         <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2"><BsPersonCircle />{customer}</Link> 
