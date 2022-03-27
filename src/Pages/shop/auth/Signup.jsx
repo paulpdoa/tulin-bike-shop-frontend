@@ -35,25 +35,24 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const onSignup = (e) => {
+    const onSignup = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-       
         if(password !== confirmPassword) {
             setPassErr('Password doesn\'t match, please check your password');
             setTimeout(() => {
                 setPassErr('');
             },2000);
         } else {
-            axios.post('/customer',{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password })
-            .then((data) => {
+            try {
+                const data = await axios.post('/customer',{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password });
                 setSuccess(data.data.mssg);
-                setIsLoading(false);
                 setTimeout(() => {
                     navigate(data.data.redirect);
-                },2000)
-            }).catch((err) => {
+                },2000);
                 setIsLoading(false);
+            }
+            catch(err) {
                 setEmailErr(err.response.data.errors.email);
                 setPassLimitErr(err.response.data.errors.password);
                 setUsernameErr(err.response.data.errors.username);
@@ -64,7 +63,8 @@ const Signup = () => {
                     setPassLimitErr('');
                     setMobileErr('');
                 },2000)
-            })
+                setIsLoading(false);
+            }
         }
     }
 
@@ -94,7 +94,7 @@ const Signup = () => {
                             <button onClick={() => setActiveStep('step three')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step three' && 'bg-gray-300'}`}>3</button>
 
                         </div>
-                        <form className="flex flex-col gap-2 mt-1" onSubmit={onSignup}>
+                        <form className="flex flex-col gap-2 mt-1">
                             {/* First Step */}
                             { activeStep === 'step one' && 
                             <StepOne 
@@ -137,6 +137,7 @@ const Signup = () => {
                                 passLimitErr={passLimitErr}
                                 passErr={passErr}
                                 setActiveStep={setActiveStep}
+                                onSignup={onSignup}
                             /> }
                         </form>
                     </div>

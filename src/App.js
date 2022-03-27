@@ -57,6 +57,9 @@ const App = () => {
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
   const [customerId] = useState(Cookies.get('customerId'));
   const imgLocation = "http://localhost:8000/uploads/products/";
+  const imgProfileLocation = "http://localhost:8000/uploads/profilePics/";
+
+ 
 
   // Closing Modal
   const [showModal,setShowModal] = useState(false);
@@ -74,7 +77,7 @@ const App = () => {
   
   return (
     <GlobalContext.Provider 
-      value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
+      value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
       showModal,setShowModal,idDetail,setIdDetail }}
     >
       <Routes>

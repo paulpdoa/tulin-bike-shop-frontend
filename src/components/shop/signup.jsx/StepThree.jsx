@@ -1,5 +1,5 @@
 
-const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,passLimitErr,passErr,setActiveStep }) => {
+const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,passLimitErr,passErr,setActiveStep,onSignup }) => {
   return (
     <div className="w-full">
          <div className="flex flex-col gap-2">
@@ -25,7 +25,7 @@ const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,pas
                 <span className="bg-gray-900 text-gray-100 p-2 rounded">Previous</span>
             </div>
             <div className="flex-col flex gap-2">
-                <button className="signup-btn-user">Signup</button>
+                <button onClick={onSignup} className="signup-btn-user">Signup</button>
             </div>
         </div>
     </div>

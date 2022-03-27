@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import { motion,AnimatePresence } from 'framer-motion';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import { BsCaretDownSquare } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiLogIn,FiLogOut } from 'react-icons/fi';
 import { BsPersonCircle } from 'react-icons/bs';
+import { GlobalContext } from '../../../helper/Context';
 
 const showMenuVar = {
   hidden: {
@@ -42,6 +43,18 @@ const Navbar = ({ customerCookie }) => {
 
   const [customer,setCustomer] = useState('');
   const [isLoading,setIsLoading] = useState(true);
+
+  const { imgProfileLocation } = useContext(GlobalContext);
+  const [userImg,setUserImg] = useState('');
+
+  useEffect(() => {
+    const abortCont = new AbortController();
+    axios.get(`/customer/${Cookies.get('customerId')}`,{signal:abortCont.signal})
+    .then(data => {
+        setUserImg(data.data.profilePicture);
+    })
+    return () => abortCont.abort();
+  },[])
   
   // Set customer name to none or with name
   useEffect(() => {
@@ -153,7 +166,10 @@ const Navbar = ({ customerCookie }) => {
                       { isLogged && customer !== null ? 
                       <>
                         <button onClick={onLogout} className="flex items-center gap-2"><FiLogOut /> Logout</button>
-                        <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2"><BsPersonCircle />{customer}</Link> 
+                        <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2">
+                            { userImg ? <img className="w-5 h-5 object-cover rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer} /> : <BsPersonCircle />}
+                            {customer}
+                        </Link> 
                       </>
                       : 
                         <Link to='/login' className="flex items-center gap-2"><FiLogIn />Login</Link> 
