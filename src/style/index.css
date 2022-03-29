@@ -28,7 +28,7 @@ html {
 }
 body {
   font-family:var(--ff);
-  @apply bg-gray-100;
+  @apply bg-white;
 }
 
 /* Center Container with max width */
@@ -144,13 +144,21 @@ body {
   width:70%;
 }
 .hero--item2 {
-  width:62%;
+  width:70%;
 }
 .hero--item3 {
-  width:53%;  
+  width:70%;  
 }
+
 .build-bg {
   background: var(--bg-buildSection);
+}
+.build-banner {
+  background: url('../assets/build.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height:100vh;
 }
 /* Footer */
 .footer-bg {

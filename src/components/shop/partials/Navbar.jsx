@@ -127,18 +127,26 @@ const Navbar = ({ customerCookie }) => {
     <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 fixed z-50 border-b-4 text-black font-semibold border-gray-200'}`}>
       <div className="max-content flex justify-between items-center">
           <div className="flex h-20 items-center gap-16">
-            <img className="w-32 h-32 object-cover" src="/image/tulin.png" alt="logo" />
+            <Link to='/'><img className="w-32 h-32 object-cover" src="/image/tulin.png" alt="logo" /></Link>
             <ul className="flex gap-9 list-none">
-              <li className="cursor-pointer">Home</li>
-              <li className="cursor-pointer">About</li>
-              <li className="cursor-pointer">Contact</li>
+              <li className="cursor-pointer"><Link to="/">Home</Link></li>
+              <li className="cursor-pointer"><Link to="/about">About</Link></li>
+              <li className="cursor-pointer"><Link to="/contact">Contact</Link></li>
               <li className="cursor-pointer">Services</li>
             </ul>
           </div>
           <div className="flex items-center gap-3">
-            <button className="p-2 rounded bg-gray-900 text-gray-200 w-28">Log in</button>
+            { customer !== null && customerCookie ? 
+              <Link className="flex items-center gap-2" to={`/profile/${Cookies.get('customerId')}`}>
+                  <img className="w-7 object-cover h-7 rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer}/>Hi {customer}!
+              </Link> : 
+              <Link to='/login' className="p-2 rounded bg-gray-900 text-gray-200 w-28 text-center">
+                Log in
+              </Link> }
             <img className="w-7 h-6 object-cover cursor-pointer" src="/image/icons/Search.png" alt="search" />
-            <img className="w-7 h-8 object-cover cursor-pointer" src="/image/icons/Shopping-Cart.png" alt="shopping cart" />
+            <Link to={`/cart/${Cookies.get('customerId')}`}>
+              <img className="w-7 h-8 object-cover cursor-pointer" src="/image/icons/Shopping-Cart.png" alt="shopping cart" />
+            </Link>
           </div>
       </div>
     </nav>
