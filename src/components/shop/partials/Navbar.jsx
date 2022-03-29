@@ -124,75 +124,22 @@ const Navbar = ({ customerCookie }) => {
   },[customerCookie])
 
   return (
-    <nav className="content navbar">
-      <div className="max-content">
-          <div className="flex justify-around border-b-2">
-            <div className="flex items-center gap-2 w-1/2">
-              <Link to='/'>
-                <img className="navbar-logo" src="/image/tulin.png" alt="Tulin logo" />
-              </Link>
-              <div className="w-full relative">
-                <input onChange={handleSearch} className="p-2 w-full rounded outline-none" type="search" placeholder="Search parts/brand" />
-                <div className=" bg-white rounded-b-sm rounded-t-none absolute top-10 w-full">
-                { searchedItem && searchedItem.slice(0,10).map((item) => (
-                  <Link to={`/products/${item._id}`} key={item._id}>
-                    <div className="cursor-pointer hover:bg-gray-300 p-2" key={item._id}>
-                      <h1>{item.product_name}</h1>
-                    </div>
-                  </Link>
-                  
-                )) }
-                </div>
-              </div>
-            </div>
-            <ul className="flex items-center justify-center gap-3 text-gray-100">
-              <Link to='/'><li>Home</li></Link>
-              <Link to='/about'><li>About</li></Link>
-              <Link to='/contact'><li>Contact Us</li></Link>
-              <Link className="text-2xl relative" to={`/cart/${Cookies.get('customerId')}`}>
-                <span className={ cartCount.length > 0 ? "absolute -top-2 -right-1 text-gray-100 bg-red-500 text-xs rounded-full flex items-center justify-center h-4 w-4" : 'hidden' }>{ cartCount.length }</span>
-                <AiOutlineShoppingCart />
-              </Link>
-              <li className="text-2xl relative">
-                <BsCaretDownSquare onClick={ () => setShowMenu(!showMenu) } className="cursor-pointer" />
-                <AnimatePresence>
-                  { showMenu &&  
-                    <motion.div className="absolute bg-gray-900 w-52 right-0 rounded shadow-xl mt-3 text-gray-200 text-lg flex flex-col p-3"
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      variants={showMenuVar}
-                    >
-                      { isLogged && customer !== null ? 
-                      <>
-                        <button onClick={onLogout} className="flex items-center gap-2"><FiLogOut /> Logout</button>
-                        <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2">
-                            { userImg ? <img className="w-5 h-5 object-cover rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer} /> : <BsPersonCircle />}
-                            {customer}
-                        </Link> 
-                      </>
-                      : 
-                        <Link to='/login' className="flex items-center gap-2"><FiLogIn />Login</Link> 
-                      }
-                    </motion.div>
-                  }
-                </AnimatePresence>
-              </li>
+    <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 fixed z-50 border-b-4 text-black font-semibold border-gray-200'}`}>
+      <div className="max-content flex justify-between items-center">
+          <div className="flex h-20 items-center gap-16">
+            <img className="w-32 h-32 object-cover" src="/image/tulin.png" alt="logo" />
+            <ul className="flex gap-9 list-none">
+              <li className="cursor-pointer">Home</li>
+              <li className="cursor-pointer">About</li>
+              <li className="cursor-pointer">Contact</li>
+              <li className="cursor-pointer">Services</li>
             </ul>
           </div>
-          <nav 
-            className={ showTopNav ? 
-            "flex justify-center items-center" : 
-            "flex justify-around items-center fixed w-screen z-50 left-0 bg-black top-0 p-2" }
-            >
-            <ul className="flex items-center justify-around w-full p-2 text-gray-100">
-              <Link to='/products/bikes'><li>BIKES</li></Link>
-              <Link to='/reservation'><li>RESERVATION</li></Link>
-              <Link to='/customize'><li>CUSTOMIZE</li></Link>
-              <Link to='/products/parts'><li>BIKE PARTS</li></Link>
-              <Link to='/products/accessories'><li>ACCESSORIES</li></Link>
-            </ul>
-          </nav>
+          <div className="flex items-center gap-3">
+            <button className="p-2 rounded bg-gray-900 text-gray-200 w-28">Log in</button>
+            <img className="w-7 h-6 object-cover cursor-pointer" src="/image/icons/Search.png" alt="search" />
+            <img className="w-7 h-8 object-cover cursor-pointer" src="/image/icons/Shopping-Cart.png" alt="shopping cart" />
+          </div>
       </div>
     </nav>
   );

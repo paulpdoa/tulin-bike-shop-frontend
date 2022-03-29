@@ -7,6 +7,7 @@
   /* Button Background */
   --bg-button: rgb(17, 17, 17);
   --bg-create: rgb(42, 196, 42);
+  --bg-navbar: #FFFFFF;
   --bg-buildSection: #111827;
   /* Font Family */
   --ff: 'Roboto', sans-serif;
@@ -20,6 +21,10 @@
 }
 #root {
   @apply md:h-screen h-auto;
+}
+html {
+  height:100%;
+  width:100%;
 }
 body {
   font-family:var(--ff);
@@ -122,16 +127,27 @@ body {
 }
 /* Navbar */
 .navbar {
-  background: var(--bg-button);
-  @apply p-2 z-50;
+  @apply p-2 z-50 hidden md:flex;
 }
 .navbar-logo {
   @apply invert w-32 h-20 object-cover;
 }
 /* Home */
-.header-banner {
+/* .header-banner {
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../assets/banner.jpg');
   @apply h-full bg-center bg-cover bg-fixed flex justify-center;
+} */
+.hero__items {
+  width:50%;
+}
+.hero--item1 {
+  width:70%;
+}
+.hero--item2 {
+  width:62%;
+}
+.hero--item3 {
+  width:53%;  
 }
 .build-bg {
   background: var(--bg-buildSection);
