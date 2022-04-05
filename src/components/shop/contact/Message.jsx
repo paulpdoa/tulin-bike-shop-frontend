@@ -1,39 +1,59 @@
 import { useState } from 'react';
+import { AiOutlineMail } from 'react-icons/ai';
+import { IoPersonOutline } from 'react-icons/io5';
+import { RiFileList3Line } from 'react-icons/ri';
+import { MdOutlineMessage } from 'react-icons/md';
 
 const Message = () => {
 
   const [message,setMessage] = useState('');
   const [name,setName] = useState('');
+  const [subject,setSubject] = useState('');
   const [email,setEmail] = useState('');  
 
+  // send message to tulin
   const onSubmit = (e) => {
     e.preventDefault();
     const dataMessage = {
         message,
         name,
-        email
+        email,
+        subject
     };
     console.log(dataMessage);
   }
 
   return (
-    <div className="bg-gray-900 content">
-        <div className="max-content py-20">
-            <h1 className="font-semibold text-4xl text-gray-100 text-center uppercase">Message Us!</h1>
-            <form onSubmit={onSubmit} className="flex gap-2 items-center justify-center py-10">
-                <textarea 
-                    onChange={(e) => setMessage(e.target.value)} 
-                    value={message}
-                    className="h-36 p-2 rounded-md outline-none" 
-                    placeholder="Message" 
-                    cols="30" 
-                    rows="10"></textarea>
-                <div className="flex flex-col gap-3 w-64 h-full">
-                    <input onChange={(e) => setName(e.target.value)} value={name} className="p-2 rounded-md outline-none" type="text" placeholder="Name" />
-                    <input onChange={(e) => setEmail(e.target.value)} value={email} className="p-2 rounded-md outline-none" type="email" placeholder="Email" />
-                    <button className="border-2 border-gray-100 p-2 w-1/2 rounded-md text-gray-100">Submit</button>
+    <div className="content">
+        <div className="max-content flex justify-around items-center gap-2 py-20">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.686503362787!2d120.85162561462896!3d14.387541389938415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33962c86ebd844c7%3A0x67cb4930ead5600b!2sTulin%20Bicycle%20and%20Repair%20Shop!5e0!3m2!1sen!2sph!4v1649159449174!5m2!1sen!2sph" width="600" height="450" style={{ border:"0" }} title="tulin map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <form onSubmit={onSubmit}>
+            <div className="border-b-4 border-gray-800 w-32">
+              <h2 className="uppercase rockwell text-widest whitespace-nowrap text-2xl">Leave a message</h2>
+            </div>
+            <p className="text-gray-400 text-sm font-semibold mt-5">Please don’t hesitate to contact us for more information</p>
+            <div className="flex gap-2 flex-col mt-4">
+              <div className="flex gap-3 justify-around">
+                <div className="border-2 border-gray-800 border-dashed flex items-center">
+                  <input value={email} onChange={e => setEmail(e.target.value)} className="outline-none p-2 placeholder:italic placeholder:font-light" type="email" placeholder="Your Email" />
+                  <AiOutlineMail className="mr-2" />
                 </div>
-            </form>
+                <div className="border-2 border-gray-800 border-dashed flex items-center">
+                  <input value={name} onChange={e => setName(e.target.value)} className="outline-none p-2 placeholder:italic placeholder:font-light" type="text" placeholder="Your Name" />
+                  <IoPersonOutline className="mr-2" />
+                </div>
+              </div>
+              <div className="border-2 border-gray-800 border-dashed flex items-center justify-between">
+                <input value={subject} onChange={e => setSubject(e.target.value)} className="outline-none p-2 placeholder:italic placeholder:font-light w-full" type="text" placeholder="Your Subject" />
+                <RiFileList3Line className="mr-2" />
+              </div>
+              <div className="border-2 border-gray-800 border-dashed flex items-center justify-between">
+                <textarea value={message} onChange={e => setMessage(e.target.value)} className="outline-none p-2 placeholder:italic placeholder:font-light w-full" placeholder="Your Message"></textarea>
+                <RiFileList3Line className="mr-2" />
+              </div>
+            </div>
+            <button className="p-2 bg-gray-800 text-gray-100 hover:bg-transparent hover:border-2 hover:border-gray-800 hover:text-gray-800 transition duration-300 rounded-md mt-5 text-sm">Send Message</button>
+          </form>
         </div>
     </div>
   );

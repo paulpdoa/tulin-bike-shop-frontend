@@ -9,7 +9,7 @@ const About = () => {
           <Helmet><title>Tulin Bicycle Shop | About</title></Helmet>
           <Info />
           <Mission />
-          <Location />
+          {/* <Location /> */}
       </>
   );
 };

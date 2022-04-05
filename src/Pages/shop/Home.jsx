@@ -1,8 +1,9 @@
 import Header from '../../components/shop/home/Header';
 import Offers from '../../components/shop/home/Offers';
 import Build from '../../components/shop/home/Build';
-import Description from '../../components/shop/home/Description';
 import { Helmet } from 'react-helmet';
+import Repair from '../../components/shop/home/Repair';
+import TopProduct from '../../components/shop/home/TopProduct';
 
 const Home = () => {
   
@@ -11,8 +12,9 @@ const Home = () => {
         <Helmet><title>Tulin Bicycle Shop | Home</title></Helmet>
         <Header />
         <Offers />
+        <TopProduct />
         <Build />
-        <Description />
+        <Repair />
     </>
   );
 };

@@ -50,27 +50,27 @@ const ProfileDetail = () => {
         <form className="grid grid-cols-2 grid-rows-4 gap-5" onSubmit={onUpdate}>
             <div className="flex flex-col">
                 <label htmlFor="firstname">First Name:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={firstname} disabled />
+                <input className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="text" placeholder={firstname} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="lastname">Last Name:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={lastname} disabled />
+                <input className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="text" placeholder={lastname} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="username">Username:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="text" placeholder={username} disabled />
+                <input className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="text" placeholder={username} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="email">Email:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="email" placeholder={email} disabled />
+                <input className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="email" placeholder={email} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="address">Address:</label>
-                <input className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="email" placeholder={address} disabled />
+                <input className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="email" placeholder={address} disabled />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="firstname">Password:</label>
-                <input onChange={(e) => setPassword(e.target.value)} value={password} className="p-2 rounded outline-none bg-white placeholder:text-gray-800" type="password" placeholder={password} />
+                <input onChange={(e) => setPassword(e.target.value)} value={password} className="p-2 rounded outline-none border border-gray-200 bg-white placeholder:text-gray-800" type="password" placeholder={password} />
             </div>
             <button onClick={onUpdate} className="p-2 bg-green-500 text-gray-100 w-1/2 h-4/5 rounded self-end">Update</button>
         </form>

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
   /* Button Background */
   --bg-button: rgb(17, 17, 17);
@@ -10,7 +9,8 @@
   --bg-navbar: #FFFFFF;
   --bg-buildSection: #111827;
   /* Font Family */
-  --ff: 'Roboto', sans-serif;
+  --ff-inter:'Inter', sans-serif;
+  --ff-rockwell:Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
 }
 
 * {
@@ -27,8 +27,16 @@ html {
   width:100%;
 }
 body {
-  font-family:var(--ff);
+  font-family:var(--ff-inter);
   @apply bg-white;
+}
+
+/* Fonts */
+.inter {
+  font-family:var(--ff-inter);
+}
+.rockwell {
+  font-family:var(--ff-rockwell);
 }
 
 /* Center Container with max width */
@@ -162,11 +170,19 @@ body {
 }
 /* Footer */
 .footer-bg {
-  background: linear-gradient(to right,#33333E,#050506);
+  background: #2e2c2c;
   @apply h-96;
 }
 /* Customize Page */
 .customize-bg {
   background: url('../assets/blackbg.jpg');
   @apply h-auto bg-no-repeat bg-center bg-cover bg-fixed;
+}
+/* Contact */
+.contact-bg {
+  background-image: url('../assets/contact-bg.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center;
+  height:100vh;
 }

@@ -9,6 +9,7 @@ import { BsCaretDownSquare } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiLogIn,FiLogOut } from 'react-icons/fi';
 import { BsPersonCircle } from 'react-icons/bs';
+import { BiSearchAlt } from 'react-icons/bi';
 import { GlobalContext } from '../../../helper/Context';
 
 const showMenuVar = {
@@ -46,6 +47,8 @@ const Navbar = ({ customerCookie }) => {
 
   const { imgProfileLocation } = useContext(GlobalContext);
   const [userImg,setUserImg] = useState('');
+
+  const [showSearch,setShowSearch] = useState(false);
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -88,7 +91,7 @@ const Navbar = ({ customerCookie }) => {
     const abortCont = new AbortController();
 
     window.addEventListener('scroll',() => {
-      window.scrollY > 88 ? setShowTopNav(false) : setShowTopNav(true);
+      window.scrollY > 330 ? setShowTopNav(false) : setShowTopNav(true);
     })
     
     return () => abortCont.abort();
@@ -117,6 +120,7 @@ const Navbar = ({ customerCookie }) => {
       return inventory.product_name.toLowerCase().includes(product.toLowerCase());
     })
     product === '' ? setSearchedItem([]) : setSearchedItem(data);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -124,7 +128,7 @@ const Navbar = ({ customerCookie }) => {
   },[customerCookie])
 
   return (
-    <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 fixed z-50 border-b-4 text-black font-semibold border-gray-200'}`}>
+    <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 z-50 fixed top-0 border-b-4 text-black font-semibold border-gray-200'}`}>
       <div className="max-content flex justify-between items-center">
           <div className="flex h-20 items-center gap-16">
             <Link to='/'><img className="w-32 h-32 object-cover" src="/image/tulin.png" alt="logo" /></Link>
@@ -143,10 +147,17 @@ const Navbar = ({ customerCookie }) => {
               <Link to='/login' className="p-2 rounded bg-gray-900 text-gray-200 w-28 text-center">
                 Log in
               </Link> }
-            <img className="w-7 h-6 object-cover cursor-pointer" src="/image/icons/Search.png" alt="search" />
+              { showSearch && 
+                <motion.div className="flex border-gray-300 border items-center">
+                  <input onChange={handleSearch} className="outline-none p-2 text-sm" type="search" placeholder="Search here..." />
+                  <BiSearchAlt className="text-2xl text-gray-200"/>
+                </motion.div> 
+              }
+            <img onClick={() => setShowSearch(!showSearch)} className="w-7 h-6 object-cover cursor-pointer" src="/image/icons/Search.png" alt="search" />
             <Link to={`/cart/${Cookies.get('customerId')}`}>
               <img className="w-7 h-8 object-cover cursor-pointer" src="/image/icons/Shopping-Cart.png" alt="shopping cart" />
             </Link>
+            <button onClick={onLogout}>Logout</button>
           </div>
       </div>
     </nav>

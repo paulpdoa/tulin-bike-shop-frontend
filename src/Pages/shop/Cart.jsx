@@ -23,7 +23,7 @@ const Cart = () => {
   return (
     <>
         <Helmet><title>Tulin Bicycle Shop | Cart</title></Helmet>
-        <div className="h-screen">
+        <div className="h-full">
           <CartHeader cartContents={cartContents} />
           <CartTable cartContents={cartContents} setCartContents={setCartContents} />
         </div>
