@@ -34,7 +34,7 @@ const Footer = () => {
                </div>
             </div>
             
-            <div className="flex gap-10 items-start">
+            <div className="md:flex gap-10 items-start hidden">
               <div>
                   <h1 className="font-bold text-2xl rockwell">Tulin</h1>
                   <div className="flex flex-col mt-5 gap-2">

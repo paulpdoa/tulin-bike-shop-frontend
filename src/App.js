@@ -49,6 +49,8 @@ import ResetPassword from './Pages/shop/auth/ResetPassword';
 import Checkout from './Pages/shop/Checkout';
 import ProductDetail from './Pages/shop/ProductDetail';
 
+
+import Test from './Pages/Test';
 import { GlobalContext } from './helper/Context';
 
 const App = () => {
@@ -91,6 +93,7 @@ const App = () => {
         <Route path='/forgotpassword' element={ <ForgotPassword /> } />
         <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
 
+        <Route path='/test' element={ <Test /> }/>
         {/* Client Page */}
 
         <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
