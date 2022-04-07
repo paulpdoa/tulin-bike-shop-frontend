@@ -11,6 +11,7 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiLogIn,FiLogOut } from 'react-icons/fi';
 import { BsPersonCircle } from 'react-icons/bs';
 import { BiSearchAlt } from 'react-icons/bi';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { GlobalContext } from '../../../helper/Context';
 
 const showMenuVar = {
@@ -153,15 +154,16 @@ const Navbar = ({ customerCookie }) => {
   return (
     <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 z-50 fixed top-0 border-b-4 text-black font-semibold border-gray-200'}`}>
       <div className="max-content flex justify-between items-center">
-          <div className="flex h-20 items-center gap-16">
-            <Link to='/'><img className="w-32 h-32 object-cover" src="/image/tulin.png" alt="logo" /></Link>
-            <ul className="flex gap-9 list-none">
+          <div className="flex h-20 items-center md:gap-16 gap-0">
+            <GiHamburgerMenu onClick={() => console.log('show side nav')} className="md:hidden block text-3xl"/>
+            <Link to='/'><img className="md:w-32 md:h-32 w-20 h-20 object-cover" src="/image/tulin.png" alt="logo" /></Link>
+            <ul className="gap-9 list-none md:flex hidden">
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/">Home</Link></li>
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/about">About</Link></li>
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/contact">Contact</Link></li>
               <li className="cursor-pointer group max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300">
                 Services
-                <div className="absolute top-14 bg-white bg-opacity-50 border border-gray-200 shadow-lg rounded w-full left-0 z-30 p-10 hidden group-hover:block">
+                <div className="absolute top-14 bg-white bg-opacity-50 border border-gray-200 shadow-lg rounded w-full left-0 z-50 p-10 hidden group-hover:block">
                   <ul className="flex justify-around items-center p-5">
                     <li className="hover:scale-75 transition duration-300">
                       <Link className="flex flex-col items-center gap-2" to='/products/bikes'>
@@ -200,7 +202,7 @@ const Navbar = ({ customerCookie }) => {
           </div>
           <div className="flex items-center gap-3">
             { customer !== null && customerCookie ? 
-              <div className="flex items-center gap-2">
+              <div className="md:flex hidden items-center gap-2">
                   <div className="group cursor-pointer relative">
                     <span className="flex items-center gap-2 transition duration-300"><img className="w-7 object-cover h-7 rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer}/>Hi {customer}!</span>
                     <div className="hidden group-hover:block absolute bg-white p-3 z-50 rounded-md border border-gray-200 w-44">

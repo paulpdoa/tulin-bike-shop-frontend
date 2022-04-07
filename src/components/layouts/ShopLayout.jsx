@@ -2,13 +2,17 @@ import { Outlet } from "react-router-dom";
 
 import Navbar from "../shop/partials/Navbar";
 import Footer from "../shop/partials/Footer";
-import MobileNavbar from "../shop/partials/MobileNavbar";
+import MobileSideNav from "../shop/partials/MobileSideNav";
+import MobileNav from "../shop/partials/MobileNav";
 
 const ShopLayout = ({ customerCookie }) => {
   return (
     <main className="h-full">
       <Navbar customerCookie={customerCookie} />
-      <MobileNavbar />
+      {/* For navbars of mobile view */}
+      <MobileNav />
+      <MobileSideNav />
+      {/* Navbars  of mobile view */}
       <Outlet />
       <Footer />
     </main>

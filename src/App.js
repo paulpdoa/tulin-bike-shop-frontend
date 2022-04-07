@@ -59,7 +59,8 @@ const App = () => {
   const imgLocation = "http://localhost:8000/uploads/products/";
   const imgProfileLocation = "http://localhost:8000/uploads/profilePics/";
 
- 
+  // Showing side nav for mobile
+  const [showSideNav,setShowSideNav] = useState(false);
 
   // Closing Modal
   const [showModal,setShowModal] = useState(false);
@@ -78,7 +79,7 @@ const App = () => {
   return (
     <GlobalContext.Provider 
       value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
-      showModal,setShowModal,idDetail,setIdDetail }}
+      showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav }}
     >
       <Routes>
         <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
