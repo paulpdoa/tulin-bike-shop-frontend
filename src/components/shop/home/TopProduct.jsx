@@ -26,12 +26,12 @@ const TopProduct = () => {
   },[])
 
   return (
-    <section className="content">
-        <div className="max-content flex flex-col items-center justify-center h-screen">
+    <section className="content py-20 md:py-0">
+        <div className="max-content flex flex-col items-center justify-center md:h-screen">
             <div className="flex justify-center">
                 <h1 className="text-5xl border-b-8 border-gray-300">Our Latest <span className="font-bold">Products</span></h1>
             </div>
-            <div className="flex gap-3 justify-around items-center py-20 w-full">
+            <div className="flex flex-col md:flex-row gap-3 justify-around items-center py-20 md:w-full w-4/5">
               { topProducts.slice(0,4).map((topProduct) => (
                 <div className="bg-gray-100 p-2 rounded-md shadow-lg" key={topProduct._id}>
                   <img src={`${imgLocation}${topProduct.product_image}`} alt={topProduct.product_name} />
