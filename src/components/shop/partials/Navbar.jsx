@@ -225,11 +225,11 @@ const Navbar = ({ customerCookie }) => {
                     <BiSearchAlt className="text-2xl text-gray-200"/>
                     {/* Results of searched items */}
                     <div className="absolute bg-gray-100 flex flex-col gap-2 z-50 w-full top-9 shadow-2xl rounded">
-                      {searchedItem.slice(0,5).map((item) => (
-                          <div className="p-2 cursor-pointer hover:bg-gray-200 transition duration-300">
-                              <Link to={`/products/${item._id}`}>{ item.product_name } - { item.product_type }</Link>
-                          </div>
-                        ))}
+                      { searchedItem && searchedItem.slice(0,5).map((item) => (
+                        <div className="p-2 cursor-pointer hover:bg-gray-200 transition duration-300" key={item._id}>
+                            <Link to={`/products/${item._id}`}>{ item.product_name } - { item.product_type }</Link>
+                        </div>
+                      ))}
                     </div>
                   </motion.div>
                 }
