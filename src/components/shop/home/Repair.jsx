@@ -4,7 +4,7 @@ const Repair = () => {
     <section className="content md:h-screen py-20">
         <div className="max-content flex flex-col justify-center">
             <div className="flex justify-center">
-              <h1 className="text-5xl border-b-8 border-gray-300">Need <span className="font-bold">Repairs</span>?</h1>
+              <h1 className="md:text-5xl text-4xl border-b-8 border-gray-300">Need <span className="font-bold">Repairs</span>?</h1>
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-3 md:py-10 py-20">
               <div className="relative flex items-center justify-center">

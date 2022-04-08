@@ -29,11 +29,11 @@ const TopProduct = () => {
     <section className="content py-20 md:py-0">
         <div className="max-content flex flex-col items-center justify-center md:h-screen">
             <div className="flex justify-center">
-                <h1 className="text-5xl border-b-8 border-gray-300">Our Latest <span className="font-bold">Products</span></h1>
+                <h1 className="md:text-5xl text-4xl border-b-8 border-gray-300">Our Latest <span className="font-bold">Products</span></h1>
             </div>
             <div className="flex flex-col md:flex-row gap-3 justify-around items-center py-20 md:w-full w-4/5">
               { topProducts.slice(0,4).map((topProduct) => (
-                <div className="bg-gray-100 p-2 rounded-md shadow-lg" key={topProduct._id}>
+                <div className="bg-gray-100 p-3 rounded-md shadow-lg" key={topProduct._id}>
                   <img src={`${imgLocation}${topProduct.product_image}`} alt={topProduct.product_name} />
                   <div className="flex justify-between  items-center border-t-2 border-gray-300 py-5">
                     <h2 className="font-semibold text-xl">{ topProduct.brand_name } - { topProduct.product_name }</h2>

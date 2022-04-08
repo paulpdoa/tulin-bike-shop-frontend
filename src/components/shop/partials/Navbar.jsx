@@ -144,7 +144,6 @@ const Navbar = ({ customerCookie }) => {
       return inventory.product_name.toLowerCase().includes(product.toLowerCase());
     })
     product === '' ? setSearchedItem([]) : setSearchedItem(data);
-    console.log(data);
   }
 
   useEffect(() => {
@@ -216,7 +215,7 @@ const Navbar = ({ customerCookie }) => {
               </Link> }
               <AnimatePresence>
                 { showSearch && 
-                  <motion.div className="flex border-gray-300 border items-center rounded"
+                  <motion.div className="flex border-gray-300 border items-center rounded relative"
                     initial="hidden"
                     animate="visible"
                     variants={searchVar}
@@ -224,7 +223,15 @@ const Navbar = ({ customerCookie }) => {
                   >
                     <input onChange={handleSearch} className="outline-none p-2 text-sm" type="search" placeholder="Search here..." />
                     <BiSearchAlt className="text-2xl text-gray-200"/>
-                  </motion.div> 
+                    {/* Results of searched items */}
+                    <div className="absolute bg-gray-100 flex flex-col gap-2 z-50 w-full top-9 shadow-2xl rounded">
+                      {searchedItem.slice(0,5).map((item) => (
+                          <div className="p-2 cursor-pointer hover:bg-gray-200 transition duration-300">
+                              <Link to={`/products/${item._id}`}>{ item.product_name } - { item.product_type }</Link>
+                          </div>
+                        ))}
+                    </div>
+                  </motion.div>
                 }
               </AnimatePresence>
             <img onClick={() => setShowSearch(!showSearch)} className="w-7 h-6 object-cover cursor-pointer hover:scale-150 transition duration-300" src="/image/icons/Search.png" alt="search" />

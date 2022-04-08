@@ -1,7 +1,8 @@
 // Dependencies and Hooks
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Cookies from 'js-cookie';
+import RingLoader from 'react-spinners/RingLoader';
 
 // Components for Shop and Dashboard
 import NotFound from './Pages/NotFound';
@@ -49,10 +50,19 @@ import ResetPassword from './Pages/shop/auth/ResetPassword';
 import Checkout from './Pages/shop/Checkout';
 import ProductDetail from './Pages/shop/ProductDetail';
 
-
 import { GlobalContext } from './helper/Context';
 
 const App = () => {
+
+  // Website Loader
+  const [loading,setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    },3000)
+  },[])
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
@@ -78,63 +88,79 @@ const App = () => {
   const paginate = page => setCurrentPage(page);
   
   return (
-    <GlobalContext.Provider 
-      value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
-      showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav }}
-    >
-      <Routes>
-        <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
-        <Route path='/adminsignup' element={ <AdminSignup /> } />
+    <>
+    { loading ? 
+    // <div className="absolute w-screen h-screen flex items-center justify-center">
+    //   <RingLoader color="#A6B8E8" loading={loading} size={150} />
+    // </div> 
+    <>
+      <div id="loop" className="center"></div>
+      <div id="bike-wrapper" className="center">
+        <div id="bike" className="centerBike"></div>
+      </div>
+    </>
+    : 
+    <>
+      <GlobalContext.Provider 
+        value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
+        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav }}
+      >
+        <Routes>
+          <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
+          <Route path='/adminsignup' element={ <AdminSignup /> } />
 
-        <Route path='/login' element={ <Login setCustomerCookie={setCustomerCookie} /> } />
-        <Route path='/signup' element={ <Signup /> } />
-        <Route path='/verify/:id' element={ <VerifyCode /> } />
-        <Route path='/forgotpassword' element={ <ForgotPassword /> } />
-        <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
+          <Route path='/login' element={ <Login setCustomerCookie={setCustomerCookie} /> } />
+          <Route path='/signup' element={ <Signup /> } />
+          <Route path='/verify/:id' element={ <VerifyCode /> } />
+          <Route path='/forgotpassword' element={ <ForgotPassword /> } />
+          <Route path='/resetpassword/:id' element={ <ResetPassword /> } />
 
-        {/* Client Page */}
+          {/* Client Page */}
 
-        <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
-          <Route path='/' element={ <Home /> } />
-          <Route path='/about' element={ <About /> } />
-          <Route path='/contact' element={ <Contact /> } />
-          <Route path='/cart/:id' element={ <Cart /> } />
-          <Route path='/products/' element={ <Products /> }>
-            <Route path='bikes' element={ <ShopBike /> } />
-            <Route path='parts' element={ <ShopPart /> } />
-            <Route path='accessories' element={ <ShopAccessories /> } />
+          <Route element={ <ShopLayout customerCookie={customerCookie} /> }>
+            <Route path='/' element={ <Home /> } />
+            <Route path='/about' element={ <About /> } />
+            <Route path='/contact' element={ <Contact /> } />
+            <Route path='/cart/:id' element={ <Cart /> } />
+            <Route path='/products/' element={ <Products /> }>
+              <Route path='bikes' element={ <ShopBike /> } />
+              <Route path='parts' element={ <ShopPart /> } />
+              <Route path='accessories' element={ <ShopAccessories /> } />
+            </Route>
+            <Route path='/products/:id' element={ <ProductDetail /> } />
+            <Route path='/profile/' element={ <Profile /> }>
+              <Route path=":id" element={ <ProfileDetail /> } />
+              <Route path="orders/:id" element={ <ProfileOrders /> } />
+              <Route path="history/:id" element={ <OrderHistory /> } />
+              <Route path="delete/:id" element={ <ProfileDelete /> } />
+            </Route>
+            <Route path='/reservation' element={ <Reservation /> } />
+            <Route path='/customize' element={ <Customization /> } />
+            <Route path='/checkout/:id' element={ <Checkout /> } />
           </Route>
-          <Route path='/products/:id' element={ <ProductDetail /> } />
-          <Route path='/profile/' element={ <Profile /> }>
-            <Route path=":id" element={ <ProfileDetail /> } />
-            <Route path="orders/:id" element={ <ProfileOrders /> } />
-            <Route path="history/:id" element={ <OrderHistory /> } />
-            <Route path="delete/:id" element={ <ProfileDelete /> } />
-          </Route>
-          <Route path='/reservation' element={ <Reservation /> } />
-          <Route path='/customize' element={ <Customization /> } />
-          <Route path='/checkout/:id' element={ <Checkout /> } />
-        </Route>
 
-        {/* Admin Page */}
-        <Route element={ <DashboardLayout adminCookie={adminCookie} /> }>
-          <Route path='/dashboard' element={ <Dashboard /> } />
-          <Route path='/dashboard/orders' element={ <DashboardOrders /> } />
-          <Route path='/dashboard/sales' element={ <DashboardSales /> } />
-          <Route path='/dashboard/messages' element={ <DashboardMessages /> } />
-          <Route path='/dashboard/addproduct' element={ <AddProduct /> } />
-          <Route path='/dashboard/inventory/' element={ <Inventory /> }>
-            <Route path='bikes' element={ <Bikes /> } />
-            <Route path='parts' element={ <Parts /> } />
-            <Route path='accessories' element={ <Accessories /> } />
+          {/* Admin Page */}
+          <Route element={ <DashboardLayout adminCookie={adminCookie} /> }>
+            <Route path='/dashboard' element={ <Dashboard /> } />
+            <Route path='/dashboard/orders' element={ <DashboardOrders /> } />
+            <Route path='/dashboard/sales' element={ <DashboardSales /> } />
+            <Route path='/dashboard/messages' element={ <DashboardMessages /> } />
+            <Route path='/dashboard/addproduct' element={ <AddProduct /> } />
+            <Route path='/dashboard/inventory/' element={ <Inventory /> }>
+              <Route path='bikes' element={ <Bikes /> } />
+              <Route path='parts' element={ <Parts /> } />
+              <Route path='accessories' element={ <Accessories /> } />
+            </Route>
+            <Route path='/dashboard/settings' element={ <Settings /> } />
+            <Route path='/dashboard/schedules' element={ <Schedule /> } />
           </Route>
-          <Route path='/dashboard/settings' element={ <Settings /> } />
-          <Route path='/dashboard/schedules' element={ <Schedule /> } />
-        </Route>
 
-        <Route path='*' element={ <NotFound /> } />
-      </Routes>
-    </GlobalContext.Provider>
+          <Route path='*' element={ <NotFound /> } />
+        </Routes>
+      </GlobalContext.Provider>
+    </> 
+    }
+    </>
   );
 }
 
