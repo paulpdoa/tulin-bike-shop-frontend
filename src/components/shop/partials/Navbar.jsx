@@ -155,7 +155,7 @@ const Navbar = ({ customerCookie }) => {
     <nav className={`content navbar w-full ${showTopNav ? 'bg-white border-b-4 border-gray-200' : 'bg-white bg-opacity-50 z-50 fixed top-0 border-b-4 text-black font-semibold border-gray-200'}`}>
       <div className="max-content flex justify-between items-center">
           <div className="flex h-20 items-center md:gap-16 gap-0">
-            <GiHamburgerMenu onClick={() => console.log('show side nav')} className="md:hidden block text-3xl"/>
+            <GiHamburgerMenu onClick={() => console.log('show side')} className="md:hidden block text-3xl"/>
             <Link to='/'><img className="md:w-32 md:h-32 w-20 h-20 object-cover" src="/image/tulin.png" alt="logo" /></Link>
             <ul className="gap-9 list-none md:flex hidden">
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/">Home</Link></li>
