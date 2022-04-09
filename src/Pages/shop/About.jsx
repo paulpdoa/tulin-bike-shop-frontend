@@ -1,15 +1,15 @@
 import { Helmet } from 'react-helmet';
+import Hero from '../../components/shop/about/Hero';
 import Info from "../../components/shop/about/Info";
-import Location from '../../components/shop/about/Location';
-import Mission from "../../components/shop/about/Mission";
 
 const About = () => {
   return (
       <>
           <Helmet><title>Tulin Bicycle Shop | About</title></Helmet>
+          <Hero />
           <Info />
-          <Mission />
-          {/* <Location /> */}
+          
+          
       </>
   );
 };

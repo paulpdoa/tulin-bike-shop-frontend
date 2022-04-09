@@ -14,27 +14,27 @@ const Footer = () => {
   return (
     <footer className="content footer-bg">
         <div className="max-content flex justify-center text-gray-100 items-center">
-            <div className="flex flex-col max-w-max">
-               <div className="flex items-center max-w-max">
-                  <img src="/image/Footer-Logo.png" alt="footer logo" />
+            <div className="flex flex-col md:max-w-max">
+               <div className="flex justify-center md:justify-start items-center max-w-max">
+                  <img className="w-4/5 md:w-auto" src="/image/Footer-Logo.png" alt="footer logo" />
                </div>
-               <div className="flex flex-col gap-4 mt-5">
+               <div className="flex flex-col items-center md:items-start gap-4 mt-5 text-sm md:text-base">
                 <div className="flex items-center gap-2 w-4/5">
-                  <GoLocation className="text-2xl" />
+                  <GoLocation className="md:text-2xl text-lg" />
                   <p>05 Lt. Aster Street, Sta. Cecilia 1 Subdivision, Tanza, 4108 Cavite</p>
                 </div>
                 <div className="flex items-center gap-2 w-4/5">
-                  <AiOutlinePhone className="text-2xl" />
+                  <AiOutlinePhone className="md:text-2xl text-lg" />
                   <p>482-3491-31</p>
                 </div>
                 <div className="flex items-center gap-2 w-4/5">
-                  <AiOutlineMail className="text-2xl" />
+                  <AiOutlineMail className="md:text-2xl text-lg" />
                   <p>TulinBicycle@gmail.com</p>
                 </div>
                </div>
             </div>
             
-            <div className="md:flex gap-10 items-start hidden">
+            <div className="hidden md:flex gap-10 items-start">
               <div>
                   <h1 className="font-bold text-2xl rockwell">Tulin</h1>
                   <div className="flex flex-col mt-5 gap-2">
