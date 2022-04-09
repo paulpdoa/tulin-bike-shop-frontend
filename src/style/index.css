@@ -11,6 +11,7 @@
   /* Font Family */
   --ff-inter:'Inter', sans-serif;
   --ff-rockwell:Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
+  --ff-rochester:'Rochester', cursive;
 }
 
 * {
@@ -38,7 +39,9 @@ body {
 .rockwell {
   font-family:var(--ff-rockwell);
 }
-
+.rochester {
+  font-family:var(--ff-rochester);
+}
 /* Center Container with max width */
 .content {
   @apply flex justify-center;
@@ -49,16 +52,16 @@ body {
 
 /* Auth Design */
 .auth-container {
-  @apply grid grid-cols-2 justify-items-center items-center;
+  @apply grid md:grid-cols-2 justify-items-center items-center;
 }
 .auth-logo {
-  @apply w-4/5 h-4/5 object-center;
+  @apply md:w-4/5 md:h-4/5 md:object-center object-cover;
 }
 .auth-input {
-  @apply p-3 border border-gray-400 rounded-md outline-none;
+  @apply p-3 md:border border-b border-gray-400 md:rounded-md outline-none;
 }
 .auth-form {
-  @apply flex flex-col gap-3 w-1/2;
+  @apply flex flex-col gap-3 md:w-1/2 w-4/5 md:mt-auto -mt-20;
 }
 .auth-button {
   background:var(--bg-button);
