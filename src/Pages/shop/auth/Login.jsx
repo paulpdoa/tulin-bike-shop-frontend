@@ -81,9 +81,13 @@ const Login = ({ setCustomerCookie }) => {
                       value={password}
                   />
                   <span className="pass-error">{ passwordErr }</span>
+                  <Link className="md:hidden block text-xs text-blue-500 font-semibold -mt-5 text-right" to='/forgotpassword'>forgot password?</Link>
                   <button className="auth-button">Login</button>
                   <Link to='/forgotpassword' className="auth-forgot">Forgot password?</Link>
                   <Link to='/signup' className="auth-create">Create new account</Link>
+                  <div className="md:hidden block">
+                    <p className="text-xs">Don't have an account yet? <Link className="text-xs text-blue-500" to='/signup'>sign up here</Link></p>
+                  </div>
                   <Link to='/' className="auth-view">View items in store</Link>
               </form>
           </div>

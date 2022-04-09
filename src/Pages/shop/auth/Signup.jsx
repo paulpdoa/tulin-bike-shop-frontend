@@ -1,6 +1,7 @@
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { Helmet } from 'react-helmet';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 import StepOne from '../../../components/shop/signup.jsx/StepOne';
@@ -34,6 +35,13 @@ const Signup = () => {
     const [activeStep,setActiveStep] = useState('step one'); 
 
     const navigate = useNavigate();
+
+     // protect signup page when the customer is already logged in
+     useEffect(() => {
+        if(Cookies.get('customerJwt')) {
+            navigate('/');
+        }
+    })
 
     const onSignup = async (e) => {
         e.preventDefault();
@@ -71,23 +79,24 @@ const Signup = () => {
   return (
     <>
         <Helmet><title>Tulin Bicycle Shop | Signup</title></Helmet>
-        <div className="content signup-bg h-full overflow-hidden">
-            <div className="max-content flex items-center justify-center w-1/2">
-                <img className="object-cover h-4/5" src="/image/bike-bg.png" alt="Bike background" />
-                <div className="bg-white h-4/5 w-2/5 relative" onSubmit={onSignup}>
-                    <div className="absolute flex items-center gap-2 top-0 right-0 p-4">
+        <div className="content md:signup-bg h-full overflow-hidden">
+            <div className="max-content flex flex-col md:flex-row items-center justify-center w-1/2">
+                <img className="hidden md:block object-cover h-4/5" src="/image/bike-bg.png" alt="Bike background" />
+                <img className="md:hidden object-cover -mt-10" src="/image/tulin.png" alt="logo" />
+                <div className="bg-white h-4/5 md:w-2/5 w-4/5 relative md:mt-auto -mt-20" onSubmit={onSignup}>
+                    <div className="absolute md:flex items-center gap-2 top-0 right-0 p-4 hidden">
                         <h2>Already have an account?</h2>
                         <Link to='/login' className="rounded-full border border-gray-700 p-2 shadow-xl">Sign in</Link>
                     </div>
-                    <div className="px-8 py-24">
-                        <h1 className="text-gray-800 text-5xl">Sign up</h1>
-                        <span>Create your account</span>
+                    <div className="px-8 py-24 -mt-28 md:mt-auto">
+                        <h1 className="text-gray-800 text-5xl hidden md:block">Sign up</h1>
+                        <span className="font-semibold md:font-normal">Create your account</span>
                         { isLoading && <h2 className="text-sm text-green-500 flex items-center gap-2"><AiOutlineLoading3Quarters className="animate-spin" />Please wait...</h2> }
                         { emailErr && <h2 className="text-sm text-red-500">{ emailErr }</h2> } 
                         { usernameErr && <h2 className="text-sm text-red-500">{ usernameErr }</h2> }
                         { mobileErr && <h2 className="text-sm text-red-500">{ mobileErr }</h2> }
                         <p className="text-sm text-green-500">{ success }</p>
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center justify-center gap-2 mt-5 md:mt-auto">
                         {/* Pages button */}
                             <button onClick={() => setActiveStep('step one')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step one' && 'bg-gray-300'}`}>1</button>
                             <button onClick={() => setActiveStep('step two')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step two' && 'bg-gray-300'}`}>2</button>
@@ -140,6 +149,7 @@ const Signup = () => {
                                 onSignup={onSignup}
                             /> }
                         </form>
+                        <p className="text-xs mt-10">Already have an account? <Link className="text-blue-500" to='/login'>login here</Link></p>
                     </div>
                 </div>
             </div>

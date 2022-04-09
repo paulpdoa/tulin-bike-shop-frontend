@@ -55,10 +55,10 @@ body {
   @apply grid md:grid-cols-2 justify-items-center items-center;
 }
 .auth-logo {
-  @apply md:w-4/5 md:h-4/5 md:object-center object-cover;
+  @apply md:w-4/5 md:h-4/5 -mt-10 md:object-center object-cover;
 }
 .auth-input {
-  @apply p-3 md:border border-b border-gray-400 md:rounded-md outline-none;
+  @apply md:p-3 p-2 md:border border-b border-gray-400 md:rounded-md outline-none;
 }
 .auth-form {
   @apply flex flex-col gap-3 md:w-1/2 w-4/5 md:mt-auto -mt-20;
@@ -68,14 +68,14 @@ body {
   @apply p-3 rounded-md w-full text-gray-100 font-semibold;
 }
 .auth-forgot {
-  @apply text-xs text-blue-500 text-center;
+  @apply text-xs text-blue-500 text-center md:block hidden;
 }
 .auth-create {
   background:var(--bg-create);
-  @apply text-gray-100 p-2 w-full rounded-md text-center;
+  @apply text-gray-100 p-2 w-full rounded-md text-center md:block hidden;
 }
 .auth-view {
-  @apply text-sm text-blue-500 text-center cursor-pointer;
+  @apply md:text-sm text-xs text-blue-500 text-center cursor-pointer;
 }
 
 /* Signup box */

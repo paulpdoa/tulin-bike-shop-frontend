@@ -2,7 +2,7 @@ import { IoChevronForwardSharp,IoChevronBackSharp } from 'react-icons/io5';
 
 const Testimonials = () => {
   return (
-    <section className="h-screen content">
+    <section className="md:h-screen content">
         <div className="max-content flex items-center justify-start relative">
             <div className="bg-gray-800 w-3/4 flex flex-col p-10 text-gray-100 h-auto">
                 <h1 className="rochester text-5xl">What our customer says about us</h1>
