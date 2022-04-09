@@ -56,7 +56,6 @@ const App = () => {
 
   // Website Loader
   const [loading,setLoading] = useState(false);
-
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {

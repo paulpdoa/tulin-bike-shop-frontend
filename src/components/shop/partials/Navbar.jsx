@@ -203,7 +203,7 @@ const Navbar = ({ customerCookie }) => {
             { customer !== null && customerCookie ? 
               <div className="md:flex hidden items-center gap-2">
                   <div className="group cursor-pointer relative">
-                    <span className="flex items-center gap-2 transition duration-300"><img className="w-7 object-cover h-7 rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer}/>Hi {customer}!</span>
+                    <span className="flex items-center gap-2 transition duration-300">{ userImg ? <img className="w-7 object-cover h-7 rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer}/> : '' }Hi {customer}!</span>
                     <div className="hidden group-hover:block absolute bg-white p-3 z-50 rounded-md border border-gray-200 w-44">
                       <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2 hover:scale-110 transition duration-300"><BsPersonCircle />My Account</Link><br/>
                       <button onClick={onLogout} className="flex items-center gap-2 hover:scale-110 transition duration-300"><FiLogOut />Logout</button>

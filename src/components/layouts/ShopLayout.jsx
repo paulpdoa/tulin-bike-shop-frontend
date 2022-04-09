@@ -9,7 +9,7 @@ import { GlobalContext } from "../../helper/Context";
 
 const ShopLayout = ({ customerCookie }) => {
 
-  const {showSideNav} = useContext(GlobalContext);
+  const { showSideNav } = useContext(GlobalContext);
 
   return (
     <main className="h-full">

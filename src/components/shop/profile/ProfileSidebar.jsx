@@ -2,7 +2,7 @@ import { BiUserCircle,BiShoppingBag,BiHistory,BiTrash } from 'react-icons/bi';
 
 import axios from 'axios';
 import { useState,useContext,useEffect } from 'react';
-import { Link,useParams } from 'react-router-dom';
+import { Link,useParams,useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { GlobalContext } from '../../../helper/Context';
 
@@ -13,6 +13,8 @@ const ProfileSidebar = () => {
     const [profilePicture,setProfilePicture] = useState([]);
     const [displayImage,setDisplayImage] = useState();
     const [userImg,setUserImg] = useState('');
+
+    const navigate = useNavigate();
     const { id } = useParams();
 
      // Get user to display image
@@ -42,6 +44,8 @@ const ProfileSidebar = () => {
             profilePic.append('profile_image',profilePicture);
             const data = await axios.post(`/customer/profilepicture/${id}`,profilePic);
             alert(data.data.mssg);
+            navigate('/');
+
         }
         catch(err) {
             console.log(err);

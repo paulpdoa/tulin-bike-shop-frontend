@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-2 w-4/5">
                   <AiOutlineMail className="md:text-2xl text-lg" />
-                  <p>TulinBicycle@gmail.com</p>
+                  <p>tulinbikeshop@gmail.com</p>
                 </div>
                </div>
             </div>
