@@ -50,10 +50,12 @@ const ResetPassword = () => {
         <Helmet><title>Tulin Bicycle Shop | Reset Password</title></Helmet>
         <div className="content h-screen">
             <div className="max-content flex justify-center items-center">
-                <div className="shadow-2xl p-10 rounded-md flex justify-around bg-white">
-                    <img className="w-1/2 object-cover" src="/image/forgot_thumbnail.png" alt="Forgot Password Thumbnail" />
-                    <form onSubmit={onResetPassword} className="flex flex-col justify-center w-1/3">
-                        <h1 className="text-4xl text-gray-800 font-bold">Hi { user }!</h1>
+                <div className="md:shadow-2xl p-10 rounded-md flex flex-col md:flex-row items-center justify-around md:bg-white bg-transparent">
+                    
+                    <img className="md:hidden block w-4/5 object-cover" src="/image/tulin.png" alt="logo" />
+                    <img className="w-1/2 object-cover hidden md:block" src="/image/forgot_thumbnail.png" alt="Forgot Password Thumbnail" />
+                    <form onSubmit={onResetPassword} className="flex flex-col justify-center md:w-1/3 w-4/5">
+                        <h1 className="md:text-4xl text-3xl text-gray-800 font-bold">Hi { user }!</h1>
                         <h2 className="text-green-500">{ mssg }</h2>
                         <input 
                             className="rounded-md p-2 mt-5 outline-none border border-gray-300"

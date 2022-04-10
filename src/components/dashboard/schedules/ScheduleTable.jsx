@@ -5,7 +5,8 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
     const [isLoading,setIsLoading] = useState(true);
-
+    console.log(details);
+    // All schedules
     useEffect(() => {
         const abortCont = new AbortController();
 
@@ -13,7 +14,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
         return () => abortCont.abort();
     },[details])
-
+    // Schedule detail for each customer
     const viewDetail = (id) => {
         const abortCont = new AbortController();
         setShowDetail(true);
@@ -34,7 +35,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
                     <th>Status</th>
                     <th>Details</th>
                 </tr>
-               { details.length < 1 ? 
+                { details.length < 1 ? 
                <tr className="w-full h-52">
                 { isLoading && <td>Please wait...</td>}
                 <td colSpan={6} className="font-semibold text-gray-800 text-4xl animate-pulse">No schedules yet...</td>

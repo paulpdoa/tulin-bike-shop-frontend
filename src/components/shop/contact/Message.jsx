@@ -49,7 +49,7 @@ const Message = () => {
               </div>
               <div className="border-2 border-gray-800 border-dashed flex items-center justify-between">
                 <textarea value={message} onChange={e => setMessage(e.target.value)} className="outline-none p-2 placeholder:italic placeholder:font-light w-full" placeholder="Your Message"></textarea>
-                <RiFileList3Line className="mr-2" />
+                <MdOutlineMessage className="mr-2" />
               </div>
             </div>
             <button className="p-2 bg-gray-800 text-gray-100 hover:bg-transparent hover:border-2 hover:border-gray-800 hover:text-gray-800 transition duration-300 rounded-md mt-5 text-sm">Send Message</button>

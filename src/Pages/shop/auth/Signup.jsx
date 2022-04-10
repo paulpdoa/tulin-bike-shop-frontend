@@ -79,11 +79,11 @@ const Signup = () => {
   return (
     <>
         <Helmet><title>Tulin Bicycle Shop | Signup</title></Helmet>
-        <div className="content md:signup-bg h-full overflow-hidden">
+        <div className="content md:signup-bg bg-white h-full overflow-hidden">
             <div className="max-content flex flex-col md:flex-row items-center justify-center w-1/2">
                 <img className="hidden md:block object-cover h-4/5" src="/image/bike-bg.png" alt="Bike background" />
                 <img className="md:hidden object-cover -mt-10" src="/image/tulin.png" alt="logo" />
-                <div className="bg-white h-4/5 md:w-2/5 w-4/5 relative md:mt-auto -mt-20" onSubmit={onSignup}>
+                <div className="md:bg-gray-100 md:shadow-2xl h-4/5 md:w-2/5 w-4/5 relative md:mt-0 -mt-20" onSubmit={onSignup}>
                     <div className="absolute md:flex items-center gap-2 top-0 right-0 p-4 hidden">
                         <h2>Already have an account?</h2>
                         <Link to='/login' className="rounded-full border border-gray-700 p-2 shadow-xl">Sign in</Link>
@@ -149,7 +149,7 @@ const Signup = () => {
                                 onSignup={onSignup}
                             /> }
                         </form>
-                        <p className="text-xs mt-10">Already have an account? <Link className="text-blue-500" to='/login'>login here</Link></p>
+                        <p className="text-xs mt-10 block md:hidden">Already have an account? <Link className="text-blue-500" to='/login'>login here</Link></p>
                     </div>
                 </div>
             </div>

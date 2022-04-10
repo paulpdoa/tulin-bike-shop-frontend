@@ -2,7 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import Cookies from 'js-cookie';
-import RingLoader from 'react-spinners/RingLoader';
+import { io } from 'socket.io-client';
 
 // Components for Shop and Dashboard
 import NotFound from './Pages/NotFound';
@@ -52,6 +52,8 @@ import ProductDetail from './Pages/shop/ProductDetail';
 
 import { GlobalContext } from './helper/Context';
 
+const socket = io("http://localhost:8000/",{ withCredentials:true });
+
 const App = () => {
 
   // Website Loader
@@ -71,6 +73,8 @@ const App = () => {
 
   // Showing side nav for mobile
   const [showSideNav,setShowSideNav] = useState(false);
+  // Clicking chat head
+  const [showChatbox,setShowChatbox] = useState(false);
 
   // Closing Modal
   const [showModal,setShowModal] = useState(false);
@@ -102,7 +106,7 @@ const App = () => {
     <>
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
-        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav }}
+        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,socket }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />

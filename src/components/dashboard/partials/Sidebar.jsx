@@ -71,7 +71,7 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                 exit="exit"
             >
                 <div className="flex items-center justify-center">
-                    <img className="invert w-1/2 self-center" src="/image/tulin.png" alt="Tulin logo" />
+                    <img className="invert w-4/5 self-center" src="/image/tulin.png" alt="Tulin logo" />
                 </div>
                 <ul className="ml-6 text-xl flex flex-col gap-5">
                     <Link to='/dashboard' className="flex items-center justify-between">
@@ -114,9 +114,9 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                     <Link to='/dashboard/messages'>
                         <li className="flex items-center gap-2"><MdOutlineMessage />Messages</li>
                     </Link>
-                    <Link to='/dashboard/settings'>
+                    {/* <Link to='/dashboard/settings'>
                         <li className="flex items-center gap-2"><FiSettings />Settings</li>
-                    </Link>
+                    </Link> */}
                 </ul>
                 { adminCookie ? 
                     <span onClick={onLogout} className="text-lg absolute bottom-5 left-2 font-bold flex gap-2 items-center cursor-pointer"><BiLogOut /> Logout</span>
