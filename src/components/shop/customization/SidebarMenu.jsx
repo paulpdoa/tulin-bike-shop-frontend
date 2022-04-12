@@ -9,7 +9,7 @@ const SidebarMenu = () => {
   return (
     <nav className="text-gray-100 p-10">
       <h1 className="text-3xl font-semibold uppercase">Build your bike!</h1>
-        <ul className="list-none text-xl cursor-pointer">
+        <ul className="list-none text-xl cursor-pointer flex flex-col gap-3">
             <li className={ active === 'frame' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('frame')}>Frame</li>
             <li className={active === 'suspension' ? "text-orange-500" : "text-gray-100"} onClick={() => setActive('suspension')}>Suspension</li>
             <li className={ active === 'wheels & tires' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('wheels & tires')}>

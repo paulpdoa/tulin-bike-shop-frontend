@@ -9,7 +9,7 @@ const Customization = () => {
       <>
           <Helmet><title>Tulin Bicycle Shop | Customize</title></Helmet>
           <div className="customize-bg content">
-            <div className="max-content grid grid-cols-3 items-center justify-items-stretch">
+            <div className="max-content grid grid-cols-3 items-center justify-items-stretch h-screen">
               <SidebarMenu />
               <BikeBuilt />
               <SendBuiltBike />

@@ -27,14 +27,14 @@ const Chatbox = () => {
         {/* Messages Area */}
         <div className="w-full h-full mt-3 overflow-auto">
           <div className="flex justify-end w-full mt-2">
-            <div className="bg-blue-500 w-1/2 rounded-md p-2">
+            <div className="bg-blue-500 w-1/2 rounded-md p-2 text-gray-100 mr-2">
               <p className="text-sm break-all">Sent</p>
               <span className="text-xs">Tuesday 8:00</span>
             </div>
           </div>
           
           <div className="flex justify-start w-full mt-2">
-            <div className="bg-gray-200 w-1/2 rounded-md p-2">
+            <div className="bg-gray-200 w-1/2 rounded-md p-2 ml-2">
               <p className="text-sm break-all">Received</p>
               <span className="text-xs">Tuesday 8:00</span>
             </div>

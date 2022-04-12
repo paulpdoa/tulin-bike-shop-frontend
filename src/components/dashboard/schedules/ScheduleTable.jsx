@@ -5,7 +5,6 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
     const [isLoading,setIsLoading] = useState(true);
-    console.log(details);
     // All schedules
     useEffect(() => {
         const abortCont = new AbortController();

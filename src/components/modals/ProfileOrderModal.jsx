@@ -3,9 +3,10 @@ import axios from 'axios';
 import { useEffect,useState,useContext } from 'react';
 import { GlobalContext } from '../../helper/Context';
 
-const ProfileOrderModal = ({ close,detailId }) => {
+const ProfileOrderModal = ({ close,detailId,orderId }) => {
 
-  const { imgLocation } = useContext(GlobalContext);
+
+  const { imgLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
   const [isLoading,setIsLoading] = useState(true);
   const [item,setItem] = useState([]);
 
@@ -19,7 +20,18 @@ const ProfileOrderModal = ({ close,detailId }) => {
     })
 
     return () => abortCont.abort();
-  },[detailId])
+  },[detailId]);
+
+  const cancelOrder = async(id) => {
+    try {
+      const cancelData = await axios.patch(`/cancelorder`,{ id:id });
+      setAlertMssg(cancelData.data.mssg);
+      setShowAlert(true);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
   
   return (
     <div className="absolute flex items-center justify-center -top-10 left-0 h-screen w-full">
@@ -44,7 +56,7 @@ const ProfileOrderModal = ({ close,detailId }) => {
                 <label htmlFor="email">Email: {item.customer_id.email}</label>
               </div>
               <div className="flex items-center justify-end gap-2">
-                <button className="bg-red-500 text-gray-100 rounded p-2">Cancel Order</button>
+                <button onClick={() => cancelOrder(orderId)} className="bg-red-500 text-gray-100 rounded p-2">Cancel Order</button>
               </div>
             </>
             }

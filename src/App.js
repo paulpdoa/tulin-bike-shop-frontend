@@ -52,7 +52,7 @@ import ProductDetail from './Pages/shop/ProductDetail';
 
 import { GlobalContext } from './helper/Context';
 
-const socket = io("http://localhost:8000/",{ withCredentials:true });
+const socket = io.connect("http://localhost:8000/",{ withCredentials:true });
 
 const App = () => {
 
@@ -75,6 +75,10 @@ const App = () => {
   const [showSideNav,setShowSideNav] = useState(false);
   // Clicking chat head
   const [showChatbox,setShowChatbox] = useState(false);
+
+  // Show Alerts and show messages in alert box
+  const [alertMssg,setAlertMssg] = useState('');
+  const [showAlert,setShowAlert] = useState(false);
 
   // Closing Modal
   const [showModal,setShowModal] = useState(false);
@@ -106,7 +110,7 @@ const App = () => {
     <>
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
-        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,socket }}
+        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,socket,alertMssg,setAlertMssg,showAlert,setShowAlert }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />

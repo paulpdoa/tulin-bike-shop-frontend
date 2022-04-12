@@ -13,6 +13,7 @@ const ProfileOrders = () => {
   const { imgLocation } = useContext(GlobalContext);
   const [showOrderModal,setShowOrderModal] = useState(false);
   const [detailId,setDetailId] = useState('');
+  const [orderId,setOrderId] = useState('');
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -22,9 +23,10 @@ const ProfileOrders = () => {
     return () => abortCont.abort();
   },[orders,id])
 
-  const viewOrderDetail = (id) => {
+  const viewOrderDetail = (id,deleteId) => {
     setDetailId(id);
     setShowOrderModal(true);
+    setOrderId(deleteId)
   }
 
   return (
@@ -43,16 +45,17 @@ const ProfileOrders = () => {
                   <div className="flex flex-col">
                     <h2 className="text-xl">{ item.inventory_id.product_name }</h2>
                     <span className="text-sm">Description:</span>
-                    <p className="text-xs">{ item.inventory_id.product_description }</p>
-                    <span className="text-sm">Qty. { item.order_quantity }</span>
+                    <p className="text-sm">{ item.inventory_id.product_description }</p>
+                    <span className="text-xs">Qty. { item.order_quantity }</span>
+                    <span className="text-xs">{ order.payment_method }</span>
                   </div>
                 </div>
-                <button onClick={() => viewOrderDetail(item._id)} className="bg-green-500 tracking-wide h-1/2 self-end p-2 rounded m-2">Details</button>
+                <button onClick={() => viewOrderDetail(item._id,order._id)} className="bg-green-500 tracking-wide h-1/2 self-end p-2 rounded m-2">Details</button>
               </div>
               ))
             )) }
         </div>
-        { showOrderModal && <ProfileOrderModal detailId={detailId} close={setShowOrderModal} /> }
+        { showOrderModal && <ProfileOrderModal detailId={detailId} orderId={orderId} close={setShowOrderModal} /> }
     </div>
   );
 };

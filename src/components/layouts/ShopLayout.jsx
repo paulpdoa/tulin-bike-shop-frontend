@@ -8,11 +8,12 @@ import Chathead from "../modals/Chathead";
 import Chatbox from "../modals/Chatbox";
 import {useContext} from 'react';
 import { GlobalContext } from "../../helper/Context";
+import Alert from "../modals/Alert";
 
 
 const ShopLayout = ({ customerCookie }) => {
 
-  const { showSideNav,showChatbox,setShowChatbox } = useContext(GlobalContext);
+  const { showSideNav,showChatbox,showAlert } = useContext(GlobalContext);
 
   return (
     <main className="h-full relative">
@@ -25,6 +26,8 @@ const ShopLayout = ({ customerCookie }) => {
       <Footer />
     {/* Chathead to have a converstion with admin */}
       { showChatbox ? <Chatbox /> : <Chathead /> }
+      {/* { showAlert && <Alert /> } */}
+      <Alert />
     </main>
   );
 };
