@@ -26,8 +26,7 @@ const ShopLayout = ({ customerCookie }) => {
       <Footer />
     {/* Chathead to have a converstion with admin */}
       { showChatbox ? <Chatbox /> : <Chathead /> }
-      {/* { showAlert && <Alert /> } */}
-      <Alert />
+      { showAlert && <Alert /> }
     </main>
   );
 };

@@ -4,7 +4,12 @@ import { GlobalContext } from '../../../helper/Context';
 
 const InventoryTable = ({ products }) => {
 
-  const { imgLocation } = useContext(GlobalContext);
+  const { imgLocation,setShowInventoryDetail,setInventoryId } = useContext(GlobalContext);
+
+  const showDetail = (id) => {
+    setShowInventoryDetail(true)
+    setInventoryId(id);
+  }
 
   return (
     <table className="w-full">
@@ -32,10 +37,9 @@ const InventoryTable = ({ products }) => {
                 <td>{ product.product_size }</td>
                 <td>Php. { product.product_price }</td>
                 <td colSpan="2">{ product.product_quantity }</td>
-                <td><button className="bg-gray-900 text-gray-100 rounded p-2">View Details</button></td>
+                <td><button onClick={() => showDetail(product._id)} className="bg-gray-900 text-gray-100 rounded p-2">View Details</button></td>
             </tr>
             )) }
-            
         </tbody>
     </table>
   )

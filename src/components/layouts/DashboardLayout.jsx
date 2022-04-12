@@ -35,7 +35,7 @@ const DashboardLayout = ({ adminCookie }) => {
     <main>
       <Sidebar adminCookie={adminCookie} showSidebar={showSidebar} />
       <div className={`content ${!showSidebar ? 'ml-0' : 'ml-72'}`}>
-        <div className={`w-full ${showSidebar ? 'max-content' : ''}`}>
+        <div className={`w-full relative ${showSidebar ? 'max-content' : ''}`}>
             <AdminNavbar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
             { isAuth ? <Outlet /> : <h1>Verifying User</h1> }
         </div>

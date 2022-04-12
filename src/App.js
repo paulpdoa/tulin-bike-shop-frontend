@@ -2,7 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
 // Components for Shop and Dashboard
 import NotFound from './Pages/NotFound';
@@ -52,7 +52,7 @@ import ProductDetail from './Pages/shop/ProductDetail';
 
 import { GlobalContext } from './helper/Context';
 
-const socket = io.connect("http://localhost:8000/",{ withCredentials:true });
+// const socket = io.connect("http://localhost:8000/",{ withCredentials:true });
 
 const App = () => {
 
@@ -70,6 +70,10 @@ const App = () => {
   const [customerId] = useState(Cookies.get('customerId'));
   const imgLocation = "http://localhost:8000/uploads/products/";
   const imgProfileLocation = "http://localhost:8000/uploads/profilePics/";
+
+  // show inventory detail on admin
+  const [showInventoryDetail,setShowInventoryDetail] = useState(false);
+  const [inventoryId,setInventoryId] = useState('');
 
   // Showing side nav for mobile
   const [showSideNav,setShowSideNav] = useState(false);
@@ -97,9 +101,6 @@ const App = () => {
   return (
     <>
     { loading ? 
-    // <div className="absolute w-screen h-screen flex items-center justify-center">
-    //   <RingLoader color="#A6B8E8" loading={loading} size={150} />
-    // </div> 
     <>
       <div id="loop" className="center"></div>
       <div id="bike-wrapper" className="center">
@@ -110,7 +111,8 @@ const App = () => {
     <>
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
-        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,socket,alertMssg,setAlertMssg,showAlert,setShowAlert }}
+        showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
+        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
