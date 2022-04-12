@@ -8,10 +8,11 @@ import Datetime from '../../components/dashboard/partials/Datetime';
 import NewOrders from '../../components/dashboard/orders/NewOrders';
 import OrderHistory from '../../components/dashboard/orders/OrderHistory';
 import OrderDetailModal from '../../components/modals/OrderDetailModal';
+import Orderhistorydetail from '../../components/modals/admin/Orderhistorydetail';
 
 const DashboardOrders = () => {
 
-  const { showModal,idDetail } = useContext(GlobalContext);
+  const { showModal,idDetail,showOrderDetail } = useContext(GlobalContext);
   const [orderedItems,setOrderedItems] = useState([]);
   const [orderDetail,setOrderDetail] = useState([]);
   const [isLoading,setIsLoading] = useState(true);
@@ -58,6 +59,7 @@ const DashboardOrders = () => {
          <OrderHistory />
         </div>
         { showModal && <OrderDetailModal /> }
+        { showOrderDetail && <Orderhistorydetail /> }
       </div>
     </>
     );

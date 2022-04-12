@@ -75,6 +75,10 @@ const App = () => {
   const [showInventoryDetail,setShowInventoryDetail] = useState(false);
   const [inventoryId,setInventoryId] = useState('');
 
+  // Show order history detail on admin
+  const [showOrderDetail,setShowOrderDetail] = useState(false);
+  const [historyOrderId,setHistoryOrderId] = useState('');
+
   // Showing side nav for mobile
   const [showSideNav,setShowSideNav] = useState(false);
   // Clicking chat head
@@ -112,7 +116,7 @@ const App = () => {
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
-        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId }}
+        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />
