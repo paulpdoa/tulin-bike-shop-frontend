@@ -2,8 +2,8 @@ import { Outlet,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useEffect,useState } from 'react';
 
-import AdminNavbar from "../dashboard/partials/AdminNavbar";
-import Sidebar from "../dashboard/partials/Sidebar";
+import AdminNavbar from "../components/dashboard/partials/AdminNavbar";
+import Sidebar from "../components/dashboard/partials/Sidebar";
 
 const DashboardLayout = ({ adminCookie }) => {
 

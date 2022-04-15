@@ -55,6 +55,25 @@ const searchVar = {
   }
 }
 
+const accountVar = {
+  hidden: {
+    x:'-2vh',
+    opacity:0,
+    transition: {
+      type:'spring',
+      duration:0.5
+    }
+  },
+  visible: {
+    x:0,
+    opacity:1,
+    transition: {
+      type:'spring',
+      duration:0.5
+    }
+  }
+}
+
 const Navbar = ({ customerCookie }) => {
 
   // Check if logged to change state inside the dropdown
@@ -204,10 +223,14 @@ const Navbar = ({ customerCookie }) => {
               <div className="md:flex hidden items-center gap-2">
                   <div className="group cursor-pointer relative">
                     <span className="flex items-center gap-2 transition duration-300">{ userImg ? <img className="w-7 object-cover h-7 rounded-full" src={`${imgProfileLocation}${userImg}`} alt={customer}/> : '' }Hi {customer}!</span>
-                    <div className="hidden group-hover:block absolute bg-white p-3 z-50 rounded-md border border-gray-200 w-44">
+                    <motion.div className="hidden group-hover:block absolute bg-white p-3 z-50 rounded-md border border-gray-200 w-44"
+                      initial="hidden"
+                      animate="visible"
+                      variants={accountVar}
+                    >
                       <Link to={`/profile/${Cookies.get('customerId')}`} className="flex items-center gap-2 hover:scale-110 transition duration-300"><BsPersonCircle />My Account</Link><br/>
                       <button onClick={onLogout} className="flex items-center gap-2 hover:scale-110 transition duration-300"><FiLogOut />Logout</button>
-                    </div>
+                    </motion.div>
                   </div>
               </div> : 
               <Link to='/login' className="p-2 rounded bg-gray-900 text-gray-200 w-28 text-center">

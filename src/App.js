@@ -8,8 +8,8 @@ import Cookies from 'js-cookie';
 import NotFound from './Pages/NotFound';
 
 //Page Layout
-import ShopLayout from './components/layouts/ShopLayout';
-import DashboardLayout from './components/layouts/DashboardLayout';
+import ShopLayout from './layouts/ShopLayout';
+import DashboardLayout from './layouts/DashboardLayout';
 
 // Admin Page
 import AdminLogin from './Pages/admin/auth/AdminLogin';
@@ -25,6 +25,8 @@ import Accessories from './components/dashboard/inventory/Accessories';
 import AddProduct from './Pages/admin/AddProduct';
 import Settings from './Pages/admin/Settings';
 import Schedule from './Pages/admin/Schedule';
+import Productdetail from './components/dashboard/inventory/Productdetail';
+
 
 // Shop Page
 import Login from './Pages/shop/auth/Login';
@@ -163,6 +165,7 @@ const App = () => {
               <Route path='bikes' element={ <Bikes /> } />
               <Route path='parts' element={ <Parts /> } />
               <Route path='accessories' element={ <Accessories /> } />
+              <Route path=':id' element={<Productdetail /> } />
             </Route>
             <Route path='/dashboard/settings' element={ <Settings /> } />
             <Route path='/dashboard/schedules' element={ <Schedule /> } />

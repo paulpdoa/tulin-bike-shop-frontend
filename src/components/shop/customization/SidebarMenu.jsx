@@ -29,7 +29,7 @@ const SidebarMenu = () => {
                 }
               </AnimatePresence>
             </li>
-            <li className={ active === 'drivetrain' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('drivetrain')}>Drivetrain</li>
+            <li className={ active === 'drivetrain' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('drivetrain')}>Groupset</li>
             <li className={ active === 'cockpit' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('cockpit')}>Cockpit</li>
             <li className={ active === 'brakes & rotors' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('brakes & rotors')}>Brakes & Rotors</li>
             <li className={ active === 'accessories' ? "text-orange-500" : "text-gray-100" } onClick={() => setActive('accessories')}>Accessories</li>
