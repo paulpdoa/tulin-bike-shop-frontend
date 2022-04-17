@@ -103,6 +103,9 @@ const App = () => {
   const startIndex = productPerPage - lastIndex;
   // For changing pages
   const paginate = page => setCurrentPage(page);
+
+  // separate with commas
+  const numberFormat = new Intl.NumberFormat('en-US')
   
   return (
     <>
@@ -118,7 +121,7 @@ const App = () => {
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
-        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId }}
+        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />

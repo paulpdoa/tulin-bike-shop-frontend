@@ -74,19 +74,19 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                     <img className="invert w-4/5 self-center" src="/image/tulin.png" alt="Tulin logo" />
                 </div>
                 <ul className="ml-6 text-xl flex flex-col gap-5">
-                    <Link to='/dashboard' className="flex items-center justify-between">
+                    <Link to='/dashboard' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><MdOutlineDashboardCustomize />Dashboard</li>
                     </Link>
-                    <Link to='/dashboard/orders'>
+                    <Link to='/dashboard/orders' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><BsBagCheck />Orders</li>
                     </Link>
-                    <Link to='/dashboard/sales'>
+                    <Link to='/dashboard/sales' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><AiOutlineDollar />Sales</li>
                     </Link>
-                    <Link to='/dashboard/schedules'>
+                    <Link to='/dashboard/schedules' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><AiOutlineCalendar />Schedules</li>
                     </Link>
-                    <li className="cursor-pointer flex justify-between items-center gap-2 relative" onClick={() => setShowInventory(!showInventory)}>
+                    <li className="cursor-pointer flex justify-between items-center gap-2 relative hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full" onClick={() => setShowInventory(!showInventory)}>
                         <div className="flex items-center gap-2"><BsHouseDoor />Inventory</div>
                         <span className="cursor-pointer mr-3">{ !showInventory ? <AiFillCaretDown /> : <AiFillCaretUp /> }</span>
                         <AnimatePresence>
@@ -111,7 +111,7 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                     </AnimatePresence>
                     </li>
                     
-                    <Link to='/dashboard/messages'>
+                    <Link to='/dashboard/messages' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><MdOutlineMessage />Messages</li>
                     </Link>
                     {/* <Link to='/dashboard/settings'>

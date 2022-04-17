@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import { AiOutlineMail } from 'react-icons/ai';
 import { IoPersonOutline } from 'react-icons/io5';
 import { RiFileList3Line } from 'react-icons/ri';
@@ -11,22 +14,26 @@ const Message = () => {
   const [subject,setSubject] = useState('');
   const [email,setEmail] = useState('');  
 
+  const navigate = useNavigate();
+
   // send message to tulin
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const dataMessage = {
-        message,
-        name,
-        email,
-        subject
-    };
-    console.log(dataMessage);
+   
+    try {
+      const data = await axios.post('/sendemail',{ message,name,email,subject });
+      alert(data.data.mssg);
+      navigate('/')
+    } catch(err) {
+      console.log(err);
+    }
+  
   }
 
   return (
     <div className="content">
-        <div className="max-content flex flex-col md:flex-row justify-around items-center gap-2 py-20">
-          <iframe className="w-4/5 md:w-auto" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.686503362787!2d120.85162561462896!3d14.387541389938415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33962c86ebd844c7%3A0x67cb4930ead5600b!2sTulin%20Bicycle%20and%20Repair%20Shop!5e0!3m2!1sen!2sph!4v1649159449174!5m2!1sen!2sph" width="600" height="450" style={{ border:"0" }} title="tulin map" allowfullscreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <div className="max-content flex flex-col md:flex-row justify-around items-center gap-3 py-20">
+          <iframe className="w-4/5 md:w-[85%]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.686503362787!2d120.85162561462896!3d14.387541389938415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33962c86ebd844c7%3A0x67cb4930ead5600b!2sTulin%20Bicycle%20and%20Repair%20Shop!5e0!3m2!1sen!2sph!4v1649159449174!5m2!1sen!2sph" width="600" height="450" style={{ border:"0" }} title="tulin map" allowfullscreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
           <form className="w-4/5 md:w-auto" onSubmit={onSubmit}>
             <div className="border-b-4 border-gray-800 w-32 md:mt-auto mt-10">
               <h2 className="uppercase rockwell text-widest whitespace-nowrap text-2xl">Leave a message</h2>

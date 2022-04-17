@@ -1,7 +1,7 @@
 import Datetime from "../partials/Datetime";
 import InventoryTable from "./InventoryTable";
 import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useContext } from 'react';
 
 const Accessories = () => {
 

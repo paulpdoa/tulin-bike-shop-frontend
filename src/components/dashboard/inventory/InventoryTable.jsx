@@ -4,7 +4,7 @@ import { GlobalContext } from '../../../helper/Context';
 
 const InventoryTable = ({ products }) => {
 
-  const { imgLocation,setShowInventoryDetail,setInventoryId } = useContext(GlobalContext);
+  const { imgLocation,setShowInventoryDetail,setInventoryId,numberFormat } = useContext(GlobalContext);
 
   const showDetail = (id) => {
     setShowInventoryDetail(true)
@@ -35,7 +35,7 @@ const InventoryTable = ({ products }) => {
                     <div className={`w-5 h-5 rounded-full bg-${product.product_color}-500`}></div>
                 </td>
                 <td>{ product.product_size }</td>
-                <td>Php. { product.product_price }</td>
+                <td>₱{ numberFormat.format(product.product_price) }</td>
                 <td colSpan="2">{ product.product_quantity }</td>
                 <td><button onClick={() => showDetail(product._id)} className="bg-gray-900 text-gray-100 rounded p-2">View Details</button></td>
             </tr>

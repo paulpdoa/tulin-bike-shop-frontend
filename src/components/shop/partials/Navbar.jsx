@@ -6,8 +6,7 @@ import Cookies from 'js-cookie';
 import { fetchData } from '../../../helper/fetching';
 
 
-import { BsCaretDownSquare } from 'react-icons/bs';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { MdKeyboardArrowDown,MdKeyboardArrowUp } from 'react-icons/md';
 import { FiLogIn,FiLogOut } from 'react-icons/fi';
 import { BsPersonCircle } from 'react-icons/bs';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -179,8 +178,8 @@ const Navbar = ({ customerCookie }) => {
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/">Home</Link></li>
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/about">About</Link></li>
               <li className="cursor-pointer max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300"><Link to="/contact">Contact</Link></li>
-              <li className="cursor-pointer group max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300">
-                Services
+              <li className="cursor-pointer flex items-center group max-w-max hover:border-b-2 hover:border-gray-200 transition duration-300">
+                Services <MdKeyboardArrowDown className="group-hover:-rotate-180 transition duration-300"/>
                 <div className="absolute top-14 bg-white bg-opacity-50 border border-gray-200 shadow-lg rounded w-full left-0 z-50 p-10 hidden group-hover:block">
                   <ul className="flex justify-around items-center p-5">
                     <li className="hover:scale-75 transition duration-300">
@@ -233,7 +232,7 @@ const Navbar = ({ customerCookie }) => {
                     </motion.div>
                   </div>
               </div> : 
-              <Link to='/login' className="p-2 rounded bg-gray-900 text-gray-200 w-28 text-center">
+              <Link to='/login' className="p-2 rounded bg-gray-900 text-gray-200 w-28 text-center hover:bg-transparent hover:border hover:border-gray-900 hover:text-gray-900 transition duration-300">
                 Log in
               </Link> }
               <AnimatePresence>
