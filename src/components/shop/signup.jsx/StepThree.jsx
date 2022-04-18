@@ -1,5 +1,11 @@
+import { useState } from 'react';
+import { AiOutlineEye,AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,passLimitErr,passErr,setActiveStep,onSignup }) => {
+
+  const [showPassword,setShowPassword] = useState(false);
+  const [showConfirmPassword,setShowConfirmPassword] = useState(false);
+    
   return (
     <div className="w-full">
          <div className="flex flex-col gap-2">
@@ -9,6 +15,7 @@ const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,pas
                 value={password}
                 required
             />
+            <AiOutlineEye />
             <span className="pass-error">{ passLimitErr }</span>
         </div>
         <div className="flex flex-col gap-2">
@@ -18,6 +25,7 @@ const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,pas
                 value={confirmPassword}
                 required
             />
+            <AiOutlineEye />
             <span className="pass-error">{ passErr }</span>
         </div>
         <div className="flex items-center gap-2">

@@ -1,15 +1,14 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { useContext,useEffect,useState } from 'react';
+import { useEffect,useState,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
 import { useNavigate,useParams } from 'react-router-dom';
 
 const Cod = ({ setShowCod,products }) => {
   
-  const { customerId } = useContext(GlobalContext);  
+  const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
+
   const cartItemId = products.map((product) => product._id);
-  // const [customer,setCustomer] = useState([]);
-  // const [isLoading,setIsLoading] = useState(true);
 
   const [firstname,setFirstname] = useState('');
   const [lastname,setLastname] = useState('');
@@ -25,7 +24,7 @@ const Cod = ({ setShowCod,products }) => {
   useEffect(() => {
     const abortCont = new AbortController();
     
-    axios.get(`/customer/${id}`)
+    axios.get(`/customer/${id}`,{ signal:abortCont.signal })
     .then((data) => {
       setFirstname(data.data.firstname);
       setLastname(data.data.lastname);
@@ -45,8 +44,10 @@ const Cod = ({ setShowCod,products }) => {
   const navigate = useNavigate();
   const paymentMethod = 'Cash on Delivery';
   const placeOrder = async () => {
-    const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod })
+    const transaction = await axios.post('/order',{ id,cartItemId, paymentMethod })
     navigate(transaction.data.redirect);
+    setAlertMssg(transaction.data.mssg);
+    setShowAlert(true);
   }
 
   return (

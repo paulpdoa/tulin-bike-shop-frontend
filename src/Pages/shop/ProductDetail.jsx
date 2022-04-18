@@ -1,15 +1,16 @@
 import axios from 'axios';
 import { useParams,useNavigate } from 'react-router-dom';
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import Cookies from 'js-cookie';
+import { GlobalContext } from '../../helper/Context';
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product,setProduct] = useState([]);
     const [quantity,setQuantity] = useState(0);
     const [quantityErr,setQuantityErr] = useState('');
-    const imgLocation = 'http://localhost:8000/uploads/products/';
+    const { imgLocation,numberFormat,setAlertMssg,setShowAlert } = useContext(GlobalContext);
 
     const navigate = useNavigate();
 
@@ -35,7 +36,8 @@ const ProductDetail = () => {
         } else {
             if(quantity > 0) {
                 const data = await axios.post('/cart',{ productToAdd });
-                alert(data.data.mssg)
+                setAlertMssg(data.data.mssg);
+                setShowAlert(true);
                 navigate(data.data.redirect);
                 setQuantityErr('');
                 
@@ -56,7 +58,7 @@ const ProductDetail = () => {
                 <section>
                     <span className="font-semibold text-gray-500">{ product.product_type }</span>
                     <h1 className="font-semibold text-4xl text-gray-800">{ product.brand_name } - { product.product_name } </h1>
-                    <span className="text-2xl font-semibold text-gray-800">₱{ product.product_price }</span>
+                    <span className="text-2xl font-semibold text-gray-800">₱{ numberFormat.format(product.product_price) }</span>
                    
                     <div className="flex flex-col mt-5">
                         <p className="text-gray-800">{ product.product_description }</p>

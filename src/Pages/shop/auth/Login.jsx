@@ -2,6 +2,8 @@ import { useEffect,useState } from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import { AiOutlineEye,AiOutlineEyeInvisible } from 'react-icons/ai';
+
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -14,6 +16,8 @@ const Login = ({ setCustomerCookie }) => {
     const [passwordErr,setPasswordErr] = useState('');
   
     const [success,setSuccess] = useState('');
+
+    const [showPassword,setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -76,12 +80,16 @@ const Login = ({ setCustomerCookie }) => {
                       value={username}
                   />
                   <span className="username-error">{ usernameErr }</span>
-                  <input className="auth-input" type="password" placeholder="Enter password" 
-                      onChange={(e) => setPassword(e.target.value)}
-                      value={password}
-                  />
-                  <span className="pass-error">{ passwordErr }</span>
-                  <Link className="md:hidden block text-xs text-blue-500 font-semibold -mt-5 text-right" to='/forgotpassword'>forgot password?</Link>
+                  <div className="w-full relative">
+                    <input className="auth-input w-full" type={ showPassword ? 'text' : 'password' } placeholder="Enter password" 
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                    />
+                    { showPassword ? <AiOutlineEyeInvisible onClick={() => setShowPassword(!showPassword)} className="absolute top-2 right-2 cursor-pointer text-3xl text-gray-800" /> : 
+                    <AiOutlineEye onClick={() => setShowPassword(!showPassword)} className="absolute top-2 right-2 cursor-pointer text-3xl text-gray-800" />}
+                    <span className="pass-error">{ passwordErr }</span>
+                  </div>
+                  <Link className="md:hidden block text-xs text-blue-500 font-semibold -mt-2 text-right" to='/forgotpassword'>forgot password?</Link>
                   <button className="auth-button">Login</button>
                   <Link to='/forgotpassword' className="auth-forgot">Forgot password?</Link>
                   <Link to='/signup' className="auth-create">Create new account</Link>
