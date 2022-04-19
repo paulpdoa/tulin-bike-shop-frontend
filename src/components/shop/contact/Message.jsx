@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState,useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
 
 import { AiOutlineMail } from 'react-icons/ai';
@@ -14,7 +14,7 @@ const Message = () => {
   const [subject,setSubject] = useState('');
   const [email,setEmail] = useState('');  
 
-  const navigate = useNavigate();
+  const { setShowAlert,setAlertMssg } = useContext(GlobalContext);
 
   // send message to tulin
   const onSubmit = async (e) => {
@@ -22,9 +22,10 @@ const Message = () => {
    
     try {
       const data = await axios.post('/sendemail',{ message,name,email,subject });
-      alert(data.data.mssg);
-      navigate('/')
-    } catch(err) {
+      setAlertMssg(data.data.mssg);
+      setShowAlert(true);
+    } 
+    catch(err) {
       console.log(err);
     }
   

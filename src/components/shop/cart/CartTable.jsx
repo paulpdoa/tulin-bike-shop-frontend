@@ -5,14 +5,15 @@ import { GlobalContext } from '../../../helper/Context';
 const CartTable = ({ cartContents,setCartContents }) => {
 
   const [quantity,setQuantity] = useState(0);
-  const { imgLocation } = useContext(GlobalContext);
+  const { imgLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
 
   const removeItem = (id) => {
     const deletedItem = cartContents.filter(cartContent => cartContent._id !== id);
     setCartContents(deletedItem);
     
     axios.delete(`/cart/${id}`,id).then((data) => {
-        alert(data.data.mssg);
+        setAlertMssg(data.data.mssg);
+        setShowAlert(true);
     }).catch(err => console.log(err))
   }
     

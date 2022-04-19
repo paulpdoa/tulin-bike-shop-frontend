@@ -1,11 +1,15 @@
 import { Outlet,useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useContext} from 'react';
+import { GlobalContext } from "../helper/Context";
 
 import AdminNavbar from "../components/dashboard/partials/AdminNavbar";
 import Sidebar from "../components/dashboard/partials/Sidebar";
+import Alert from "../components/modals/admin/Alert";
 
 const DashboardLayout = ({ adminCookie }) => {
+
+  const { showAlert } = useContext(GlobalContext);
 
   const [isAuth,setIsAuth] = useState(false);
   const [showSidebar,setShowSidebar] = useState(true);
@@ -40,6 +44,7 @@ const DashboardLayout = ({ adminCookie }) => {
             { isAuth ? <Outlet /> : <h1>Verifying User</h1> }
         </div>
       </div>
+      { showAlert && <Alert /> }
     </main>
   )
 };

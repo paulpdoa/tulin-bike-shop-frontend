@@ -30,7 +30,7 @@ const Dashboard = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },'/order',setOrders,setIsLoading);
+    fetchData({ signal:abortCont.signal },'/ordereditem',setOrders,setIsLoading);
 
     return () => abortCont.abort()
   },[orders])
