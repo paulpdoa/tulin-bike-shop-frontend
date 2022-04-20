@@ -44,8 +44,8 @@ const ProfileDetail = () => {
     }
  
   return (
-    <div className="p-20 h-screen col-span-2">
-        <h1 className="text-gray-800 font-semibold text-4xl">Personal Information</h1>
+    <div className="md:p-20 p-10 md:h-screen md:col-span-2 col-span-3 md:mt-0 -mt-10">
+        <h1 className="text-gray-800 font-semibold md:text-4xl text-3xl">Personal Information</h1>
         
         <form className="grid grid-cols-2 grid-rows-4 gap-5" onSubmit={onUpdate}>
             <div className="flex flex-col">

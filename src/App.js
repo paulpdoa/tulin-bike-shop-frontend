@@ -65,7 +65,10 @@ const App = () => {
     setTimeout(() => {
       setLoading(false);
     },3000)
-  },[])
+  },[]);
+
+  // Sidebar products shop filtering brands
+  const [brandChosen,setBrandChosen] = useState('');
 
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
@@ -121,7 +124,9 @@ const App = () => {
       <GlobalContext.Provider 
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
-        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat }}
+        showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat,
+        brandChosen,setBrandChosen
+      }}
       >
         <Routes>
           <Route path='/adminlogin' element={ <AdminLogin setAdminCookie={setAdminCookie} /> } />

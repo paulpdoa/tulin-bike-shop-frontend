@@ -9,7 +9,7 @@ const NotFound = () => {
     <div className="content select-none">
     <Helmet><title>Sorry, this page is unavailable :(</title></Helmet>
         <div className="max-content h-screen flex flex-col-reverse md:flex-row items-center justify-center">
-            <div className="md:w-1/3 w-4/5">
+            <div className="md:w-1/3 w-4/5 flex items-center md:items-start flex-col">
               <h1 className="font-bold md:error-title text-9xl">404</h1>
               <h2 className="md:text-2xl text-xl font-normal">Sorry, the page was not found</h2>
               <button className="error-button" onClick={() => navigate(-1)} to='/'>Go back</button>

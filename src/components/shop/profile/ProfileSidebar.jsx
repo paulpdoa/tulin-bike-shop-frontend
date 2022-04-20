@@ -1,4 +1,5 @@
 import { BiUserCircle,BiShoppingBag,BiHistory,BiTrash } from 'react-icons/bi';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import axios from 'axios';
 import { useState,useContext,useEffect } from 'react';
@@ -53,9 +54,9 @@ const ProfileSidebar = () => {
     }
 
   return (
-      <nav className="col-span-1 p-20">
+      <nav className="md:col-span-1 col-span-3 md:p-20 p-10">
         <h1 className="font-semibold text-4xl text-gray-800 whitespace-nowrap">{sideTitle}</h1>
-        <div className="overflow-hidden flex justify-center relative">
+        <div className="overflow-hidden md:flex justify-center relative hidden">
             { userImg ? <img onClick={previewProfilePicture} className="object-cover rounded-full w-32 h-32 cursor-pointer" src={`${imgProfileLocation}${userImg}`} alt="Blank Profile" /> :
                 <>
                 { displayImage ? 
@@ -72,18 +73,22 @@ const ProfileSidebar = () => {
                 </>
                 }
         </div>
-        <ul className="flex flex-col gap-5 mt-5 text-gray-800 text-lg">
-            <Link onClick={() => setSideTitle('My Account')} to={`/profile/${Cookies.get('customerId')}`}>
+        <ul className="flex flex-col md:gap-5 gap-2 mt-5 text-gray-800 text-lg">
+            <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('My Account')} to={`/profile/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiUserCircle />My Account</li>
+                <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
-            <Link onClick={() => setSideTitle('Orders')} to={`/profile/orders/${Cookies.get('customerId')}`}>
+            <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('Orders')} to={`/profile/orders/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiShoppingBag />Orders</li>
+                <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
-            <Link onClick={() => setSideTitle('History')} to={`/profile/history/${Cookies.get('customerId')}`}>
+            <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('History')} to={`/profile/history/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiHistory />History</li>
+                <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
-            <Link onClick={() => setSideTitle('Delete Account')} to={`/profile/delete/${Cookies.get('customerId')}`}>
+            <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('Delete Account')} to={`/profile/delete/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiTrash />Delete Account</li>
+                <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
         </ul>      
       </nav>

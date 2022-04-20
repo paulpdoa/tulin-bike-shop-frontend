@@ -7,7 +7,7 @@ import { GlobalContext } from '../../../helper/Context';
 
 const ShopBike = () => {
 
-  const { startIndex,lastIndex,productPerPage } = useContext(GlobalContext);
+  const { startIndex,lastIndex,productPerPage,brandChosen } = useContext(GlobalContext);
   const [bikes,setBikes] = useState([]);
   const [isLoading,setIsLoading] = useState(true);
 
@@ -25,7 +25,6 @@ const ShopBike = () => {
     pageNumbers.push(i);
   }
   
-
   return (
     <div className="col-span-2 p-20 h-auto">
       <Helmet><title>Tulin Bicycle Shop | Bicycles</title></Helmet>
@@ -34,7 +33,7 @@ const ShopBike = () => {
       <div className="grid grid-cols-3 gap-5 mt-5">
           { isLoading && <h2>Please wait...</h2> }
           { bikes.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There are no items yet</h1> : 
-            bikeLists && bikeLists.map((product) => (
+            bikeLists && bikeLists.filter(brand => brand.brand_name === brandChosen).map((product) => (
               <div key={product._id}>
                 <ProductCard product={product} />
               </div> 

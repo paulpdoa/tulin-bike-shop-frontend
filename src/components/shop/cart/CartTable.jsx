@@ -18,7 +18,7 @@ const CartTable = ({ cartContents,setCartContents }) => {
   }
     
   return (
-      <div className="content">
+      <div className="md:flex justify-center hidden">
         <table className="max-content w-full">
             <tbody>
                 <tr className="bg-gray-200 h-10">

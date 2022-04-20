@@ -4,6 +4,8 @@ import { useEffect,useState } from 'react';
 import CartHeader from '../../components/shop/cart/CartHeader';
 import CartTable from '../../components/shop/cart/CartTable';
 import Cookies from 'js-cookie';
+import CartCard from '../../components/shop/cart/CartCard';
+import CartheadMobile from '../../components/shop/cart/CartheadMobile';
 
 const Cart = () => {
 
@@ -26,6 +28,8 @@ const Cart = () => {
         <div className="h-full">
           <CartHeader cartContents={cartContents} />
           <CartTable cartContents={cartContents} setCartContents={setCartContents} />
+          <CartCard cartContents={cartContents} setCartContents={setCartContents} />
+          <CartheadMobile cartContents={cartContents} />
         </div>
     </>
   );

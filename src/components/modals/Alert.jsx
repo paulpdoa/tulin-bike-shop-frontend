@@ -34,7 +34,7 @@ const Alert = () => {
 
   return (
     <div className="fixed top-0 w-full h-screen flex justify-center items-center" style={{ zIndex:"200" }}>
-        <motion.div className="bg-gray-100 shadow-2xl rounded p-3 flex flex-col items-center justify-center w-1/3 text-gray-800 border border-gray-800" style={{ zIndex:"105" }}
+        <motion.div className="bg-gray-100 shadow-2xl rounded p-3 flex flex-col items-center justify-center md:w-1/3 w-4/5 text-gray-800 border border-gray-800" style={{ zIndex:"105" }}
           variants={popModalVar}
           initial="hidden"
           animate="visible"

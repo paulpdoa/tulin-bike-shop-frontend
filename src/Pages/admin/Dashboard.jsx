@@ -16,6 +16,7 @@ const Dashboard = () => {
 
   const [customers,setCustomers] = useState([]);
   const [orders,setOrders] = useState([]);
+  const [sales,setSales] = useState(0);
 
   // get customers length
   useEffect(() => {
@@ -35,13 +36,20 @@ const Dashboard = () => {
     return () => abortCont.abort()
   },[orders])
   
-  // Get total sales depending on orders
-  // const extractOrdersTotal = orders.map((order) => order.cart_id.map((cart) => cart.inventory_id.product_price * cart.order_quantity));
-  // let totalSales = 0;
-  // for(let i = 0; i < extractOrdersTotal.length; i++) {
-  //   totalSales += extractOrdersTotal.reduce((curr,init) => curr + init[i],0);
-  // }
-  // console.log(totalSales);
+  // Get total sales
+  useEffect(() => {
+    const abortCont = new AbortController();
+    let totalPrice = 0;
+
+    const carts = orders.map(order => order.cart_id);
+    const inventories = carts.map(cart => cart);
+    for(let i = 0; i < inventories.length; i++) {
+      totalPrice += inventories[i][0].inventory_id.product_price;
+    }
+    setSales(totalPrice);
+
+    return () => abortCont.abort()
+  },[orders])
   
   return (
     <>
@@ -53,8 +61,8 @@ const Dashboard = () => {
         </div>
         <div className="flex gap-10 justify-around">
           <DashboardCard title='Total Orders' number={orders.length} color='bg-blue-500' icon={<BsBagCheck />} isLoading={isLoading} />
-          <DashboardCard title='Total Sales' sign='₱' number={123} color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
-          <DashboardCard title='Total Expenses' sign='₱' number='2273' color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
+          <DashboardCard title='Total Sales' sign='₱' number={sales} color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
+          <DashboardCard title='Total Expenses' sign='₱' number={123} color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
           <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} isLoading={isLoading} />
         </div>
         <div className="grid grid-cols-5 gap-5 mt-10 rounded h-56">
