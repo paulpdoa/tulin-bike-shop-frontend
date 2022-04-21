@@ -280,3 +280,8 @@ body {
   }
 }
 /* Bike animation loader */
+
+/* React Calendar */
+.react-calendar {
+  height:max-content;
+}

@@ -55,7 +55,7 @@ const ProfileSidebar = () => {
 
   return (
       <nav className="md:col-span-1 col-span-3 md:p-20 p-10">
-        <h1 className="font-semibold text-4xl text-gray-800 whitespace-nowrap">{sideTitle}</h1>
+        <h1 className="font-semibold md:text-4xl text-3xl text-gray-800 whitespace-nowrap">{sideTitle}</h1>
         <div className="overflow-hidden md:flex justify-center relative hidden">
             { userImg ? <img onClick={previewProfilePicture} className="object-cover rounded-full w-32 h-32 cursor-pointer" src={`${imgProfileLocation}${userImg}`} alt="Blank Profile" /> :
                 <>
@@ -86,7 +86,7 @@ const ProfileSidebar = () => {
                 <li className="flex gap-2 items-center"><BiHistory />History</li>
                 <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
-            <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('Delete Account')} to={`/profile/delete/${Cookies.get('customerId')}`}>
+            <Link className="bg-red-500 text-gray-100 md:text-gray-800 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('Delete Account')} to={`/profile/delete/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiTrash />Delete Account</li>
                 <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import Calendar from '../../components/shop/scheduling/Calendar';
 import DateInput from '../../components/shop/scheduling/DateInput';
+import ScheduledCustomer from '../../components/shop/scheduling/ScheduledCustomer';
 
 const Reservation = () => {
 
@@ -36,10 +37,11 @@ const Reservation = () => {
       <>
           <Helmet><title>Tulin Bicycle Shop | Schedule</title></Helmet>
           <div className="content">
-            <div className="max-content p-20 w-full flex flex-col h-screen justify-center">
+            <div className="max-content p-20 w-full flex flex-col h-full justify-center">
               <h1 className="text-4xl text-gray-800 font-semibold uppercase">SELECT YOUR SCHEDULE</h1>
-              <div className=" grid grid-cols-2 justify-items-center mt-10">
+              <div className="grid grid-cols-2 grid-rows-2 justify-items-center mt-10 h-full">
                 <Calendar date={date} setDate={setDate} />
+                <ScheduledCustomer date={date} />
                 <DateInput today={date} setToday={setDate} hour={hour} minute={minute} />
               </div>
             </div>

@@ -34,7 +34,7 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
   }
   
   return (
-    <div className="absolute flex items-center justify-center -top-10 left-0 h-screen w-full">
+    <div className="absolute flex items-center justify-center md:-top-10 -top-28 left-0 h-screen w-full">
         <div className="text-gray-200 w-4/5 shadow-xl bg-gray-800 rounded-md p-5 z-50">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-semibold">Order Detail</h1>

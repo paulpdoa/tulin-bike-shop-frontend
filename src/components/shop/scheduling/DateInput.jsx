@@ -69,19 +69,25 @@ const DateInput = ({today,hour,minute,setToday}) => {
 
   return (
     <>
-        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white rounded shadow-lg w-full p-10">
+        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white rounded shadow-lg w-full p-10 col-span-2 -mt-20">
             <section className="flex flex-col">
                 <label htmlFor="date">Date:</label>
                 <input disabled className="outline-none p-2 border border-gray-400 rounded" type="date" value={today} onChange={(e) => setToday(e.target.value)} />               
             </section>
             <section className="flex flex-col">
                 <label htmlFor="date">Time:</label>
-                <input className="outline-none p-2 border border-gray-400 rounded" 
+                <select value={time} onChange={(e) => setTime(e.target.value)} className="outline-none p-2 border border-gray-400 rounded" name="time">
+                    <option value="8:00am - 10:00am">8:00am - 10:00am</option>
+                    <option value="10:00am - 12:00pm">10:00am - 12:00am</option>
+                    <option value="1:00pm - 3:00pm">1:00pm - 3:00pm</option>
+                    <option value="3:00pm - 5:00pm">3:00pm - 5:00pm</option>
+                </select>
+                {/* <input className="outline-none p-2 border border-gray-400 rounded" 
                     type="time" 
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     required
-                />
+                /> */}
             </section>
             <section className="flex flex-col">
                 <label htmlFor="date">Concern:</label>

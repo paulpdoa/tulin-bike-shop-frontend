@@ -8,24 +8,24 @@ const StepThree = ({ password,setPassword,confirmPassword,setConfirmPassword,pas
     
   return (
     <div className="w-full">
-         <div className="flex flex-col gap-2">
+         <div className="flex flex-col gap-2 relative">
             <label htmlFor="password">Password:</label>
-            <input className="user-auth" type="password" placeholder="Password" 
+            <input className="user-auth" type={!showPassword ? 'password' : 'text'} placeholder="Password" 
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required
             />
-            <AiOutlineEye />
+            { !showPassword ? <AiOutlineEye onClick={() => setShowPassword(!showPassword)} className="absolute right-3 bottom-5 text-xl cursor-pointer" /> : <AiOutlineEyeInvisible onClick={() => setShowPassword(!showPassword)} className="absolute right-3 bottom-5 text-xl cursor-pointer" /> }
             <span className="pass-error">{ passLimitErr }</span>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
             <label htmlFor="confirm password">Confirm Password:</label>
-            <input className="user-auth" type="password" placeholder="Confirm password" 
+            <input className="user-auth" type={!showConfirmPassword ? 'password' : 'text'} placeholder="Confirm password" 
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
                 required
             />
-            <AiOutlineEye />
+            { !showConfirmPassword ? <AiOutlineEye onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 bottom-5 text-xl cursor-pointer" /> : <AiOutlineEyeInvisible onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 bottom-5 text-xl cursor-pointer" /> }
             <span className="pass-error">{ passErr }</span>
         </div>
         <div className="flex items-center gap-2">
