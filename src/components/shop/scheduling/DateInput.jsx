@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState,useContext,useEffect } from 'react';
 import { motion,AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../../helper/Context';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
@@ -24,14 +25,32 @@ const enterVar = {
     }
 }
 
-const DateInput = ({today,hour,minute,setToday}) => {
+const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
+
+    const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
 
     const [showImage,setShowImage] = useState(false);
-    const [time,setTime] = useState(`${hour}:${minute}`);
+    const [time,setTime] = useState('');
     const [image,setImage] = useState([]);
     const [displayImage,setDisplayImage] = useState();
     const [concern,setConcern] = useState('');
-    
+    const [schedules,setSchedules] = useState([]);
+
+    // Checks date today to compare with actual input by user for validation purposes
+    const presentDay = `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? 0 + '' + Number(new Date().getMonth() + 1) : Number(new Date().getMonth() + 1)}-${new Date().getDate()}`;
+
+    useEffect(() => {
+        const abortCont = new AbortController();
+
+        axios.get('/schedule',{ signal:abortCont.signal })
+        .then(data => {
+            const scheds = data.data.filter((date) => date.reserved_date === chosenDate).map(date => date.reserved_time);
+            setSchedules(scheds);
+        })
+
+        return () => abortCont.abort();
+    },[chosenDate]);
+
     const previewImage = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -47,47 +66,55 @@ const DateInput = ({today,hour,minute,setToday}) => {
 
     const onSchedule = async (e) => {
         e.preventDefault();
-
-        try {
-            const productDetails = new FormData();
-            productDetails.append('concern_image',image);
-            productDetails.append('reserved_time',time);
-            productDetails.append('reserved_date',today);
-            productDetails.append('customer_concern',concern);
-            productDetails.append('customer_id',Cookies.get('customerId'));
-            // Limit the reservation power of customer
-            
-
-            const postSched = await axios.post('/schedule',productDetails);
-            alert(postSched.data.mssg);
-            navigate(postSched.data.redirect);
+        
+        // Prevent the user to schedule a behind date
+        if(new Date(chosenDate) < new Date(presentDay)) {
+            setAlertMssg('Please select date today or the next days');
+            setShowAlert(true);
+        } else {
+            try {
+                if(schedules.includes(time)) {
+                    setAlertMssg('this time has been occupied, please select another time');
+                    setShowAlert(true);
+                } else {
+                    const productDetails = new FormData();
+                    productDetails.append('concern_image',image);
+                    productDetails.append('reserved_time',time);
+                    productDetails.append('reserved_date',chosenDate);
+                    productDetails.append('customer_concern',concern);
+                    productDetails.append('customer_id',Cookies.get('customerId'));
+                    
+                    const postSched = await axios.post('/schedule',productDetails);
+                    setAlertMssg(postSched.data.mssg);
+                    setShowAlert(true);
+                    navigate(postSched.data.redirect);
+                }
+            }
+            catch(err) {
+                const mute = err;
+            }
         }
-        catch(err) {
-            console.log(err)
-        }
+
+        
     }
 
   return (
     <>
-        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white rounded shadow-lg w-full p-10 col-span-2 -mt-20">
+        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white border border-gray-200 rounded-md shadow-lg w-full p-10 col-span-2 -mt-16">
             <section className="flex flex-col">
                 <label htmlFor="date">Date:</label>
-                <input disabled className="outline-none p-2 border border-gray-400 rounded" type="date" value={today} onChange={(e) => setToday(e.target.value)} />               
+                <input disabled className="outline-none p-2 border border-gray-400 rounded" type="date" value={chosenDate} onChange={(e) => setToday(e.target.value)} />               
             </section>
             <section className="flex flex-col">
                 <label htmlFor="date">Time:</label>
-                <select value={time} onChange={(e) => setTime(e.target.value)} className="outline-none p-2 border border-gray-400 rounded" name="time">
+                <select required value={time} onChange={(e) => setTime(e.target.value)} className="outline-none p-2 border border-gray-400 rounded" name="time">
+                    <option hidden>Select time</option>
                     <option value="8:00am - 10:00am">8:00am - 10:00am</option>
                     <option value="10:00am - 12:00pm">10:00am - 12:00am</option>
                     <option value="1:00pm - 3:00pm">1:00pm - 3:00pm</option>
                     <option value="3:00pm - 5:00pm">3:00pm - 5:00pm</option>
                 </select>
-                {/* <input className="outline-none p-2 border border-gray-400 rounded" 
-                    type="time" 
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                    required
-                /> */}
+               
             </section>
             <section className="flex flex-col">
                 <label htmlFor="date">Concern:</label>

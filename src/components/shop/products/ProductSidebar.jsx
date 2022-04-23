@@ -29,10 +29,10 @@ const ProductSidebar = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    const productBrand = brands.map(brand => brand.brand_name);
-    // indexOf returns first occurrence of data, if the indexOf is not equal to the key, it means it is different from the first occurrence
-    const uniqueBrands = productBrand.filter((brand,key) => productBrand.indexOf(brand) === key);
-    setUniqueBrands(uniqueBrands);
+        const productBrand = brands.map(brand => brand.brand_name);
+        // indexOf returns first occurrence of data, if the indexOf is not equal to the key, it means it is different from the first occurrence
+        const uniqueBrands = productBrand.filter((brand,key) => productBrand.indexOf(brand) === key);
+        setUniqueBrands(uniqueBrands);
     return () => abortCont.abort();
   },[brands])
 

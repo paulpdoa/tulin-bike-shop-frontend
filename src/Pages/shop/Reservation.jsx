@@ -12,8 +12,8 @@ const Reservation = () => {
     const hour = d.getHours() < 10 ? 0 + '' + d.getHours() : d.getHours();
     const minute = d.getMinutes() < 10 ? 0 + '' + d.getMinutes() : d.getMinutes();
     const fixedDate = d.getDate() < 10 ? 0 + '' + d.getDate() : d.getDate();
-    const fixedMonth = d.getMonth() < 10 ? 0 + '' + d.getMonth() : d.getMonth();
-
+    const fixedMonth = d.getMonth() < 10 ? 0 + '' + Number(d.getMonth() + 1) : Number(d.getMonth() + 1);
+    
     const [isAuth,setIsAuth] = useState(false);
     const [date,setDate] = useState(d.getFullYear() + '-' + fixedMonth + '-' + fixedDate);
 
@@ -27,7 +27,7 @@ const Reservation = () => {
         navigate(data.data.redirect);
       })
       .catch(err => {
-        console.log(err)
+        const mute = err;
       }) 
 
       return () => abortCont.abort();

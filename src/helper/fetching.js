@@ -7,7 +7,7 @@ export const fetchData = async (signal,url,passState,onLoad) => {
         onLoad(false);
     }
     catch(err) {
-        console.log(err);
+        const mute = err
     }
 }
 

@@ -1,10 +1,15 @@
+import { useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 
-const Sender = () => {
+const Sender = ({ senderName,senderEmail,profileImg }) => {
+
+  const { imgProfileLocation } = useContext(GlobalContext);
+
   return (
     <div className="border-l border-gray-600 w-1/3 flex gap-5 flex-col items-center">
-        <img className="w-1/2 object-cover rounded-full" src="/image/admin-icon.png" alt="admin icon" />
-        <h1 className="text-3xl font-semibold">Paul Andres</h1>
-        <span className="text-sm">polopdoandres@gmail.com</span>
+        {profileImg && <img className="w-1/3 object-cover rounded-full" src={`${imgProfileLocation}${profileImg}`} alt={senderName} />}
+        <h1 className="text-2xl font-semibold">{senderName}</h1>
+        <span className="text-sm">{senderEmail}</span>
     </div>
   )
 }

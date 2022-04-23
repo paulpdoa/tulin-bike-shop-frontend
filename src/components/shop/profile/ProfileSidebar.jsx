@@ -9,7 +9,7 @@ import { GlobalContext } from '../../../helper/Context';
 
 const ProfileSidebar = () => {
 
-    const { imgProfileLocation } = useContext(GlobalContext);
+    const { imgProfileLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
     const [sideTitle,setSideTitle] = useState('My Account');
     const [profilePicture,setProfilePicture] = useState([]);
     const [displayImage,setDisplayImage] = useState();
@@ -44,7 +44,8 @@ const ProfileSidebar = () => {
             const profilePic = new FormData();
             profilePic.append('profile_image',profilePicture);
             const data = await axios.post(`/customer/profilepicture/${id}`,profilePic);
-            alert(data.data.mssg);
+            setAlertMssg(data.data.mssg);
+            setShowAlert(true);
             navigate('/');
 
         }

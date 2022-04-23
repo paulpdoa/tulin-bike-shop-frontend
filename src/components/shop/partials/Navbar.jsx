@@ -148,7 +148,7 @@ const Navbar = ({ customerCookie }) => {
         setInventories(data.data);
       }
       catch(err) {
-        console.log(err);
+        const mute = err;
       }
     }
     fetchData();
@@ -165,7 +165,9 @@ const Navbar = ({ customerCookie }) => {
   }
 
   useEffect(() => {
+    const abortCont = new AbortController();
     if(customerCookie) setIsLogged(true);
+    return () => abortCont.abort();
   },[customerCookie])
 
   return (

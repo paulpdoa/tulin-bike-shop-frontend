@@ -2,7 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import Cookies from 'js-cookie';
-// import { io } from 'socket.io-client';
+import io from 'socket.io-client';
 
 // Components for Shop and Dashboard
 import NotFound from './Pages/NotFound';
@@ -26,7 +26,6 @@ import AddProduct from './Pages/admin/AddProduct';
 import Settings from './Pages/admin/Settings';
 import Schedule from './Pages/admin/Schedule';
 import Productdetail from './components/dashboard/inventory/Productdetail';
-
 
 // Shop Page
 import Login from './Pages/shop/auth/Login';
@@ -54,9 +53,11 @@ import ProductDetail from './Pages/shop/ProductDetail';
 
 import { GlobalContext } from './helper/Context';
 
-// const socket = io.connect("http://localhost:8000/",{ withCredentials:true });
+const socket = io.connect("http://localhost:8000/");
 
 const App = () => {
+
+  const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
   // Website Loader
   const [loading,setLoading] = useState(false);
@@ -125,7 +126,7 @@ const App = () => {
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
         showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat,
-        brandChosen,setBrandChosen
+        brandChosen,setBrandChosen,socket,day
       }}
       >
         <Routes>

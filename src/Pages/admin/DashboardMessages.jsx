@@ -1,10 +1,35 @@
 import { Helmet } from 'react-helmet';
+import { useEffect,useState,useContext } from 'react';
+import { GlobalContext } from '../../helper/Context';
+import axios from 'axios';
+
 import Conversation from '../../components/dashboard/messages/Conversation';
 import Messages from '../../components/dashboard/messages/Messages';
 import Sender from '../../components/dashboard/messages/Sender';
 import Datetime from '../../components/dashboard/partials/Datetime';
 
 const DashboardMessages = () => {
+
+  const [senders,setSenders] = useState([]);
+  const [senderId,setSenderId] = useState('');
+  const [senderName,setSenderName] = useState('');
+  const [profileImg,setProfileImg] = useState('');
+  const [senderEmail,setSenderEmail] = useState('');
+
+  // For getting the id of the user and displaying the senders
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    axios.get('/chat',{ signal:abortCont.signal })
+    .then((data) => {
+        const senders = data.data.map(user => user.sender); 
+        const uniqueSender = Array.from(new Set(senders.map(JSON.stringify))).map(JSON.parse); //Set unique senders
+        setSenders(uniqueSender);
+    });
+
+    return () => abortCont.abort();
+  },[]);
+
   return (
     <>
       <Helmet><title>Tulin Bicycle Shop | Messages</title></Helmet>
@@ -14,9 +39,9 @@ const DashboardMessages = () => {
           <Datetime />
         </div>
         <div className="flex justify-around bg-gray-50 rounded shadow-2xl p-2 h-full">
-          <Messages />
-          <Conversation />
-          <Sender />
+          <Messages senders={senders} setSenderName={setSenderName} setProfileImg={setProfileImg} setSenderEmail={setSenderEmail} setSenderId={setSenderId} />
+          <Conversation senderName={senderName} profileImg={profileImg} senderId={senderId} />
+          <Sender senderName={senderName} senderEmail={senderEmail} profileImg={profileImg} />
         </div>
       </div>
     </>
