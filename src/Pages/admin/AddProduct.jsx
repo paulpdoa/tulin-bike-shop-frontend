@@ -1,12 +1,15 @@
 import { Helmet } from 'react-helmet';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Datetime from '../../components/dashboard/partials/Datetime';
+import { GlobalContext } from '../../helper/Context';
 
 const AddProduct = () => {
+
+  const { setShowAlert,setAlertMssg } = useContext(GlobalContext);
 
   const [type,setType] = useState('');
   const [size,setSize] = useState('');
@@ -18,11 +21,13 @@ const AddProduct = () => {
   const [quantity,setQuantity] = useState(0);
   const [productImg,setProductImg] = useState();
   const [image,setImage] = useState();
-
+  
   const navigate = useNavigate();
 
   const uploadProduct = (e) => {
     e.preventDefault();
+
+    const uniqueColor = color.filter((col,key) => color.indexOf(col) === key);
 
     const productDetails = new FormData();
     
@@ -31,20 +36,19 @@ const AddProduct = () => {
     productDetails.append('brand_name',brand);
     productDetails.append('product_name',itemName);
     productDetails.append('product_size',size);
-    productDetails.append('product_color',color);
+    productDetails.append('product_color',uniqueColor);
     productDetails.append('product_quantity',quantity);
     productDetails.append('product_price',price);
     productDetails.append('product_description',description);
     
     axios.post('/inventory', productDetails)
     .then((data) => {
-      console.log(data.data.mssg);
+      setAlertMssg(data.data.mssg);
+      setShowAlert(true);
       navigate(data.data.redirect);
     }).catch(err => console.log(err))
-
   }
   
-
   // Preview image before upload
   const readImage = (e) => {
     const reader = new FileReader();
@@ -80,21 +84,21 @@ const AddProduct = () => {
               <section className="flex flex-col">
                 <label htmlFor="type">Select type:</label>
                 <select onChange={(e) => setType(e.target.value)} value={type} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
-                  <option value="" disabled selected hidden>Type</option>
-                  <option value="Bicycle">Bicycle</option>
-                  <option value="Accessory">Accessory</option>
-                  <option value="Part">Part</option>
+                  <option defaultValue="" disabled selected hidden>Type</option>
+                  <option defaultValue="Bicycle">Bicycle</option>
+                  <option defaultValue="Accessory">Accessory</option>
+                  <option defaultValue="Part">Part</option>
                 </select>
               </section>
               <section className="flex flex-col">
                 <label htmlFor="brandname">Product Size:</label>
                 <select onChange={(e) => setSize(e.target.value)} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
-                  <option value="" disabled selected hidden>Size</option>
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="XL">XL</option>
-                  <option value="L">L</option>
+                  <option defaultValue="" disabled selected hidden>Size</option>
+                  <option defaultValue="XS">XS</option>
+                  <option defaultValue="S">S</option>
+                  <option defaultValue="M">M</option>
+                  <option defaultValue="XL">XL</option>
+                  <option defaultValue="L">L</option>
                 </select>
               </section>
               <section className="flex flex-col">
@@ -105,19 +109,19 @@ const AddProduct = () => {
                 <label htmlFor="brandname">Product Color:</label>
                 <div className="flex items-center gap-2">
                   <label htmlFor="red">Red</label>
-                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="red" />
+                  <input type="checkbox" onChange={(e) => e.target.checked && setColor(currCol => [...currCol,e.target.value])} value="red" />
                 </div>
                 <div className="flex items-center gap-2">
                   <label htmlFor="green">Green</label>
-                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="green" />
+                  <input type="checkbox" onChange={(e) => e.target.checked && setColor(currCol => [...currCol,e.target.value])} value="green" />
                 </div>
                 <div className="flex items-center gap-2">
                   <label htmlFor="blue">Blue</label>
-                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="blue" />
+                  <input type="checkbox" onChange={(e) => e.target.checked && setColor(currCol => [...currCol,e.target.value])} value="blue" />
                 </div>
                 <div className="flex items-center gap-2">
                   <label htmlFor="yellow">Yellow</label>
-                  <input type="checkbox" onChange={(e) => setColor(e.target.value)} value="yellow" />
+                  <input type="checkbox" onChange={(e) => e.target.checked && setColor(currCol => [...currCol,e.target.value])} value="yellow" />
                 </div>
               </section>
               <section className="flex flex-col">

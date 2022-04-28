@@ -41,10 +41,11 @@ const Dashboard = () => {
     const abortCont = new AbortController();
     let totalPrice = 0;
 
-    const carts = orders.map(order => order.cart_id);
+    const carts = orders.map(order => order.amount_paid);
+    
     const inventories = carts.map(cart => cart);
     for(let i = 0; i < inventories.length; i++) {
-      totalPrice += inventories[i][0].inventory_id.product_price;
+      totalPrice += carts;
     }
     setSales(totalPrice);
 

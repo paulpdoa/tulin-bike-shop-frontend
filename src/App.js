@@ -71,6 +71,9 @@ const App = () => {
   // Sidebar products shop filtering brands
   const [brandChosen,setBrandChosen] = useState('');
 
+  // Set total amount paid for order tracking
+  const [totalAmount,setTotalAmount] = useState(0);
+
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
   const [customerId] = useState(Cookies.get('customerId'));
@@ -126,7 +129,7 @@ const App = () => {
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
         showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat,
-        brandChosen,setBrandChosen,socket,day
+        brandChosen,setBrandChosen,socket,day,totalAmount,setTotalAmount
       }}
       >
         <Routes>

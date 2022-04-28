@@ -1,10 +1,12 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 import { BsPaypal } from 'react-icons/bs';
 import { FiTruck } from 'react-icons/fi';
 
-const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod,id }) => {
+const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
 
     const [totalPrice,setTotalPrice] = useState(0);
+    const { numberFormat,setTotalAmount } = useContext(GlobalContext);
 
     useEffect(() => {
         const abortCont = new AbortController();
@@ -17,9 +19,10 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod,id }) => 
             });
             for(let i = 0; i < data.length; i++) {
                 previousNum += data[i];
-              }
+            }
 
             setTotalPrice(previousNum);
+            setTotalAmount(previousNum);
             setPaymentVal(previousNum);
         }
         computeTotal();
@@ -34,11 +37,11 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod,id }) => 
     <div className="w-full select-none">
         <div className="flex justify-between items-center mt-5">
             <span>Subtotal({itemsCount} item/s)</span>
-            <span>₱{totalPrice.toLocaleString()}</span>
+            <span>₱{numberFormat.format(totalPrice)}</span>
         </div>
         <div className="flex justify-between items-center mt-5">
             <span className="font-semibold text-gray-800 text-xl">Total</span>
-            <span className="text-orange-500 font-semibold text-lg">₱{totalPrice.toLocaleString()}</span>
+            <span className="text-orange-500 font-semibold text-lg">₱{numberFormat.format(totalPrice)}</span>
         </div>
         <div className="mt-10">
             <h2 className="text-3xl font-semibold text-gray-800">Payment Method</h2>

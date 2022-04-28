@@ -73,7 +73,7 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                 <div className="flex items-center justify-center">
                     <img className="invert w-4/5 self-center" src="/image/tulin.png" alt="Tulin logo" />
                 </div>
-                <ul className="ml-6 text-xl flex flex-col gap-5">
+                <ul className="ml-6 text-xl flex flex-col gap-3">
                     <Link to='/dashboard' className="flex items-center justify-between hover:bg-gray-500 p-2 hover:rounded-l-full transition duration-300 rounded-l-full">
                         <li className="flex items-center gap-2"><MdOutlineDashboardCustomize />Dashboard</li>
                     </Link>

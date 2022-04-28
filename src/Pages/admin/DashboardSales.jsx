@@ -1,38 +1,62 @@
 import { useState,useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import Datetime from '../../components/dashboard/partials/Datetime';
 import LineChart from '../../components/dashboard/sales/LineChart';
+import moment from 'moment';
 
 const DashboardSales = () => {
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const data = [
-    {
-      id:1,
-      price:800,
-      year: 2021
-    },
-    {
-      id:2,
-      price:200,
-      year: 2022
-    },
-    {
-      id:3,
-      price:600,
-      year: 2023
-    }
-  ];
 
-    const [line,setLine] = useState({
-    labels: months.map(month => month),
-    datasets: [{
-      label: "Total Sales",
-      data: data.map(year => year.price),
-      backgroundColor: ["red","blue","green"],
-      borderColor: ["black"],
-      borderWidth: 2
-    }]
+  const [sales,setSales] = useState([]);
+  const monthSale = 0;
+  
+  // Get start up to end of the month
+  const startOfMonth = moment().clone().startOf('month').format('YYYY-MM-DD');
+  const endOfMonth   = moment().clone().endOf('month').format('YYYY-MM-DD');
+  // Get total sales in a month
+  const validMonths = sales.filter(sale => {
+    if(moment(sale.createdAt).format('YYYY-MM-DD') <= endOfMonth || startOfMonth >= moment(sale.createdAt).format('YYYY-MM-DD')) 
+    return sale
   });
+
+  console.log(validMonths.map(valid => valid.amount_paid));
+
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    axios.get('/ordereditem', { signal:abortCont.signal })
+    .then((data) => {
+     setSales(data.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    return () => abortCont.abort();
+  },[])
+
+  const [line,setLine] = useState({
+  labels: months.map(month => month),
+  datasets: [
+    {
+      label: "Monthly Sales",
+      data: [validMonths.map(valid => valid.amount_paid)],
+      backgroundColor: ["#111827"],
+      borderColor: ["black"],
+      borderWidth: 1,
+      fill:false
+    },
+    {
+      label: "Total Expense",
+      data: ['4','3','2','1'],
+      backgroundColor: ["#8E9296"],
+      borderColor: ["black"],
+      borderWidth: 1,
+      fill:false
+    }
+  ]
+});
 
   return (
     <>

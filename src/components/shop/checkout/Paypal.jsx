@@ -1,10 +1,12 @@
-import { useRef,useEffect,useState } from "react"
+import { useRef,useEffect,useState,useContext } from "react";
+import { GlobalContext } from "../../../helper/Context";
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
-
+    
+    const { totalAmount } = useContext(GlobalContext);
     const paypal = useRef();
     const [customerId] = useState(id);
     
@@ -42,7 +44,7 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
         
         const paymentMethod = "Paypal";
         const postOrder = async () => {
-            const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod })
+            const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod,totalAmount })
             navigate(transaction.data.redirect);
         }
         

@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { useEffect,useState,useContext } from 'react';
-import { GlobalContext } from '../../helper/Context';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
 
 import Conversation from '../../components/dashboard/messages/Conversation';
@@ -28,7 +27,7 @@ const DashboardMessages = () => {
     });
 
     return () => abortCont.abort();
-  },[]);
+  },[senders]);
 
   return (
     <>

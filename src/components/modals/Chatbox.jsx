@@ -12,11 +12,12 @@ const Chatbox = () => {
   const [chatDatas,setChatDatas] = useState([]);
 
   const [message,setMessage] = useState('');
-
-  const [messageList,setMessageList] = useState([]);
+  const [loading,setLoading] = useState(true);
+ 
   const { setShowChatbox,socket,day } = useContext(GlobalContext);
 
-
+  // 1. show messages from database
+  // 2. using socket.io, when messaging, push it to the chatDatas state and immediately display it
   useEffect(() => {
     const abortCont = new AbortController();
 
@@ -24,6 +25,7 @@ const Chatbox = () => {
       try {
         const data = await axios.get('/chat',{ signal:abortCont.signal });
         setChatDatas(data.data);
+        setLoading(false);
       }
       catch(err) {
         console.log(err);
@@ -31,12 +33,14 @@ const Chatbox = () => {
     }
     fetchMessages();
 
-    socket.on("receive_message",(data) => {
-      setMessageList([...messageList, data]);
-    });
+    // socket.on("receive_message",(data) => {
+    //   // setMessageList([...messageList, data]);
+    //   setChatDatas([...chatDatas, data]);
+    //   console.log(data);
+    // });
 
     return () => abortCont.abort();
-  },[messageList,chatDatas])
+  },[chatDatas])
   
   const sendMessage = async() => {
    if(message !== "") {
@@ -50,9 +54,12 @@ const Chatbox = () => {
       time: `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`,
       day: day[new Date().getDay()]
     }
-    await socket.emit("send_message",data);
-    setMessageList((list) => [...list,data]);
+
+    // await socket.emit("send_message",data);
+    // // setMessageList((list) => [...list,data]);
+    // setChatDatas([...chatDatas,data]);
     setMessage('');
+
     // Post to db
     try {
       await axios.post('/chat',data);
@@ -73,14 +80,16 @@ const Chatbox = () => {
         {/* Messages Area */}
         <div className="w-full h-4/5 overflow-auto">
           <ScrollToBottom className="overflow-y-scroll h-full">
-            { chatDatas && chatDatas.filter(chatData => chatData.room === Cookies.get('customerId')).map((content,key) => (
+            { loading ? <h1>Please wait...</h1> : 
+            chatDatas && chatDatas.filter(chatData => chatData.room === Cookies.get('customerId')).map((content,key) => (
               <div className={`flex ${content.user === 'customer' ? 'justify-end' : 'justify-start'} w-full mt-2`} key={key}>
                 <div className={`${content.user === 'customer' ? 'bg-blue-500 text-gray-100' : 'bg-gray-200 text-gray-800'} w-1/2 rounded-md p-2 ml-2`}>
                   <p className="text-sm break-all">{content.message}</p>
                   <span className="text-xs">{content.day} { content.time }</span>
                 </div>
               </div>
-            )) }
+            ))
+            }
           </ScrollToBottom>
         </div>
         {/* Messages Area */}

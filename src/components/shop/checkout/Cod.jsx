@@ -6,9 +6,10 @@ import { useNavigate,useParams } from 'react-router-dom';
 
 const Cod = ({ setShowCod,products }) => {
   
-  const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
+  const { setAlertMssg,setShowAlert,totalAmount } = useContext(GlobalContext);
 
   const cartItemId = products.map((product) => product._id);
+  console.log(totalAmount);
 
   const [firstname,setFirstname] = useState('');
   const [lastname,setLastname] = useState('');
@@ -37,14 +38,14 @@ const Cod = ({ setShowCod,products }) => {
       setBarangay(data.data.barangay);
     })
 
-    return abortCont.abort();
+    return () => abortCont.abort();
   },[id]);
  
 
   const navigate = useNavigate();
   const paymentMethod = 'Cash on Delivery';
   const placeOrder = async () => {
-    const transaction = await axios.post('/order',{ id,cartItemId, paymentMethod })
+    const transaction = await axios.post('/order',{ id,cartItemId, paymentMethod,totalAmount })
     navigate(transaction.data.redirect);
     setAlertMssg(transaction.data.mssg);
     setShowAlert(true);
