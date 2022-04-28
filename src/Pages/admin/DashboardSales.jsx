@@ -6,57 +6,69 @@ import LineChart from '../../components/dashboard/sales/LineChart';
 import moment from 'moment';
 
 const DashboardSales = () => {
+  // Create a code that filters total sales per month 
+  // Ex. April = 500,000php
+  // Filter this month === month to show sales for that month
+
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-  const [sales,setSales] = useState([]);
-  const monthSale = 0;
-  
-  // Get start up to end of the month
-  const startOfMonth = moment().clone().startOf('month').format('YYYY-MM-DD');
-  const endOfMonth   = moment().clone().endOf('month').format('YYYY-MM-DD');
-  // Get total sales in a month
-  const validMonths = sales.filter(sale => {
-    if(moment(sale.createdAt).format('YYYY-MM-DD') <= endOfMonth || startOfMonth >= moment(sale.createdAt).format('YYYY-MM-DD')) 
-    return sale
-  });
+  const [orders,setOrders] = useState([]);
 
-  console.log(validMonths.map(valid => valid.amount_paid));
+  const [monthSales,setMonthSales] = useState([]);
+
+  const [test,setTest] = useState(<LineChart />);
+  
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    const fetchSales = async () => {
+      try {
+        const data = await axios.get('/ordereditem', {signal:abortCont.signal});
+        // First is to get Month equal to all months variable
+        const filterMonthSale = data.data.filter((month) => {
+          for(let i = 0; i < months.length; i++) {
+            if(moment(month .createdAt).format('MMMM') === months[i]) {
+              return month
+            } 
+          }          
+        }).map((amount) => amount.amount_paid);
+        setMonthSales(filterMonthSale);
+        setOrders(data.data);
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+    fetchSales();
+
+    return () => abortCont.abort();
+  },[monthSales]);
 
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get('/ordereditem', { signal:abortCont.signal })
-    .then((data) => {
-     setSales(data.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    setTest(<LineChart chartData={chartData} />)
 
     return () => abortCont.abort();
   },[])
+  
 
-  const [line,setLine] = useState({
-  labels: months.map(month => month),
-  datasets: [
-    {
-      label: "Monthly Sales",
-      data: [validMonths.map(valid => valid.amount_paid)],
-      backgroundColor: ["#111827"],
-      borderColor: ["black"],
-      borderWidth: 1,
-      fill:false
+  const [chartData,setChartData] = useState({
+    options: {
+      chart: {
+        id: "basic-bar"
+      },
+      xaxis: {
+        categories: months
+      }
     },
-    {
-      label: "Total Expense",
-      data: ['4','3','2','1'],
-      backgroundColor: ["#8E9296"],
-      borderColor: ["black"],
-      borderWidth: 1,
-      fill:false
-    }
-  ]
-});
+    series: [
+      {
+        name: "Monthly Sales",
+        data: monthSales
+      }
+    ]
+  });
 
   return (
     <>
@@ -68,7 +80,7 @@ const DashboardSales = () => {
         </div>
         
         <div className="mt-10 shadow-lg p-10">
-          <LineChart chartData={line} /> 
+          <LineChart chartData={chartData} /> 
         </div>
       </div>
     </>

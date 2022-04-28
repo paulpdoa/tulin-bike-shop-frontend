@@ -1,10 +1,15 @@
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto';
+import Chart from 'react-apexcharts';
 
 const LineChart = ({ chartData }) => {
+
   return (
       <>
-          <Bar data={chartData} />
+          <Chart 
+            options={ chartData.options }
+            series={ chartData.series }
+            type="bar"
+            height={350}
+          />
       </>
   )
 }
