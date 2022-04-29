@@ -45,8 +45,9 @@ const Dashboard = () => {
     
     const inventories = carts.map(cart => cart);
     for(let i = 0; i < inventories.length; i++) {
-      totalPrice += carts;
+      totalPrice += inventories[i];
     }
+    
     setSales(totalPrice);
 
     return () => abortCont.abort()

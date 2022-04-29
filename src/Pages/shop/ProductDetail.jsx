@@ -63,6 +63,7 @@ const ProductDetail = () => {
                     <div className="flex flex-col mt-5">
                         <p className="text-gray-800">{ product.product_description }</p>
                         <span className="text-xs text-gray-800">Qty.{ product.product_quantity }</span><br/>
+                        { product.product_quantity < 1 && <p className="text-red-500 text-sm -mt-5">Out of Stock</p> }
                     </div>
                     <div className="flex items-center gap-2 mt-5 relative">
                         <button className="p-2 bg-gray-900 text-gray-100 font-semibold rounded" onClick={() => quantity > 0 && setQuantity(quantity-1)}>-</button>
@@ -70,7 +71,14 @@ const ProductDetail = () => {
                         <button className="p-2 bg-gray-900 text-gray-100 font-semibold rounded" onClick={() => quantity < product.product_quantity && setQuantity(quantity+1)}>+</button>
                         <span className="text-red-500 text-xs absolute -bottom-5">{ quantityErr }</span>
                     </div>
-                    <button onClick={addToCart} className="mt-16 font-semibold bg-orange-400 text-gray-100 p-2 rounded">Add to Cart</button>
+                    <div className="flex mt-3">
+                        <p>Available colors</p>
+                        { product.product_color[0].split(",").map(col => (
+                            <div onClick={() => console.log(col)} className={`w-5 h-5 rounded-full bg-${col}-500 inline-block ml-2 cursor-pointer`}></div>
+                        )) }
+                        
+                    </div>
+                    <button onClick={ product.product_quantity > 0 ? addToCart : () => alert('Out of Stock!') } className="mt-16 font-semibold bg-orange-400 text-gray-100 p-2 rounded">Add to Cart</button>
                 </section>
             </div>
         </div>

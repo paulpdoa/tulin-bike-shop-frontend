@@ -135,7 +135,7 @@ body {
   @apply w-1/2 text-lg select-none; 
 }
 .pass-error,.username-error,.error {
-  @apply text-red-500 font-bold text-xs w-1/2
+  @apply text-red-500 font-bold text-xs w-auto
 }
 .user-auth { 
   @apply w-full border border-gray-400 p-2 rounded-md outline-none;

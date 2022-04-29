@@ -12,12 +12,23 @@ const DashboardSales = () => {
 
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-  const [orders,setOrders] = useState([]);
+  const [chartData,setChartData] = useState({
+    options: {
+      chart: {
+        id: "basic-bar"
+      },
+      xaxis: {
+        categories: []
+      }
+    },
+    series: [
+      {
+        name: "Monthly Sales",
+        data: []
+      }
+    ]
+  });
 
-  const [monthSales,setMonthSales] = useState([]);
-
-  const [test,setTest] = useState(<LineChart />);
-  
   useEffect(() => {
     const abortCont = new AbortController();
 
@@ -31,9 +42,26 @@ const DashboardSales = () => {
               return month
             } 
           }          
-        }).map((amount) => amount.amount_paid);
-        setMonthSales(filterMonthSale);
-        setOrders(data.data);
+        });
+        // Select same month then add each amount
+        
+        setChartData({
+          options: {
+            chart: {
+              id: "basic-bar"
+            },
+            xaxis: {
+              categories: filterMonthSale.map(month => moment(month.createdAt).format('MMMM'))
+            }
+          },
+          series: [
+            {
+              name: "Monthly Sales",
+              data: filterMonthSale.map(sale => sale.amount_paid)
+            }
+          ]
+        })
+    
       }
       catch(err) {
         console.log(err);
@@ -42,33 +70,7 @@ const DashboardSales = () => {
     fetchSales();
 
     return () => abortCont.abort();
-  },[monthSales]);
-
-  useEffect(() => {
-    const abortCont = new AbortController();
-
-    setTest(<LineChart chartData={chartData} />)
-
-    return () => abortCont.abort();
-  },[])
-  
-
-  const [chartData,setChartData] = useState({
-    options: {
-      chart: {
-        id: "basic-bar"
-      },
-      xaxis: {
-        categories: months
-      }
-    },
-    series: [
-      {
-        name: "Monthly Sales",
-        data: monthSales
-      }
-    ]
-  });
+  },[]);
 
   return (
     <>
