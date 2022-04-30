@@ -38,30 +38,37 @@ const DashboardSales = () => {
         // First is to get Month equal to all months variable
         const filterMonthSale = data.data.filter((month) => {
           for(let i = 0; i < months.length; i++) {
-            if(moment(month .createdAt).format('MMMM') === months[i]) {
+            if(moment(month.createdAt).format('MMMM') === months[i]) {
               return month
             } 
           }          
         });
-        // Select same month then add each amount
+        const allMonths = filterMonthSale.map(month => moment(month.createdAt).format('MMMM'));
         
+        // Modify the array 
+        const getMonthValues = filterMonthSale.map(monthVal => ({ month: moment(monthVal.createdAt).format('MMMM'), amount: monthVal.amount_paid }));
+        const sumPerMonth = getMonthValues.reduce((total,curr) => {
+          total[curr.month] = total[curr.month] + Number(curr.amount) || Number(curr.amount)
+          return total
+        },[]);
+
+        // Select same month then add each amount
         setChartData({
           options: {
             chart: {
               id: "basic-bar"
-            },
+            },  
             xaxis: {
-              categories: filterMonthSale.map(month => moment(month.createdAt).format('MMMM'))
+              categories: Array.from(new Set(allMonths.map(JSON.stringify))).map(JSON.parse)
             }
           },
           series: [
             {
               name: "Monthly Sales",
-              data: filterMonthSale.map(sale => sale.amount_paid)
+              data: Object.values(sumPerMonth)
             }
           ]
         })
-    
       }
       catch(err) {
         console.log(err);

@@ -1,15 +1,20 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaRegPlusSquare } from 'react-icons/fa';
-import { BsBell } from 'react-icons/bs';
+import { IoIosArrowDown,IoIosArrowUp } from 'react-icons/io';
+import { ImExit } from 'react-icons/im';
 
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 
 const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
 
+    const [showLogout,setShowLogout] = useState(false);
+
     const [products,setProducts] = useState([]);
     const [searchedItems,setSearchedItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const abortCont = new AbortController();
@@ -27,6 +32,14 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
 
     return () => abortCont.abort();
     },[]);
+
+    const onLogout = () => {
+        axios.get('/adminlogout')
+        .then((data) => {
+            navigate(data.data.redirect);
+            localStorage.removeItem('adminName');
+        }).catch(err => console.log(err))
+    }
 
     const handleSearch = (e) => {
         const searched = e.target.value;
@@ -52,12 +65,13 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
                 )) }
             </div>
         </div>
-        <div className="flex items-center gap-2">
-            <div className="relative">
-                <span className="bg-red-500 text-gray-100 absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs flex items-center justify-center font-semibold">3</span>
-                <BsBell className="text-2xl font-bold" />
-            </div>
+        <div className="flex items-center gap-2 relative">
             <h2 className="font-semibold text-xl select-none">{ localStorage.getItem('adminName') }</h2>
+            <button onClick={() => setShowLogout(!showLogout)} className="p-1 border border-gray-800 rounded"><IoIosArrowDown /></button>
+            { showLogout && 
+            <div className="absolute bg-white text-gray-800 w-36 top-10 -left-10 p-2 border border-gray-800 rounded">
+                <button onClick={onLogout} className="flex items-center w-full p-2 gap-2 hover:bg-gray-100 transition duration-300 rounded"><ImExit /> Logout</button>
+            </div> }
         </div>
     </nav>
   );

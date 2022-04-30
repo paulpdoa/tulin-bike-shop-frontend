@@ -53,13 +53,7 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
 
   const navigate = useNavigate();
 
-  const onLogout = () => {
-      axios.get('/adminlogout')
-      .then((data) => {
-          navigate(data.data.redirect);
-          localStorage.removeItem('adminName');
-      }).catch(err => console.log(err))
-  }
+ 
 
   return (
       <>
@@ -118,11 +112,6 @@ const Sidebar = ({ adminCookie,showSidebar }) => {
                         <li className="flex items-center gap-2"><FiSettings />Settings</li>
                     </Link> */}
                 </ul>
-                { adminCookie ? 
-                    <span onClick={onLogout} className="text-lg absolute bottom-5 left-2 font-bold flex gap-2 items-center cursor-pointer"><BiLogOut /> Logout</span>
-                    :
-                    <Link to='/adminlogin' className="text-lg absolute bottom-5 left-2 font-bold flex gap-2 items-center cursor-pointer"><BiLogOut /> Login</Link>
-                }
             </motion.nav>
           </AnimatePresence>
       </>

@@ -90,6 +90,7 @@ const Navbar = ({ customerCookie }) => {
   const [userImg,setUserImg] = useState('');
 
   const [showSearch,setShowSearch] = useState(false);
+  
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -260,7 +261,7 @@ const Navbar = ({ customerCookie }) => {
             <img onClick={() => setShowSearch(!showSearch)} className="w-7 h-6 object-cover cursor-pointer hover:scale-150 transition duration-300" src="/image/icons/Search.png" alt="search" />
             <Link className="hover:scale-110 transition duration-300 relative" to={`/cart/${Cookies.get('customerId')}`}>
               <img className="w-7 h-8 object-cover cursor-pointer" src="/image/icons/Shopping-Cart.png" alt="shopping cart" />
-              { cartCount > 0 && <span className="bg-red-500 w-5 h-5 text-gray-100 flex items-center justify-center rounded-full text-xs -right-2 absolute top-0">{cartCount}</span> }
+              { cartCount > 0 ? <span className="bg-red-500 w-5 h-5 text-gray-100 flex items-center justify-center rounded-full text-xs -right-2 absolute top-0">{cartCount.length}</span> : '' }
             </Link>
           </div>
       </div>
