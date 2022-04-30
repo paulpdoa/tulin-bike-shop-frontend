@@ -6,7 +6,7 @@ const Info = () => {
         <h1 className="font-semibold md:text-5xl text-4xl text-gray-800 text-center">About Us</h1>
         <div className="flex flex-col md:items-start items-center justify-start gap-10 mt-5">
             <h2 className="font-semibold md:text-3xl text-2xl text-gray-800">Who we are?</h2>
-            <p className="md:text-justify md:w-1/2 w-4/5 font-semibold md:text-lg text-sm text-gray-800">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto exercitationem quis, minima porro veritatis repellat dolorum blanditiis cupiditate repellendus temporibus beatae autem fuga totam labore, sequi sint! Quam molestias dicta mollitia consequuntur nobis quae enim error pariatur, temporibus perspiciatis ipsa?</p>
+            <p className="md:text-justify md:w-1/2 w-4/5 font-semibold md:text-lg text-sm text-gray-800">Our bicycle shop started on 1998 and our business is almost 24 years and we are focusing on alignment of motorcycle parts, wheels, and selling of bicycles.</p>
         </div>
       </div>
     </section>

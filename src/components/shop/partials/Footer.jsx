@@ -35,7 +35,7 @@ const Footer = () => {
             </div>
             
             <div className="hidden md:flex gap-10 items-start">
-              <div>
+              <div className="w-full">
                   <h1 className="font-bold text-2xl rockwell">Tulin</h1>
                   <div className="flex flex-col mt-5 gap-2">
                     <Link to='/'>Home</Link>
@@ -43,7 +43,7 @@ const Footer = () => {
                     <Link to='/contact'>Contact Us</Link>
                   </div>
               </div>
-              <div>
+              <div className="w-full">
                   <h1 className="font-bold text-2xl rockwell">Services</h1>
                   <div className="flex flex-col mt-5 gap-2">
                     <Link to='/products/bikes'>Bicycles</Link>
@@ -54,19 +54,9 @@ const Footer = () => {
                   </div>
               </div>
               <div>
-                  <h1 className="font-bold text-2xl rockwell">News Letter</h1>
+                  <h1 className="font-bold text-2xl rockwell">About Tulin</h1>
                   <div className="flex flex-col mt-5">
-                    <p className="text-sm">Subscribe to our news letter to get your weekly news and updates.</p>
-                    <div className="max-w-max border-b border-gray-200 flex items-center">
-                      <AiOutlineMail />
-                      <input value={email} onChange={(e) => setEmail(e.target.value)} className="bg-transparent outline-none p-2 placeholder:font-light placeholder:text-sm" type="email" placeholder="Enter your email address" />
-                    </div>
-                    <button onClick={subscribeUser} className="p-2 outline-none uppercase inter font-semibold bg-gray-100 text-gray-800 w-1/3 mt-5 hover:bg-transparent hover:border hover:border-gray-100 hover:text-gray-100 transition duration-300">Subscribe</button>
-                    <div className="flex gap-5 items-center mt-5">
-                      <Link to="#"><BsFacebook /></Link>
-                      <Link to="#"><BsTwitter /></Link>
-                      <Link to="#"><BsInstagram /></Link>
-                    </div>
+                    <p>Our bicycle shop started on 1998 and our business is almost 24 years and we are focusing on alignment of motorcycle parts, wheels, and selling of bicycles.</p>
                   </div>
               </div>
             </div>

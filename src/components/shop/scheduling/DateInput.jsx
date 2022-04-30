@@ -100,7 +100,7 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
 
   return (
     <>
-        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white border border-gray-200 rounded-md shadow-lg w-full p-10 col-span-2 -mt-16">
+        <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white border border-gray-200 rounded-md shadow-lg w-full p-10 md:col-span-2 col-span-1 md:-mt-16 mt-0">
             <section className="flex flex-col">
                 <label htmlFor="date">Date:</label>
                 <input disabled className="outline-none p-2 border border-gray-400 rounded" type="date" value={chosenDate} onChange={(e) => setToday(e.target.value)} />               

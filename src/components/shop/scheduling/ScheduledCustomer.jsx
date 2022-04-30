@@ -26,7 +26,7 @@ const ScheduledCustomer = ({ date: sched }) => {
   },[dates])
 
   return (
-    <div className="p-3 h-auto">
+    <div className="p-3 md:h-auto h-max">
         <h1 className="md:text-3xl text-2xl font-semibold text-gray-800">Available Schedules</h1>
         <h2>Schedule for: { months[new Date(sched).getMonth()] + ' ' + new Date(sched).getDate() + ', ' + new Date(sched).getFullYear() }</h2>
         { dates && dates.filter(date => date.reserved_date === sched).map(date => (

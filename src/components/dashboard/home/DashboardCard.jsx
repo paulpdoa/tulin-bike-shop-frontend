@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
+import CountUp from 'react-countup';
 
 const DashboardCard = ({ title,icon,number,sign,color,isLoading }) => {
   
@@ -11,7 +12,7 @@ const DashboardCard = ({ title,icon,number,sign,color,isLoading }) => {
             <h1 className="text-lg">{ title }</h1>
             <span className="text-2xl font-bold">{ icon }</span>
         </div>
-        <h2 className="font-bold text-2xl">{ isLoading ? <span className="text-sm text-red-500">Please wait...</span> : <>{sign} {numberFormat.format(number)}</> }</h2>
+        <h2 className="font-bold text-2xl">{ isLoading ? <span className="text-sm text-gray-100 animate-pulse">Please wait...</span> : <>{sign} <CountUp end={number} duration={2} /></> }</h2>
     </div>
   )
 }

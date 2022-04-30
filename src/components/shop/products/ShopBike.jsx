@@ -30,10 +30,16 @@ const ShopBike = () => {
       <Helmet><title>Tulin Bicycle Shop | Bicycles</title></Helmet>
       <h1 className="text-4xl text-gray-800 font-semibold uppercase">Bicycles</h1>
       <ProductHeader pageNumbers={ pageNumbers }/>
-      <div className="grid grid-cols-3 gap-5 mt-5">
+      <div className="grid md:grid-cols-3 grid-cols-1 justify-items-center md:justify-items-start gap-5 mt-5">
           { isLoading && <h2>Please wait...</h2> }
           { bikes.length < 1 ? <h1 className="font-bold text-5xl text-gray-700 animate-pulse">There are no items yet</h1> : 
-            bikeLists && bikeLists.filter(brand => brand.brand_name === brandChosen).map((product) => (
+            bikeLists && bikeLists.filter(brand => {
+              if(brandChosen === '') {
+                return brand
+              } else {
+                return brand.brand_name === brandChosen
+              }
+            }).map((product) => (
               <div key={product._id}>
                 <ProductCard product={product} />
               </div> 

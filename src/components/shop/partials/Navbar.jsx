@@ -80,7 +80,6 @@ const Navbar = ({ customerCookie }) => {
 
   const [inventories,setInventories] = useState([]);
   const [searchedItem,setSearchedItem] = useState('');
-  const [showMenu,setShowMenu] = useState(false);
   const [showTopNav,setShowTopNav] = useState(true);
   const [cartCount,setCartCount] = useState(0);
 

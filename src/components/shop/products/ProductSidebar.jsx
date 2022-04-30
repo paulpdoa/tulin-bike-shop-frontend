@@ -37,7 +37,7 @@ const ProductSidebar = () => {
   },[brands])
 
   return (
-    <nav className="col-span-1 h-full border-r-2 p-20 border-gray-600 overflow-auto">
+    <nav className="col-span-1 h-full border-r-2 p-20 border-gray-600 overflow-auto hidden md:block">
         <h1 className="font-semibold text-5xl text-gray-800">Filter By:</h1>
         {/* <section className="mt-5">
             <div className="flex items-center justify-between">

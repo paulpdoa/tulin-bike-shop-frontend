@@ -10,17 +10,18 @@ const ProductDetail = () => {
     const [product,setProduct] = useState([]);
     const [quantity,setQuantity] = useState(0);
     const [quantityErr,setQuantityErr] = useState('');
+    const [colort,setColor] = useState('');
     const { imgLocation,numberFormat,setAlertMssg,setShowAlert } = useContext(GlobalContext);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const abortCont = new AbortController();
-        const fetchData = async() => {
-            const data = await axios.get(`/inventory/${id}`);
-            setProduct(data.data);
-        }
-        fetchData();
+            const fetchData = async() => {
+                const data = await axios.get(`/inventory/${id}`,{ signal: abortCont.signal });
+                setProduct(data.data);
+            }
+            fetchData();
         return () => abortCont.abort();
     },[id]);
 
@@ -73,10 +74,9 @@ const ProductDetail = () => {
                     </div>
                     <div className="flex mt-3">
                         <p>Available colors</p>
-                        { product.product_color[0].split(",").map(col => (
-                            <div onClick={() => console.log(col)} className={`w-5 h-5 rounded-full bg-${col}-500 inline-block ml-2 cursor-pointer`}></div>
+                        { product.product_color && product.product_color[0].split(",").map(col => (
+                            <div onClick={() => console.log(col)} className={`w-5 h-5 rounded-full bg-${col}-500 inline-block ml-2 cursor-pointer hover:scale-150 transition duration-300`}></div>
                         )) }
-                        
                     </div>
                     <button onClick={ product.product_quantity > 0 ? addToCart : () => alert('Out of Stock!') } className="mt-16 font-semibold bg-orange-400 text-gray-100 p-2 rounded">Add to Cart</button>
                 </section>

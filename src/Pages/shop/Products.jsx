@@ -5,7 +5,7 @@ import ProductSidebar from '../../components/shop/products/ProductSidebar';
 const Products = () => {
 
   return (
-      <div className="grid grid-cols-3">
+      <div className="grid md:grid-cols-3 grid-cols-1">
         <ProductSidebar />
         <Outlet />
       </div>

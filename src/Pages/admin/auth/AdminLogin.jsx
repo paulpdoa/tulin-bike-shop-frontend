@@ -57,7 +57,7 @@ const AdminLogin = ({ setAdminCookie }) => {
                 <span className="pass-error">{ passwordErr }</span>
                 <button className="auth-button">Login</button>
                 <span className="auth-forgot">Forgot password?</span>
-                <Link to='/adminsignup' className="auth-create">Create new account</Link>
+                {/* <Link to='/adminsignup' className="auth-create">Create new account</Link> */}
                 <Link to='/' className="auth-view">View items in store</Link>
             </form>
         </div>
