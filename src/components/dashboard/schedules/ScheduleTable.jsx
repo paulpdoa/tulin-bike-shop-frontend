@@ -32,7 +32,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
-                    <th>Details</th>
+                    <th>Action</th>
                 </tr>
                 { details.length < 1 ? 
                <tr className="w-full h-52">

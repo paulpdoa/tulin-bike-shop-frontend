@@ -51,8 +51,8 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
     <nav className="bg-gray-100 p-3 flex justify-between shadow-md">
         <div className="flex items-center gap-10">
             <span onClick={() => setShowSidebar(!showSidebar)} className="text-2xl font-bold cursor-pointer"><GiHamburgerMenu /></span>
-            <Link to='/dashboard/addproduct' className="flex gap-2 items-center p-2 border-2 rounded border-gray-900">
-                <span><FaRegPlusSquare className="text-gray-900 text-2xl" /></span>
+            <Link to='/dashboard/addproduct' className="flex gap-2 items-center p-2 border-2 rounded border-gray-900 hover:bg-gray-800 hover:text-gray-100 transition duration-300">
+                <span><FaRegPlusSquare className="text-2xl" /></span>
                 <span>Add Product</span>
             </Link>
         </div>
@@ -67,7 +67,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
         </div>
         <div className="flex items-center gap-2 relative">
             <h2 className="font-semibold text-xl select-none">{ localStorage.getItem('adminName') }</h2>
-            <button onClick={() => setShowLogout(!showLogout)} className="p-1 border border-gray-800 rounded"><IoIosArrowDown /></button>
+            <button onClick={() => setShowLogout(!showLogout)} className="p-1 border border-gray-800 rounded">{ showLogout ? <IoIosArrowUp /> : <IoIosArrowDown /> }</button>
             { showLogout && 
             <div className="absolute bg-white text-gray-800 w-36 top-10 -left-10 p-2 border border-gray-800 rounded">
                 <button onClick={onLogout} className="flex items-center w-full p-2 gap-2 hover:bg-gray-100 transition duration-300 rounded"><ImExit /> Logout</button>

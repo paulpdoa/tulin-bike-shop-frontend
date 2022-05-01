@@ -66,6 +66,10 @@ const DashboardSales = () => {
             {
               name: "Monthly Sales",
               data: Object.values(sumPerMonth)
+            },
+            {
+              name: "Monthly Expense",
+              data: Object.values(sumPerMonth)
             }
           ]
         })
