@@ -2,7 +2,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import axios from 'axios';
 import { useState,useEffect,useContext } from 'react'; 
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ProductSidebar = () => {
 
   const { setBrandChosen } = useContext(GlobalContext);  
@@ -15,7 +15,7 @@ const ProductSidebar = () => {
 
       const fetchBrands = async () => {
           try {
-            const data = await axios.get('/inventory',{ signal:abortCont.signal });
+            const data = await axios.get(`${baseUrl()}/inventory`,{ signal:abortCont.signal });
             setBrands(data.data);
           }
           catch(err) {

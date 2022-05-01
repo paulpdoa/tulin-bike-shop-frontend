@@ -4,7 +4,7 @@ import { useState,useEffect,useContext } from 'react';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ShopBike = () => {
 
   const { startIndex,lastIndex,productPerPage,brandChosen } = useContext(GlobalContext);
@@ -13,7 +13,7 @@ const ShopBike = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({signal:abortCont.signal},'/inventory/bike',setBikes,setIsLoading);
+    fetchData({signal:abortCont.signal},`${baseUrl()}/inventory/bike`,setBikes,setIsLoading);
     return () => abortCont.abort()
   },[bikes]);
 

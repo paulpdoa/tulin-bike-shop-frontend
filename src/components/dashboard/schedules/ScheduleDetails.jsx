@@ -1,10 +1,10 @@
 import { AiOutlineCloseCircle,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useEffect,useState } from 'react';
 import { putData } from '../../../helper/fetching';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ScheduleDetails = ({ setShowDetail,getDetail }) => {
    
-    const imgLocation = 'http://localhost:8000/uploads/schedule/'
+    const imgLocation = 'https://tulinbikeshop.herokuapp.com/uploads/schedule/'
     const [isLoading,setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const ScheduleDetails = ({ setShowDetail,getDetail }) => {
     },[]);
 
     const approveSchedule = (id) => {
-        putData(`/schedule/${id}`,{schedule_status : 'approved'});
+        putData(`${baseUrl()}/schedule/${id}`,{schedule_status : 'approved'});
         setShowDetail(false);
     }
 

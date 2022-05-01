@@ -3,7 +3,7 @@ import { useEffect,useState,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
 import { useNavigate,useParams } from 'react-router-dom';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const Cod = ({ setShowCod,products }) => {
   
   const { setAlertMssg,setShowAlert,totalAmount } = useContext(GlobalContext);
@@ -45,7 +45,7 @@ const Cod = ({ setShowCod,products }) => {
   const navigate = useNavigate();
   const paymentMethod = 'Cash on Delivery';
   const placeOrder = async () => {
-    const transaction = await axios.post('/order',{ id,cartItemId, paymentMethod,totalAmount })
+    const transaction = await axios.post(`${baseUrl()}/order`,{ id,cartItemId, paymentMethod,totalAmount })
     navigate(transaction.data.redirect);
     setAlertMssg(transaction.data.mssg);
     setShowAlert(true);

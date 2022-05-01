@@ -2,7 +2,7 @@ import { useState, useEffect,useContext } from 'react';
 import axios from 'axios';
 import { GlobalContext } from '../../../helper/Context';
 import { Link } from 'react-router-dom';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const TopProduct = () => {
 
   const [topProducts,setTopProducts] = useState([]);
@@ -13,7 +13,7 @@ const TopProduct = () => {
 
     const fetchTopProds = async() => {
       try {
-        const data = await axios.get('/inventory',{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/inventory`,{ signal:abortCont.signal });
         setTopProducts(data.data);
       }
       catch(err) {

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import { useParams,Link,useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ResetPassword = () => {
 
     const { id } = useParams();
@@ -17,7 +17,7 @@ const ResetPassword = () => {
     useEffect(() => {
         const abortCont = new AbortController();
 
-        axios.get(`/customer/${id}`)
+        axios.get(`${baseUrl()}/customer/${id}`)
         .then((data) => {
             setUser(data.data.firstname)
         }).catch(err => console.log(err))
@@ -28,7 +28,7 @@ const ResetPassword = () => {
     const onResetPassword = (e) => {
         e.preventDefault();
 
-        axios.put(`/customerresetpassword/${id}`,{ password })
+        axios.put(`${baseUrl()}/customerresetpassword/${id}`,{ password })
         .then((data) => {
             if(password.length < 8) {
                 setPasswordErr('password must be greater than 8 characters');

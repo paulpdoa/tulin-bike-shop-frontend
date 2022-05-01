@@ -9,6 +9,7 @@ import NewOrders from '../../components/dashboard/orders/NewOrders';
 import OrderHistory from '../../components/dashboard/orders/OrderHistory';
 import OrderDetailModal from '../../components/modals/OrderDetailModal';
 import Orderhistorydetail from '../../components/modals/admin/Orderhistorydetail';
+import { baseUrl } from '../../helper/baseUrl';
 
 const DashboardOrders = () => {
 
@@ -22,7 +23,7 @@ const DashboardOrders = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({ signal:abortCont.signal },`/cart/ordered/${idDetail}`,setOrderDetail,setIsLoading);
+    fetchData({ signal:abortCont.signal },`${baseUrl()}/cart/ordered/${idDetail}`,setOrderDetail,setIsLoading);
     return () => abortCont.abort();
   },[idDetail]);
 
@@ -30,7 +31,7 @@ const DashboardOrders = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get('/neworders',{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/neworders`,{ signal:abortCont.signal })
     .then((data) => {
       setOrderedItems(data.data);
     })

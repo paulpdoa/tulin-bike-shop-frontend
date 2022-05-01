@@ -8,7 +8,7 @@ import { motion,AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const slideVar = {
   hidden: {
     x:'5vw',
@@ -46,7 +46,7 @@ const MobileNav = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    axios.get('/inventory',{ signal: abortCont.signal })
+    axios.get(`${baseUrl()}/inventory`,{ signal: abortCont.signal })
     .then(data => {
       setProducts(data.data);
     })

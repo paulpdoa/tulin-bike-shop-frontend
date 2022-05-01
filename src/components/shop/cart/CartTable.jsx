@@ -1,7 +1,7 @@
 import { useState,useContext } from 'react';
 import axios from 'axios';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const CartTable = ({ cartContents,setCartContents }) => {
 
   const [quantity,setQuantity] = useState(0);
@@ -11,7 +11,7 @@ const CartTable = ({ cartContents,setCartContents }) => {
     const deletedItem = cartContents.filter(cartContent => cartContent._id !== id);
     setCartContents(deletedItem);
     
-    axios.delete(`/cart/${id}`,id).then((data) => {
+    axios.delete(`${baseUrl()}/cart/${id}`,id).then((data) => {
         setAlertMssg(data.data.mssg);
         setShowAlert(true);
     }).catch(err => console.log(err))

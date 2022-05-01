@@ -5,7 +5,7 @@ import axios from 'axios';
 import Calendar from '../../components/shop/scheduling/Calendar';
 import DateInput from '../../components/shop/scheduling/DateInput';
 import ScheduledCustomer from '../../components/shop/scheduling/ScheduledCustomer';
-
+import { baseUrl } from '../../helper/baseUrl';
 const Reservation = () => {
 
     const d = new Date();
@@ -21,7 +21,7 @@ const Reservation = () => {
     useEffect(() => {
       const abortCont = new AbortController();
       
-      axios.get('/reservation',{ signal:abortCont.signal })
+      axios.get(`${baseUrl()}/reservation`,{ signal:abortCont.signal })
       .then((data) => {
         setIsAuth(data.data.isAuth);
         navigate(data.data.redirect);

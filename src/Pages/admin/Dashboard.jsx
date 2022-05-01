@@ -9,6 +9,7 @@ import RecentOrders from '../../components/dashboard/home/RecentOrders';
 import DashboardCard from '../../components/dashboard/home/DashboardCard';
 import Datetime from '../../components/dashboard/partials/Datetime';
 import { fetchData } from '../../helper/fetching';
+import { baseUrl } from '../../helper/baseUrl';
 
 const Dashboard = () => {
 
@@ -22,7 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     const abortCont = new AbortController();
   
-    fetchData({ signal:abortCont.signal },'/customer',setCustomers,setIsLoading);
+    fetchData({ signal:abortCont.signal },`${baseUrl()}/customer`,setCustomers,setIsLoading);
 
     return () => abortCont.abort()
   },[customers])
@@ -31,7 +32,7 @@ const Dashboard = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },'/ordereditem',setOrders,setIsLoading);
+    fetchData({ signal:abortCont.signal },`${baseUrl()}/ordereditem`,setOrders,setIsLoading);
 
     return () => abortCont.abort()
   },[orders])

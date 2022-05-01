@@ -3,7 +3,7 @@ import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
 import { useContext,useEffect,useState } from 'react';
 import { motion } from 'framer-motion';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const popModalVar = {
     hidden: {
       opacity:0,
@@ -33,7 +33,7 @@ const InventoryDetail = () => {
 
     const getDetail = async () => {
         try {
-            const data = await axios.get(`/inventory/${inventoryId}`,{ signal:abortCont.signal });
+            const data = await axios.get(`${baseUrl()}/inventory/${inventoryId}`,{ signal:abortCont.signal });
             setProduct(data.data);
             console.log(data.data);
         }

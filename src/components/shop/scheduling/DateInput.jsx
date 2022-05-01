@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../../helper/Context';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const enterVar = {
     hidden: {
        scale:0
@@ -42,7 +42,7 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
     useEffect(() => {
         const abortCont = new AbortController();
 
-        axios.get('/schedule',{ signal:abortCont.signal })
+        axios.get(`${baseUrl()}/schedule`,{ signal:abortCont.signal })
         .then(data => {
             const scheds = data.data.filter((date) => date.reserved_date === chosenDate).map(date => date.reserved_time);
             setSchedules(scheds);
@@ -84,7 +84,7 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
                     productDetails.append('customer_concern',concern);
                     productDetails.append('customer_id',Cookies.get('customerId'));
                     
-                    const postSched = await axios.post('/schedule',productDetails);
+                    const postSched = await axios.post(`${baseUrl()}/schedule`,productDetails);
                     setAlertMssg(postSched.data.mssg);
                     setShowAlert(true);
                     navigate(postSched.data.redirect);

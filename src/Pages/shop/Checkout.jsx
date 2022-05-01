@@ -7,7 +7,7 @@ import OrderedItem from '../../components/shop/checkout/OrderedItem';
 import PaymentCard from '../../components/shop/checkout/PaymentCard';
 import Paypal from '../../components/shop/checkout/Paypal';
 import Cod from '../../components/shop/checkout/Cod';
-
+import { baseUrl } from '../../helper/baseUrl';
 const Checkout = () => {
 
   const [showPaypal,setShowPaypal] = useState(false);
@@ -19,7 +19,7 @@ const Checkout = () => {
   const {id} = useParams();
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({ signal:abortCont.signal },`/cart/${id}`,setProducts,setIsLoading);
+    fetchData({ signal:abortCont.signal },`${baseUrl()}/cart/${id}`,setProducts,setIsLoading);
     return () => abortCont.abort();
   },[id]);
 

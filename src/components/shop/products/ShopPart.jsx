@@ -4,7 +4,7 @@ import { fetchData } from '../../../helper/fetching';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ShopPart = () => {
 
   const { startIndex,lastIndex,productPerPage } = useContext(GlobalContext);
@@ -13,7 +13,7 @@ const ShopPart = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({signal:abortCont.signal},'/inventory/part',setParts,setIsLoading);
+    fetchData({signal:abortCont.signal},`${baseUrl()}/inventory/part`,setParts,setIsLoading);
     return () => abortCont.abort();
   },[parts])
 

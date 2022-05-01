@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../helper/fetching';
 import { GlobalContext } from '../../../helper/Context';
 import ProfileOrderModal from '../../modals/ProfileOrderModal';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ProfileOrders = () => {
 
   const { id } = useParams();
@@ -18,7 +18,7 @@ const ProfileOrders = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    fetchData({ signal:abortCont.signal },`/neworders`,setOrders,setIsLoading);
+    fetchData({ signal:abortCont.signal },`${baseUrl()}/neworders`,setOrders,setIsLoading);
 
     return () => abortCont.abort();
   },[orders,id])

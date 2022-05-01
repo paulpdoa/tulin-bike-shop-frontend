@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState,useEffect } from 'react'
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ScheduledCustomer = ({ date: sched }) => {
 
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -13,7 +13,7 @@ const ScheduledCustomer = ({ date: sched }) => {
 
     const fetchDates = async() => {
       try {
-        const data = await axios.get('/schedule',{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/schedule`,{ signal:abortCont.signal });
         setDates(data.data);
       }
       catch(err) {

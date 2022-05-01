@@ -1,7 +1,7 @@
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
-
+import { baseUrl } from '../../../helper/baseUrl';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const ProfileDelete = () => {
@@ -11,7 +11,7 @@ const ProfileDelete = () => {
   const [deleted,setDeleted] = useState('');
 
   const deleteAccount = () => {
-    axios.put(`/customerdelete/${id}`,{ status:'inactive' })
+    axios.put(`${baseUrl()}/customerdelete/${id}`,{ status:'inactive' })
     .then((data) => {
       setDeleted(data.data.mssg);
       localStorage.removeItem('customer_name');

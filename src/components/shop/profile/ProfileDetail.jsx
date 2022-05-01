@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 
 const ProfileDetail = () => {
 
@@ -19,7 +19,7 @@ const ProfileDetail = () => {
     useEffect(() => {
         const abortCont = new AbortController();
 
-        axios.get(`/customer/${id}`,{ signal:abortCont.signal })
+        axios.get(`${baseUrl()}/customer/${id}`,{ signal:abortCont.signal })
         .then((data) => {
             setFirstname(data.data.firstname);
             setLastname(data.data.lastname);

@@ -6,7 +6,7 @@ import { useState,useContext,useEffect } from 'react';
 import { Link,useParams,useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ProfileSidebar = () => {
 
     const { imgProfileLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
@@ -21,7 +21,7 @@ const ProfileSidebar = () => {
      // Get user to display image
     useEffect(() => {
         const abortCont = new AbortController();
-        axios.get(`/customer/${id}`,{signal:abortCont.signal})
+        axios.get(`${baseUrl()}/customer/${id}`,{signal:abortCont.signal})
         .then(data => {
             setUserImg(data.data.profilePicture);
         })
@@ -43,7 +43,7 @@ const ProfileSidebar = () => {
         try {
             const profilePic = new FormData();
             profilePic.append('profile_image',profilePicture);
-            const data = await axios.post(`/customer/profilepicture/${id}`,profilePic);
+            const data = await axios.post(`${baseUrl()}/customer/profilepicture/${id}`,profilePic);
             setAlertMssg(data.data.mssg);
             setShowAlert(true);
             navigate('/');

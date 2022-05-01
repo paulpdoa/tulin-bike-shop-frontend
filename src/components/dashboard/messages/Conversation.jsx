@@ -3,7 +3,7 @@ import { useState,useEffect,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const Conversation = ({ senderName,profileImg,senderId }) => {
 
   const { socket,day,imgProfileLocation } = useContext(GlobalContext);
@@ -19,7 +19,7 @@ const Conversation = ({ senderName,profileImg,senderId }) => {
 
       const fetchMessages = async () => {
         try {
-          const data = await axios.get('/chat',{ signal:abortCont.signal });
+          const data = await axios.get(`${baseUrl()}/chat`,{ signal:abortCont.signal });
           setChatDatas(data.data);
           setLoading(false);
         }

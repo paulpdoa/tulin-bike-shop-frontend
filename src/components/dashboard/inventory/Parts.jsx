@@ -2,7 +2,7 @@ import Datetime from "../partials/Datetime";
 import InventoryTable from "./InventoryTable";
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-
+import { baseUrl } from "../../../helper/baseUrl";
 const Parts = () => {
 
   const [parts,setParts] = useState([]);
@@ -11,7 +11,7 @@ const Parts = () => {
     const abortCont = new AbortController();
     const fetchData = async () => {
       try {
-        const data = await axios.get('/inventory/part',{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/inventory/part`,{ signal:abortCont.signal });
         setParts(data.data);
       }
       catch(err) {

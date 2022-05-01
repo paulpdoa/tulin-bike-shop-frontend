@@ -6,7 +6,7 @@ import Conversation from '../../components/dashboard/messages/Conversation';
 import Messages from '../../components/dashboard/messages/Messages';
 import Sender from '../../components/dashboard/messages/Sender';
 import Datetime from '../../components/dashboard/partials/Datetime';
-
+import { baseUrl } from '../../helper/baseUrl';
 const DashboardMessages = () => {
 
   const [senders,setSenders] = useState([]);
@@ -19,7 +19,7 @@ const DashboardMessages = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get('/chat',{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/chat`,{ signal:abortCont.signal })
     .then((data) => {
         const senders = data.data.map(user => user.sender); 
         const uniqueSender = Array.from(new Set(senders.map(JSON.stringify))).map(JSON.parse); //Set unique senders

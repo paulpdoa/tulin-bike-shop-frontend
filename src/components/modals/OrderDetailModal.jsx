@@ -2,7 +2,7 @@ import { AiOutlineClose,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useContext,useEffect,useState } from 'react';
 import { GlobalContext } from '../../helper/Context';
 import axios from 'axios';
-
+import { baseUrl } from '../../helper/baseUrl';
 const OrderDetailModal = () => {
 
   const { setShowModal,idDetail,imgLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
@@ -12,7 +12,7 @@ const OrderDetailModal = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get(`/neworders`,{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/neworders`,{ signal:abortCont.signal })
     .then((data) => {
       setOrderDetails(data.data);
       setIsLoading(false);
@@ -23,7 +23,7 @@ const OrderDetailModal = () => {
 
   const markReceivedOrder = async(id) => {
     try {
-      const data = await axios.patch(`/neworders`,{ id });
+      const data = await axios.patch(`${baseUrl()}/neworders`,{ id });
       setAlertMssg(data.data.mssg);
       setShowAlert(true);
       setShowModal(false);

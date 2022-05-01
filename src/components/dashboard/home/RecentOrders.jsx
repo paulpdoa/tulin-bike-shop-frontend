@@ -1,6 +1,6 @@
 import { fetchData } from '../../../helper/fetching';
 import { useEffect,useState } from 'react';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const RecentOrders = () => {
 
   const [recentOrders,setRecentOrders] = useState([]);
@@ -8,7 +8,7 @@ const RecentOrders = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({signal:abortCont.signal},'/neworders',setRecentOrders,setIsLoading);
+    fetchData({signal:abortCont.signal},`${baseUrl()}/neworders`,setRecentOrders,setIsLoading);
     return () => abortCont.abort();
   },[recentOrders])
 

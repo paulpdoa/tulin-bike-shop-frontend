@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react';
 import { fetchData } from '../../../helper/fetching';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
@@ -9,7 +9,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
     useEffect(() => {
         const abortCont = new AbortController();
 
-        fetchData({ signal:abortCont.signal },'/schedule',setDetails,setIsLoading);
+        fetchData({ signal:abortCont.signal },`${baseUrl()}/schedule`,setDetails,setIsLoading);
 
         return () => abortCont.abort();
     },[details])
@@ -17,7 +17,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
     const viewDetail = (id) => {
         const abortCont = new AbortController();
         setShowDetail(true);
-        fetchData({ signal:abortCont.signal },`/schedule/${id}`,setGetDetail,setIsLoading);
+        fetchData({ signal:abortCont.signal },`${baseUrl()}/schedule/${id}`,setGetDetail,setIsLoading);
        
         return () => abortCont.abort();
     }

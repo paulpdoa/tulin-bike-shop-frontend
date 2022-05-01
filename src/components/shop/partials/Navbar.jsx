@@ -4,10 +4,10 @@ import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { fetchData } from '../../../helper/fetching';
+import { baseUrl } from '../../../helper/baseUrl';
 
-
-import { MdKeyboardArrowDown,MdKeyboardArrowUp } from 'react-icons/md';
-import { FiLogIn,FiLogOut } from 'react-icons/fi';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { FiLogOut } from 'react-icons/fi';
 import { BsPersonCircle } from 'react-icons/bs';
 import { BiSearchAlt } from 'react-icons/bi';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -94,7 +94,7 @@ const Navbar = ({ customerCookie }) => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    axios.get(`/customer/${Cookies.get('customerId')}`,{signal:abortCont.signal})
+    axios.get(`${baseUrl()}/customer/${Cookies.get('customerId')}`,{signal:abortCont.signal})
     .then(data => {
         setUserImg(data.data.profilePicture);
     })
@@ -113,14 +113,14 @@ const Navbar = ({ customerCookie }) => {
   // Get length of cart for display
   useEffect(() => {
     const abortCont = new AbortController();
-    Cookies.get('customerId') !== undefined && fetchData({ signal:abortCont.signal },`/cart/${Cookies.get('customerId')}`,setCartCount,setIsLoading);
+    Cookies.get('customerId') !== undefined && fetchData({ signal:abortCont.signal },`${baseUrl()}/cart/${Cookies.get('customerId')}`,setCartCount,setIsLoading);
     return () => abortCont.abort();
   },[cartCount])
 
   const navigate = useNavigate();
 
   const onLogout = () => {
-    axios.get('/customerlogout')
+    axios.get(`${baseUrl()}/customerlogout`)
     .then((data) => {
       navigate(data.data.redirect);
       localStorage.removeItem('customer_name');
@@ -142,9 +142,10 @@ const Navbar = ({ customerCookie }) => {
   // Get items for searching
   useEffect(() => {
     const abortCont = new AbortController();
+
     const fetchData = async () => {
       try {
-        const data = await axios.get('/inventory',{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/inventory`,{ signal:abortCont.signal });
         setInventories(data.data);
       }
       catch(err) {
@@ -152,6 +153,7 @@ const Navbar = ({ customerCookie }) => {
       }
     }
     fetchData();
+
     return () => abortCont.abort();
   },[inventories]);
 

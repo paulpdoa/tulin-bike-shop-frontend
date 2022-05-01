@@ -8,7 +8,7 @@ import axios from 'axios';
 import StepOne from '../../../components/shop/signup.jsx/StepOne';
 import StepTwo from '../../../components/shop/signup.jsx/StepTwo';
 import StepThree from '../../../components/shop/signup.jsx/StepThree';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const Signup = () => {
    
     const [firstname,setFirstname] = useState('');
@@ -54,7 +54,7 @@ const Signup = () => {
             },2000);
         } else {
             try {
-                const data = await axios.post('/customer',{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password });
+                const data = await axios.post(`${baseUrl()}/customer`,{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password });
                 setSuccess(data.data.mssg);
                 setTimeout(() => {
                     navigate(data.data.redirect);

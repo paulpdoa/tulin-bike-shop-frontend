@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
- 
+import { baseUrl } from '../../../helper/baseUrl';
 const AdminLogin = ({ setAdminCookie }) => {
 
   const [username,setUsername] = useState('');
@@ -24,7 +24,7 @@ const AdminLogin = ({ setAdminCookie }) => {
 
   const onLogin = (e) => {
       e.preventDefault();
-      axios.post('/adminlogin',{ username,password })
+      axios.post(`${baseUrl()}/adminlogin`,{ username,password })
       .then((data) => {
           navigate(data.data.redirect);
           localStorage.setItem('adminName',data.data.adminName);

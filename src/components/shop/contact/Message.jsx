@@ -1,11 +1,13 @@
 import { useState,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
+import { baseUrl } from '../../../helper/baseUrl';
 import axios from 'axios';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { IoPersonOutline } from 'react-icons/io5';
 import { RiFileList3Line } from 'react-icons/ri';
 import { MdOutlineMessage } from 'react-icons/md';
+
 
 const Message = () => {
 
@@ -21,7 +23,7 @@ const Message = () => {
     e.preventDefault();
    
     try {
-      const data = await axios.post('/sendemail',{ message,name,email,subject });
+      const data = await axios.post(`${baseUrl()}/sendemail`,{ message,name,email,subject });
       setAlertMssg(data.data.mssg);
       setShowAlert(true);
     } 

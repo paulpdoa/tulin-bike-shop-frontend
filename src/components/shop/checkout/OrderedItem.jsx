@@ -3,7 +3,7 @@ import { GlobalContext } from '../../../helper/Context';
 
 const OrderedItem = ({ image,brand,item,description,quantity,price }) => {
  
-  const { imgLocation } = useContext(GlobalContext);
+  const { imgLocation,numberFormat } = useContext(GlobalContext);
 
   return (
     <div className="flex gap-5 w-full mt-5">
@@ -14,7 +14,7 @@ const OrderedItem = ({ image,brand,item,description,quantity,price }) => {
             <p className="text-sm">{description}</p>
             <div className="flex w-full items-center justify-between mt-5">
             <span>Qty. {quantity}</span>
-            <span className="font-semibold text-orange-500">₱{(price * quantity).toLocaleString()}</span>
+            <span className="font-semibold text-orange-500">₱{numberFormat.format(price * quantity)}</span>
             </div>
         </div>
     </div>

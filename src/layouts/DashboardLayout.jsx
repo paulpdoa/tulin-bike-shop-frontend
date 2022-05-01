@@ -2,7 +2,7 @@ import { Outlet,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useEffect,useState,useContext} from 'react';
 import { GlobalContext } from "../helper/Context";
-
+import { baseUrl } from "../helper/baseUrl";
 import AdminNavbar from "../components/dashboard/partials/AdminNavbar";
 import Sidebar from "../components/dashboard/partials/Sidebar";
 import Alert from "../components/modals/admin/Alert";
@@ -19,7 +19,7 @@ const DashboardLayout = ({ adminCookie }) => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get('/dashboard',{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/dashboard`,{ signal:abortCont.signal })
     .then((data) => {
       if(data.data.isAuth === false) {
         navigate(data.data.redirect);

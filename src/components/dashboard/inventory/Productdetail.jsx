@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect,useState,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
+import { baseUrl } from '../../../helper/baseUrl';
 
 const Productdetail = () => {
 
@@ -15,7 +16,7 @@ const Productdetail = () => {
 
     const fetchInventoryDetail = async () => {
       try {
-        const data = await axios.get(`/inventory/${id}`,{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/inventory/${id}`,{ signal:abortCont.signal });
         setProduct(data.data);
       }
       catch(err) {

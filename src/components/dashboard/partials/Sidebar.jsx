@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion,AnimatePresence } from 'framer-motion';
-import axios from 'axios';
 
-import { BiLogOut } from 'react-icons/bi';
+
+
 import { MdOutlineDashboardCustomize,MdOutlineDirectionsBike,MdOutlineMessage,MdOutlineSettingsInputSvideo } from 'react-icons/md';
 import { BsBagCheck,BsHouseDoor } from 'react-icons/bs';
 import { AiOutlineDollar,AiFillCaretDown,AiFillCaretUp,AiOutlineCalendar } from 'react-icons/ai';
-import { FiSettings } from 'react-icons/fi';
+
 import { RiEBikeFill } from 'react-icons/ri';
 
 const slideLeftVar = {
@@ -47,13 +47,9 @@ const inventVar = {
     }
 }
 
-const Sidebar = ({ adminCookie,showSidebar }) => {
+const Sidebar = ({ showSidebar }) => {
 
   const [showInventory,setShowInventory] = useState(false);
-
-  const navigate = useNavigate();
-
- 
 
   return (
       <>

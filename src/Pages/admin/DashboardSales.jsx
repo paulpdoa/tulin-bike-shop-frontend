@@ -4,7 +4,7 @@ import axios from 'axios';
 import Datetime from '../../components/dashboard/partials/Datetime';
 import LineChart from '../../components/dashboard/sales/LineChart';
 import moment from 'moment';
-
+import { baseUrl } from '../../helper/baseUrl';
 const DashboardSales = () => {
   // Create a code that filters total sales per month 
   // Ex. April = 500,000php
@@ -34,7 +34,7 @@ const DashboardSales = () => {
 
     const fetchSales = async () => {
       try {
-        const data = await axios.get('/ordereditem', {signal:abortCont.signal});
+        const data = await axios.get(`${baseUrl()}/ordereditem`, {signal:abortCont.signal});
         // First is to get Month equal to all months variable
         const filterMonthSale = data.data.filter((month) => {
           for(let i = 0; i < months.length; i++) {

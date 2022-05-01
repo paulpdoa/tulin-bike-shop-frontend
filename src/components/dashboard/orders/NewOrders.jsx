@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState,useEffect,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const NewOrders = ({ foundUniqueId }) => {
 
     const [newOrders,setNewOrders] = useState([]);
@@ -11,7 +11,7 @@ const NewOrders = ({ foundUniqueId }) => {
     useEffect(() => {
         const abortCont = new AbortController();
         
-        axios.get('/neworders',{signal: abortCont.signal})
+        axios.get(`${baseUrl()}/neworders`,{signal: abortCont.signal})
         .then(data => {
             setIsLoading(false);
             setNewOrders(data.data);

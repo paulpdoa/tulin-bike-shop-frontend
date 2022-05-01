@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import { baseUrl } from '../../../helper/baseUrl';
 
 const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
 
@@ -21,7 +22,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
         
         const getInventoryItems = async() => {
             try {
-                const data = await axios.get('/inventory',{ signal: abortCont.signal });
+                const data = await axios.get(`${baseUrl()}/inventory`,{ signal: abortCont.signal });
                 setProducts(data.data);
             }
             catch(err) {
@@ -34,7 +35,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
     },[]);
 
     const onLogout = () => {
-        axios.get('/adminlogout')
+        axios.get(`${baseUrl()}/adminlogout`)
         .then((data) => {
             navigate(data.data.redirect);
             localStorage.removeItem('adminName');

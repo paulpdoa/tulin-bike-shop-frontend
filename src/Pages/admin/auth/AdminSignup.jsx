@@ -2,7 +2,7 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const AdminSignup = () => {
 
     const [username,setUsername] = useState('');
@@ -26,7 +26,7 @@ const AdminSignup = () => {
                 setPassErr('');
             },2000);
         } else {
-            axios.post('/admin',{ username, password })
+            axios.post(`${baseUrl()}/admin`,{ username, password })
             .then((data) => {
                 setSuccess(data.data.mssg);
                 setTimeout(() => {

@@ -2,7 +2,7 @@ import { AiOutlineClose,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import axios from 'axios';
 import { useEffect,useState,useContext } from 'react';
 import { GlobalContext } from '../../helper/Context';
-
+import { baseUrl } from '../../helper/baseUrl';
 const ProfileOrderModal = ({ close,detailId,orderId }) => {
 
 
@@ -13,7 +13,7 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    axios.get(`/neworders/${detailId}`,{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/neworders/${detailId}`,{ signal:abortCont.signal })
     .then((data) => {
      setItem(data.data);
      setIsLoading(false);
@@ -24,7 +24,7 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
 
   const cancelOrder = async(id) => {
     try {
-      const cancelData = await axios.patch(`/cancelorder`,{ id:id });
+      const cancelData = await axios.patch(`${baseUrl()}/cancelorder`,{ id:id });
       setAlertMssg(cancelData.data.mssg);
       setShowAlert(true);
     }

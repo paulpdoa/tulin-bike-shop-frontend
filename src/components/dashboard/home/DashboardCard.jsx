@@ -1,11 +1,8 @@
-import { useContext } from 'react';
-import { GlobalContext } from '../../../helper/Context';
+
 import CountUp from 'react-countup';
 
 const DashboardCard = ({ title,icon,number,sign,color,isLoading }) => {
   
-  const { numberFormat } = useContext(GlobalContext);
-
   return (
     <div className={`${color} text-gray-100 p-10 rounded w-1/2 shadow-2xl mt-10 select-none`}>
         <div className="flex justify-between">

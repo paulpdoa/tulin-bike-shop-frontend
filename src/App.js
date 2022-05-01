@@ -77,8 +77,8 @@ const App = () => {
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
   const [customerId] = useState(Cookies.get('customerId'));
-  const imgLocation = "http://localhost:8000/uploads/products/";
-  const imgProfileLocation = "http://localhost:8000/uploads/profilePics/";
+  const imgLocation = "https://tulinbikeshop.herokuapp.com/uploads/products/";
+  const imgProfileLocation = "https://tulinbikeshop.herokuapp.com/uploads/profilePics/";
 
   // show inventory detail on admin
   const [showInventoryDetail,setShowInventoryDetail] = useState(false);

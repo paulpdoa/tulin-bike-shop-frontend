@@ -6,7 +6,7 @@ import CartTable from '../../components/shop/cart/CartTable';
 import Cookies from 'js-cookie';
 import CartCard from '../../components/shop/cart/CartCard';
 import CartheadMobile from '../../components/shop/cart/CartheadMobile';
-
+import { baseUrl } from '../../helper/baseUrl';
 const Cart = () => {
 
   const [cartContents,setCartContents] = useState([]);
@@ -15,7 +15,7 @@ const Cart = () => {
   useEffect(() => {
     const abortCont = new AbortController();
       const fetchCustomerCart = async () => {
-        const data = await axios.get(`/cart/${Cookies.get('customerId')}`,{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/cart/${Cookies.get('customerId')}`,{ signal:abortCont.signal });
         setCartContents(data.data);
       }
       fetchCustomerCart();

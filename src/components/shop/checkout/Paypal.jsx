@@ -3,6 +3,7 @@ import { GlobalContext } from "../../../helper/Context";
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from "../../../helper/baseUrl";
 
 const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
     
@@ -44,7 +45,7 @@ const Paypal = ({ setShowPaypal,paymentVal,id,products }) => {
         
         const paymentMethod = "Paypal";
         const postOrder = async () => {
-            const transaction = await axios.post('/order',{ customerId,cartItemId, paymentMethod,totalAmount })
+            const transaction = await axios.post(`${baseUrl()}/order`,{ customerId,cartItemId, paymentMethod,totalAmount })
             navigate(transaction.data.redirect);
         }
         

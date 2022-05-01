@@ -4,7 +4,7 @@ import { useEffect,useState,useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import Cookies from 'js-cookie';
 import { GlobalContext } from '../../helper/Context';
-
+import { baseUrl } from '../../helper/baseUrl';
 const ProductDetail = () => {
     const { id } = useParams();
     const [product,setProduct] = useState([]);
@@ -18,7 +18,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const abortCont = new AbortController();
             const fetchData = async() => {
-                const data = await axios.get(`/inventory/${id}`,{ signal: abortCont.signal });
+                const data = await axios.get(`${baseUrl()}/inventory/${id}`,{ signal: abortCont.signal });
                 setProduct(data.data);
             }
             fetchData();
@@ -36,7 +36,7 @@ const ProductDetail = () => {
             navigate('/login');
         } else {
             if(quantity > 0) {
-                const data = await axios.post('/cart',{ productToAdd });
+                const data = await axios.post(`${baseUrl()}/cart`,{ productToAdd });
                 setAlertMssg(data.data.mssg);
                 setShowAlert(true);
                 navigate(data.data.redirect);

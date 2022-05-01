@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { GrClose } from 'react-icons/gr';
 import { IoSend } from 'react-icons/io5';
-
+import { baseUrl } from '../../helper/baseUrl';
 
 const Chatbox = () => {
 
@@ -23,7 +23,7 @@ const Chatbox = () => {
 
     const fetchMessages = async () => {
       try {
-        const data = await axios.get('/chat',{ signal:abortCont.signal });
+        const data = await axios.get(`${baseUrl()}/chat`,{ signal:abortCont.signal });
         setChatDatas(data.data);
         setLoading(false);
       }

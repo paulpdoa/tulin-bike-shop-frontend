@@ -6,7 +6,7 @@ import { AiOutlineEye,AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const Login = ({ setCustomerCookie }) => {
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
@@ -30,7 +30,7 @@ const Login = ({ setCustomerCookie }) => {
 
     // resends the code to the email
     const sendCodeToMail = () => {
-        axios.get(`/sendcodetoverify/${verifyId}`)
+        axios.get(`${baseUrl()}/sendcodetoverify/${verifyId}`)
         .then((data) => {
             console.log(data)
         }).catch(err => console.log(err));
@@ -38,7 +38,7 @@ const Login = ({ setCustomerCookie }) => {
 
     const onLogin = (e) => {
         e.preventDefault();
-        axios.post('/customerlogin',{ username,password })
+        axios.post(`${baseUrl()}/customerlogin`,{ username,password })
         .then((data) => {
             setSuccess(data.data.mssg);
             setVerifyId(data.data.verify_id);

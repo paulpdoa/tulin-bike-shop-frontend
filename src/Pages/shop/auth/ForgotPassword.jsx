@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const ForgotPassword = () => {
 
     const [customer,setCustomer] = useState('');
@@ -13,7 +13,7 @@ const ForgotPassword = () => {
 
     const findCustomer = async (e) => {
         e.preventDefault();
-        await axios.get(`/customerforgetpassword/${customer}`)
+        await axios.get(`${baseUrl()}/customerforgetpassword/${customer}`)
         .then((data) => {
             setLoading(true);
             setMessage('Please wait...')

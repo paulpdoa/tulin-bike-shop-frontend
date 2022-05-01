@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState,useEffect,useContext } from 'react';
 import { GlobalContext } from '../../../helper/Context';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const OrderHistory = () => {
 
   const [orders,setOrders] = useState([]);
@@ -13,7 +13,7 @@ const OrderHistory = () => {
     const abortCont = new AbortController();
       const getOrdered = async () => {
         try {
-          const data = await axios.get('/ordereditem',{ signal:abortCont.signal });
+          const data = await axios.get(`${baseUrl()}/ordereditem`,{ signal:abortCont.signal });
           setOrders(data.data);
         }
         catch(err) {

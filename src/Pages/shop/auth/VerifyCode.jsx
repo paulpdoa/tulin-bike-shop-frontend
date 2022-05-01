@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { FaUserShield } from 'react-icons/fa';
-
+import { baseUrl } from '../../../helper/baseUrl';
 const VerifyCode = () => {
   const [code,setCode] = useState(0);
   const [message,setMessage] = useState('');
@@ -24,7 +24,7 @@ const VerifyCode = () => {
   useEffect(() => {
       const abortCont = new AbortController();
 
-      axios.get(`/customer/${id}`)
+      axios.get(`${baseUrl()}/customer/${id}`)
       .then((data) => {
           setCode(data.data.code);
           setEmail(data.data.email);
@@ -37,7 +37,7 @@ const VerifyCode = () => {
     const codeInput = `${numone}${numtwo}${numthree}${numfour}${numfive}`;
     
     if(codeInput === code) {
-        axios.put(`/customerverify/${id}`, { verified: true })
+        axios.put(`${baseUrl()}/customerverify/${id}`, { verified: true })
         .then((data) => {
             setMessage(data.data.mssg);
             setTimeout(() => {
