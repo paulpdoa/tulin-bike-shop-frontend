@@ -10,6 +10,7 @@ import DashboardCard from '../../components/dashboard/home/DashboardCard';
 import Datetime from '../../components/dashboard/partials/Datetime';
 import { fetchData } from '../../helper/fetching';
 import { baseUrl } from '../../helper/baseUrl';
+import axios from 'axios';
 
 const Dashboard = () => {
 
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [customers,setCustomers] = useState([]);
   const [orders,setOrders] = useState([]);
   const [sales,setSales] = useState(0);
+  const [expense,setExpense] = useState(0);
 
   // get customers length
   useEffect(() => {
@@ -53,6 +55,24 @@ const Dashboard = () => {
 
     return () => abortCont.abort()
   },[orders])
+
+  useEffect(() => {
+    const abortCont = new AbortController();
+    
+    const getExpense = async () => {
+      try {
+        const data = await axios.get(`${baseUrl()}/expense`,{ signal:abortCont.signal });
+        const totalExpense = data.data.reduce((total,curr) => total + curr.amount ,0);
+        setExpense(totalExpense);
+      }
+      catch(err) {
+        console.log(err)
+      } 
+    }
+    getExpense();
+
+    return () => abortCont.abort()
+  },[])
   
   return (
     <>
@@ -65,7 +85,7 @@ const Dashboard = () => {
         <div className="flex gap-10 justify-around">
           <DashboardCard title='Total Orders' number={orders.length} color='bg-blue-500' icon={<BsBagCheck />} isLoading={isLoading} />
           <DashboardCard title='Total Sales' sign='₱' number={sales} color='bg-green-500' icon={<AiOutlineDollarCircle />} isLoading={isLoading} />
-          <DashboardCard title='Total Expenses' sign='₱' number={123} color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
+          <DashboardCard title='Total Expenses' sign='₱' number={expense} color='bg-cyan-500' icon={<HiOutlineClipboardList />} isLoading={isLoading} />
           <DashboardCard title='Total Users' number={customers.length} color='bg-yellow-500' icon={<AiOutlineUser />} isLoading={isLoading} />
         </div>
         <div className="grid grid-cols-5 gap-5 mt-10 rounded h-56">

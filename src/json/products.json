@@ -1,0 +1,14 @@
+{
+    "products":[
+        {
+            "id": 1,
+            "type": "frame",
+            "display":"/image/customize/f1.png"
+        },
+        {
+            "id": 2,
+            "type": "frame",
+            "display":"/image/customize/f4.png"
+        }
+    ]
+}

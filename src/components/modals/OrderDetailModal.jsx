@@ -44,6 +44,7 @@ const OrderDetailModal = () => {
           {orderDetails && orderDetails.map((orderDetail) => (
             orderDetail.cart_id.filter(id => id._id === idDetail).map((orderItem) => (
               <>
+              {console.log(orderDetail)}
                 { isLoading ?
                   <div>
                     <p className="flex gap-2 text-xl"><AiOutlineLoading3Quarters className="animate-spin" />Please wait...</p>

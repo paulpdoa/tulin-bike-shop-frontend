@@ -36,11 +36,12 @@ const NewOrders = ({ foundUniqueId }) => {
                 } else if(item.uniqueOrder_id.toLowerCase().includes(foundUniqueId.toLowerCase())) {
                     return item
                 }
+                return item
             }).map((newOrder) => (
             newOrder.cart_id.map((order) => (
                 <div className="flex justify-between" key={order._id}>
                     <div className="flex gap-2 items-center mt-4">
-                        <img className="object-cover w-20 h-20" src={`${imgLocation}${order.inventory_id.product_image}`} alt="Orderd item" />
+                        <img className="object-cover w-20 h-20" src={`${imgLocation}${order.inventory_id.product_image}`} alt={ order.inventory_id.brand_name } />
                         <div className="flex flex-col text-gray-800">
                             <p className="text-sm">Unique ID: { newOrder.uniqueOrder_id }</p>
                             <h2 className="font-semibold text-lg">{ order.inventory_id.brand_name }</h2>

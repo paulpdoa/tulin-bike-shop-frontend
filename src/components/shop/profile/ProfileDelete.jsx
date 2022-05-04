@@ -1,25 +1,52 @@
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import { baseUrl } from '../../../helper/baseUrl';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-
+import { GlobalContext } from '../../../helper/Context';
 const ProfileDelete = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [deleted,setDeleted] = useState('');
+  const [pendingCustomer,setPendingCustomer] = useState([]);
+  const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
+
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    const checkOrders = async () => {
+      try {
+        const data = await axios.get(`/order/${id}`,{ signal:abortCont.signal });
+        const pendings = data.data.filter(pend => pend.order_status === 'pending');
+        const currentCustomerPending = pendings.filter(pending => pending.customer_id === id);
+        setPendingCustomer(currentCustomerPending);
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+    checkOrders();
+
+    return () => abortCont.abort();
+  },[id])
 
   const deleteAccount = () => {
-    axios.put(`${baseUrl()}/customerdelete/${id}`,{ status:'inactive' })
-    .then((data) => {
-      setDeleted(data.data.mssg);
-      localStorage.removeItem('customer_name');
-      setTimeout(() => {
-        navigate(data.data.redirect);
-      },2000)
-    }).catch((err) => console.log(err));
+    if(pendingCustomer.length > 0) {
+      setAlertMssg('You have current order, please cancel it first');
+      setShowAlert(true);
+    } else {
+      axios.put(`${baseUrl()}/customerdelete/${id}`,{ status:'inactive' })
+      .then((data) => {
+        setDeleted(data.data.mssg);
+        localStorage.removeItem('customer_name');
+        setTimeout(() => {
+          navigate(data.data.redirect);
+        },2000)
+      }).catch((err) => console.log(err));
+    }
   }
+  console.log(baseUrl());
 
   return (
     <div className="md:p-20 p-10 md:h-screen md:col-span-2 col-span-3 md:mt-0 -mt-10">
