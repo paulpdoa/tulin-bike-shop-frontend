@@ -3,12 +3,65 @@
         {
             "id": 1,
             "type": "frame",
-            "display":"/image/customize/f1.png"
+            "name": "Evil Following V3",
+            "price": 10000,
+            "display":"/image/customize/frames/Evil-Following-V3-Frame.png",
+            "frameSize": "26er",
+            "prodCode": "012"
         },
         {
             "id": 2,
             "type": "frame",
-            "display":"/image/customize/f4.png"
+            "name": "Evil Insurgent V3",
+            "price": 12000,
+            "display":"/image/customize/frames/Evil-Insurgent-V3-Frame.png",
+            "frameSize": "27.5er",
+            "prodCode": "013"
+        },
+        {
+            "id": 3,
+            "type": "frame",
+            "name": "Evil Offering Frame - 2019",
+            "price": 12000,
+            "display":"/image/customize/frames/Evil-Offering-Frame-2019.png",
+            "frameSize": "29er",
+            "prodCode": "014"
+        },
+        {
+            "id": 4,
+            "type": "frame",
+            "name": "Evil Offering V",
+            "price": 12000,
+            "display":"/image/customize/frames/Evil-Offering-V2-Frame.png",
+            "frameSize": "26er",
+            "prodCode": "015"
+        },
+        {
+            "id": 5,
+            "type": "frame",
+            "name": "Evil Wreckoning V3",
+            "price": 12000,
+            "display":"/image/customize/frames/Evil-Wreckoning-V3-Frame.png",
+            "frameSize": "27.5er",
+            "prodCode": "016"
+        },
+        {
+            "id": 6,
+            "type": "fork",
+            "name": "Fox Racing Shox 38 Factory 27.5 GRIP2 15x110 44mm Offset",
+            "price": 12000,
+            "display":"/image/customize/fork/Fox-Racing-Shox-38-Factory-27.5-GRIP2-15x110-44mm-Offset.png",
+            "frameSize": "27.5er",
+            "prodCode": "013"
+        },
+        {
+            "id": 7,
+            "type": "fork",
+            "name": "Fox Racing Shox 38 Performance Elite 27.5 GRIP2 15x110 44mm Offset",
+            "price": 12000,
+            "display":"/image/customize/fork/Fox-Racing-Shox-38-Performance-Elite-27.5-GRIP2-15x110-44mm-Offset.png",
+            "frameSize": "27.5er",
+            "prodCode": "013"
         }
     ]
 }

@@ -1,11 +1,11 @@
 
-const BikeBuilt = ({ itemId }) => {
+const BikeBuilt = ({ itemId,products }) => {
 
   return (
     <div className="p-10 text-gray-100">
-        {/* { dummies.filter(dummy => itemId === dummy.id).map(dummy => (
-          <img className="w-52 h-52" src={dummy.frame} alt="Frame png" />
-        )) } */}
+        { products.filter(product => itemId === product.id).map(product => (
+          <img className="scale-150" src={product.display} alt="chosen parts" />
+        )) }
     </div>
   )
 }

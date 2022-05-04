@@ -51,6 +51,7 @@ import ResetPassword from './Pages/shop/auth/ResetPassword';
 import Checkout from './Pages/shop/Checkout';
 import ProductDetail from './Pages/shop/ProductDetail';
 
+import { baseUrl } from './helper/baseUrl';
 import { GlobalContext } from './helper/Context';
 
 // const socket = io.connect("http://localhost:8000/");
@@ -78,8 +79,8 @@ const App = () => {
   const [customerCookie,setCustomerCookie] = useState(Cookies.get('customerJwt'));
   const [adminCookie,setAdminCookie] = useState(Cookies.get('adminJwt'));
   const [customerId] = useState(Cookies.get('customerId'));
-  const imgLocation = "https://tulinbikeshop.herokuapp.com/uploads/products/";
-  const imgProfileLocation = "https://tulinbikeshop.herokuapp.com/uploads/profilePics/";
+  const imgLocation = `${baseUrl()}/uploads/products/`;
+  const imgProfileLocation = `${baseUrl()}/uploads/profilePics/`;
 
   // show inventory detail on admin
   const [showInventoryDetail,setShowInventoryDetail] = useState(false);
