@@ -1,12 +1,14 @@
 
-const BikeBuilt = ({ itemId,products }) => {
+const BikeBuilt = ({ itemId,products,prodCode }) => {
 
   return (
-    <div className="p-10 text-gray-100">
+   <>
+     <div className="p-10 text-gray-100 rounded shadow-xl">
         { products.filter(product => itemId === product.id).map(product => (
-          <img className="scale-150" src={product.display} alt="chosen parts" />
+          <img key={product.id} className="scale-150" src={product.display} alt="chosen parts" />
         )) }
-    </div>
+    </div> 
+   </>
   )
 }
 

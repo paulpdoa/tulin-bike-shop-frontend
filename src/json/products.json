@@ -62,6 +62,15 @@
             "display":"/image/customize/fork/Fox-Racing-Shox-38-Performance-Elite-27.5-GRIP2-15x110-44mm-Offset.png",
             "frameSize": "27.5er",
             "prodCode": "013"
+        },
+        {
+            "id": 8,
+            "type": "fork",
+            "name": "Marzocchi Bomber Z1 Coil 27.5 44mm Offset",
+            "price": 12000,
+            "display":"/image/customize/fork/Marzocchi-Bomber-Z1-Coil-29-44mm-Offset.png",
+            "frameSize": "27.5er",
+            "prodCode": "013"
         }
     ]
 }
