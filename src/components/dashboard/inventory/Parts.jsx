@@ -20,7 +20,7 @@ const Parts = () => {
     }
     fetchData();
     return () => abortCont.abort();
-  },[])
+  },[parts])
 
   return (
     <div className="p-20">

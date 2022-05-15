@@ -22,11 +22,11 @@ const InventoryTable = ({ products }) => {
                 <th>Quantity</th>
                 <th>Action</th>
             </tr>
-            { products && products.map((product) => (
-            <tr key={product._id}>
+            { products && products.map((product,key) => (
+            <tr key={key}>
                 <td className="flex gap-2 max-w-max">
                     <img className="object-cover w-32 h-32 rounded" src={ `${imgLocation}${product.product_image}` } alt={ product.product_name } />
-                    <div className="flex text-gray-800 flex-col">
+                    <div className="flex text-gray-800 max-w-sm flex-col">
                         <h2 className="text-xl">{ product.brand_name }</h2>
                         <span className="text-lg">{ product.product_name }</span>
                         <p>{ product.product_description }</p>

@@ -90,17 +90,19 @@ const AddProduct = () => {
                   <option defaultValue="Part">Part</option>
                 </select>
               </section>
+              { type === 'Bicycle' ? 
               <section className="flex flex-col">
-                <label htmlFor="brandname">Product Size:</label>
-                <select onChange={(e) => setSize(e.target.value)} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
-                  <option defaultValue="" disabled selected hidden>Size</option>
-                  <option defaultValue="XS">XS</option>
-                  <option defaultValue="S">S</option>
-                  <option defaultValue="M">M</option>
-                  <option defaultValue="XL">XL</option>
-                  <option defaultValue="L">L</option>
-                </select>
-              </section>
+              <label htmlFor="brandname">Product Size:</label>
+              <select onChange={(e) => setSize(e.target.value)} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer">
+                <option defaultValue="" disabled selected hidden>Size</option>
+                <option defaultValue="XS">XS</option>
+                <option defaultValue="S">S</option>
+                <option defaultValue="M">M</option>
+                <option defaultValue="XL">XL</option>
+                <option defaultValue="L">L</option>
+              </select>
+            </section> : ''
+              }
               <section className="flex flex-col">
                 <label htmlFor="brandname">Price:</label>
                 <input required type="number" onChange={(e) => setPrice(e.target.value)} value={price} className="p-2 w-1/2 outline-none border border-gray-300 rounded cursor-pointer" />

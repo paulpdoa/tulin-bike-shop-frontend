@@ -22,7 +22,7 @@ const Accessories = () => {
     fetchData();
 
     return () => abortCont.abort();
-  },[])
+  },[accessories])
 
   return (
     <div className="p-20">

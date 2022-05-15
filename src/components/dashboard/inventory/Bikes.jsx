@@ -22,7 +22,7 @@ const Bikes = () => {
    fetchData();
 
    return () => abortCont.abort();
-  },[])
+  },[bikes])
 
 
   return (

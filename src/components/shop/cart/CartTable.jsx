@@ -23,6 +23,7 @@ const CartTable = ({ cartContents,setCartContents }) => {
             <tbody>
                 <tr className="bg-gray-200 h-10">
                     <th colSpan={2}>Product</th>
+                    <th>Color</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
@@ -38,7 +39,10 @@ const CartTable = ({ cartContents,setCartContents }) => {
                         </td>
                         <td>
                             <h2 className="font-semibold texr-gray-700 text-lg">{cartContent.inventory_id.brand_name} - {cartContent.inventory_id.product_name}</h2>
-                            <span>{ cartContent.inventory_id.product_color }</span>
+                            <span>{ cartContent.product_color }</span>
+                        </td>
+                        <td>
+                            <div className={`w-5 h-5 rounded-full bg-${cartContent.product_color}-500 inline-block ml-2 cursor-pointer hover:scale-150 transition duration-300`}></div>
                         </td>
                         <td>₱{ cartContent.inventory_id.product_price.toLocaleString() }</td>
                         <td>

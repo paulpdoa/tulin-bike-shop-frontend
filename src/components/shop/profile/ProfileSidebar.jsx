@@ -1,4 +1,5 @@
 import { BiUserCircle,BiShoppingBag,BiHistory,BiTrash } from 'react-icons/bi';
+import { GiCartwheel } from 'react-icons/gi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import axios from 'axios';
@@ -83,6 +84,10 @@ const ProfileSidebar = () => {
                 <li className="flex gap-2 items-center"><BiShoppingBag />Orders</li>
                 <MdKeyboardArrowRight className="text-3xl md:hidden block" />
             </Link>
+            {/* <Link className="bg-red-500 text-gray-100 md:text-gray-800 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('Customize Updates')} to={`/profile/customize/${Cookies.get('customerId')}`}>
+                <li className="flex gap-2 items-center"><GiCartwheel />Customized Orders</li>
+                <MdKeyboardArrowRight className="text-3xl md:hidden block" />
+            </Link> */}
             <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('History')} to={`/profile/history/${Cookies.get('customerId')}`}>
                 <li className="flex gap-2 items-center"><BiHistory />History</li>
                 <MdKeyboardArrowRight className="text-3xl md:hidden block" />

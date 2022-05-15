@@ -35,6 +35,7 @@ const Orderhistorydetail = () => {
         try {
             const data = await axios.get(`${baseUrl()}/ordereditem`,{ signal:abortCont.signal });
             setProducts(data.data);
+            console.log(data.data);
         }
         catch(err) {
             console.log(err);
@@ -56,8 +57,8 @@ const Orderhistorydetail = () => {
                 <h1 className="text-2xl font-semibold">Order History Detail</h1>
                 <button onClick={() => setShowOrderDetail(false)} className="text-2xl group"><AiOutlineClose className="group-hover:scale-150 duration-200 transition" /></button>
             </div>
-            { products.filter((product) => historyOrderId === product._id).map(product => (
-                product.cart_id.map(item => (
+            { products.map(product => (
+                product.cart_id.filter(item => item.inventory_id._id === historyOrderId).map(item => (
                     <div className="flex gap-2 py-5 px-2">
                         <img className="w-1/2 rounded-md shadow-xl" src={`${imgLocation}${item.inventory_id.product_image}`} alt={item.inventory_id.product_name} />
                         <div className="flex flex-col gap-1 text-gray-800">
@@ -70,6 +71,7 @@ const Orderhistorydetail = () => {
                     </div>
                 ))
             )) }
+            
         </motion.div>
     </div>
   )

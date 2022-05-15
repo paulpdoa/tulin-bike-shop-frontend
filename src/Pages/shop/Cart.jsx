@@ -15,8 +15,13 @@ const Cart = () => {
   useEffect(() => {
     const abortCont = new AbortController();
       const fetchCustomerCart = async () => {
-        const data = await axios.get(`${baseUrl()}/cart/${Cookies.get('customerId')}`,{ signal:abortCont.signal });
-        setCartContents(data.data);
+        try {
+          const data = await axios.get(`${baseUrl()}/cart/${Cookies.get('customerId')}`,{ signal:abortCont.signal });
+          setCartContents(data.data);
+        }
+        catch(err) {
+          console.log(err);
+        }
       }
       fetchCustomerCart();
       return () => abortCont.abort();

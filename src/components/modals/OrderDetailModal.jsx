@@ -1,8 +1,29 @@
 import { AiOutlineClose,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useContext,useEffect,useState } from 'react';
+import { motion } from 'framer-motion';
 import { GlobalContext } from '../../helper/Context';
 import axios from 'axios';
 import { baseUrl } from '../../helper/baseUrl';
+
+const popModalVar = {
+  hidden: {
+    opacity:0,
+    scale:0,
+    transition: {
+      type:'spring',
+      duration:0.9
+    }
+  },
+  visible: {
+    opacity:1,
+    scale:1,
+    transition: {
+      type:'spring',
+      duration:0.9
+    }
+  }
+}
+
 const OrderDetailModal = () => {
 
   const { setShowModal,idDetail,imgLocation,setAlertMssg,setShowAlert } = useContext(GlobalContext);
@@ -36,7 +57,11 @@ const OrderDetailModal = () => {
   
   return (
     <div className="absolute bg-gray-900 bg-opacity-50 top-0 w-full left-0 h-screen flex justify-center items-center">
-        <div className="bg-gray-900 text-gray-100 w-1/2 p-4 h-1/2 rounded-md">
+        <motion.div className="bg-gray-900 text-gray-100 w-1/2 p-4 h-1/2 rounded-md"
+         initial="hidden"
+         animate="visible"
+         variants={popModalVar}
+        >
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold">Order Details</h1>
             <AiOutlineClose onClick={() => setShowModal(false)} className="font-semibold text-xl cursor-pointer transform hover:scale-150 transition" />
@@ -76,7 +101,7 @@ const OrderDetailModal = () => {
               </>
             ))
           ))}
-        </div>
+        </motion.div>
     </div>
   )
 }

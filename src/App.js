@@ -53,6 +53,7 @@ import ProductDetail from './Pages/shop/ProductDetail';
 
 import { baseUrl } from './helper/baseUrl';
 import { GlobalContext } from './helper/Context';
+import CustomUpdates from './components/shop/profile/CustomUpdates';
 
 // const socket = io.connect("http://localhost:8000/");
 const socket = io.connect("https://tulinbikeshop.herokuapp.com/");
@@ -60,6 +61,18 @@ const socket = io.connect("https://tulinbikeshop.herokuapp.com/");
 const App = () => {
 
   const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+  // Customization States
+  const [bikeDisplay,setBikeDisplay] = useState('');
+  const [active,setActive] = useState('frame');
+  const [prodCode,setProdCode] = useState('');
+  const [frameSize,setFrameSize] = useState('');
+  const [build,setBuild] = useState([]);
+  const [showSelectedParts,setShowSelectedParts] = useState(false);
+  const [showDp,setShowDp] = useState(false);
+  const [showCustomDetail,setShowCustomDetail] = useState(false);
+  const [customId,setCustomId] = useState('');
+  const totalPrice = build.reduce((total,curr) => total + curr.price ,0);
 
   // Website Loader
   const [loading,setLoading] = useState(false);
@@ -131,7 +144,8 @@ const App = () => {
         value={{ customerCookie,setCustomerCookie,adminCookie,setAdminCookie,imgLocation,imgProfileLocation,startIndex,lastIndex,productPerPage,paginate,customerId,
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
         showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat,
-        brandChosen,setBrandChosen,socket,day,totalAmount,setTotalAmount
+        brandChosen,setBrandChosen,socket,day,totalAmount,setTotalAmount,bikeDisplay,setBikeDisplay,active,setActive,prodCode,setProdCode,frameSize,setFrameSize,
+        build,setBuild,showSelectedParts,setShowSelectedParts,showDp,setShowDp,totalPrice,showCustomDetail,setShowCustomDetail,customId,setCustomId
       }}
       >
         <Routes>
@@ -160,6 +174,7 @@ const App = () => {
             <Route path='/profile/' element={ <Profile /> }>
               <Route path=":id" element={ <ProfileDetail /> } />
               <Route path="orders/:id" element={ <ProfileOrders /> } />
+              <Route path="customize/:id" element={ <CustomUpdates /> } />
               <Route path="history/:id" element={ <OrderHistory /> } />
               <Route path="delete/:id" element={ <ProfileDelete /> } />
             </Route>

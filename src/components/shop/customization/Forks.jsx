@@ -1,23 +1,29 @@
 import products from '../../../json/products.json';
 import ChoiceCard from './ChoiceCard';
+import { GlobalContext } from '../../../helper/Context';
+import { useContext } from 'react';
 
-const Forks = ({ setActive,setItemId,setBuild,prodCode }) => {
+const Forks = () => {
 
-    const selectFork = (id,display,price,name,type) => {
-        const data = {display,price,name,type};
-        setActive('wheels & tires');
-        setItemId(id);
+  const { setBikeDisplay,setActive,prodCode,setProdCode,frameSize,setBuild } = useContext(GlobalContext);
+
+    const selectFork = (id,display,price,name,type,code,cardDisplay) => {
+        const data = {id,display,price,name,type,cardDisplay};
+        setActive('shock');
         setBuild(currPart => [...currPart,data]);
+        setBikeDisplay(display);
+        setProdCode(code);
     }
 
   return (
     <>
-       { products.products.filter(product => product.type === 'fork' && product.prodCode === prodCode).map(product => (
-        <div className="cursor-pointer" key={product.id} onClick={() => selectFork(product.id,product.display,product.price,product.name,product.type)}>
-            <ChoiceCard image={product.display} name={product.name} price={product.price} />
-            {console.log(product.prodCode)}
+     { products.products.map((product) => (
+       product.forks.filter(fork => fork.frameCode === prodCode && fork.frameSize === frameSize).map(fork => (
+        <div className="cursor-pointer" key={fork.id} onClick={() => selectFork(fork.id,fork.display,fork.price,fork.name,fork.type,fork.forkCode,fork.cardDisplay)}>
+            <ChoiceCard image={fork.cardDisplay} name={fork.name} price={fork.price} size={fork.frameSize} />
         </div>
-       )) }
+       ))
+     ) ) }
     </>
   )
 }

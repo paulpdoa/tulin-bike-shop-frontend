@@ -41,11 +41,6 @@ const Productdetail = () => {
           <p>₱{ numberFormat.format(product.product_price) }</p>
           <p>{ product.product_description }</p>
           <span className="text-xs">Qty. { product.product_quantity }</span>
-          <div>
-            <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button>
-            <span>{ quantity }</span>
-            <button onClick={() => setQuantity(quantity + 1)}>+</button>
-          </div>
         </div>
     </div>
      }

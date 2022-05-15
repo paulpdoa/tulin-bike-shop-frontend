@@ -75,7 +75,7 @@ const Chatbox = () => {
     <div className="fixed bottom-0 right-5 bg-gray-100 shadow-3xl w-96 h-96 rounded-t-md overflow-hidden">
         <header onClick={() => setShowChatbox(false)} className="bg-blue-600 flex justify-between p-2 text-gray-100 cursor-pointer">
             <h1>Tulin Bike Shop - Admin</h1>
-            <button className="group" onClick={() => setShowChatbox(false)}><GrClose className="group-hover:scale-150 transition duration-200 text-gray-100"/></button>
+            <button className="group" onClick={() => setShowChatbox(false)}><GrClose className="group-hover:scale-150 transition duration-200 invert"/></button>
         </header>
         {/* Messages Area */}
         <div className="w-full h-4/5 overflow-auto">

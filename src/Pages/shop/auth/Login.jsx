@@ -7,7 +7,9 @@ import { AiOutlineEye,AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const Login = ({ setCustomerCookie }) => {
+    
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [verifyId,setVerifyId] = useState('');

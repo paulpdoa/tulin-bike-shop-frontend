@@ -1,12 +1,14 @@
+import { GlobalContext } from "../../../helper/Context";
+import { useContext } from "react";
 
-const BikeBuilt = ({ itemId,products,prodCode }) => {
+const BikeBuilt = () => {
+
+  const { bikeDisplay } = useContext(GlobalContext);
 
   return (
    <>
-     <div className="p-10 text-gray-100 rounded shadow-xl">
-        { products.filter(product => itemId === product.id).map(product => (
-          <img key={product.id} className="scale-150" src={product.display} alt="chosen parts" />
-        )) }
+     <div className="p-10 text-gray-100 rounded flex justify-center">
+          { bikeDisplay === '' ? '' : <img className="scale-150 w-1/2" src={bikeDisplay} alt="chosen parts" /> }
     </div> 
    </>
   )

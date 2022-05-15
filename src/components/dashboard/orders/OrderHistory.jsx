@@ -27,6 +27,7 @@ const OrderHistory = () => {
   const viewOrderDetail = (id) => {
     setShowOrderDetail(true)
     setHistoryOrderId(id);
+    console.log(id);
   }
 
   return (
@@ -43,7 +44,7 @@ const OrderHistory = () => {
                             <span className="text-xs">Qty. { item.order_quantity }</span>
                         </div>
                     </div>
-                    <button onClick={() => viewOrderDetail(order._id)} className="p-2 rounded text-gray-100 bg-gray-900 h-1/2 self-end">Details</button>
+                    <button onClick={() => viewOrderDetail(item.inventory_id._id)} className="p-2 rounded text-gray-100 bg-gray-900 h-1/2 self-end">Details</button>
                 </div>
             ))
         )) }

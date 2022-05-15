@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useContext,useEffect,useState } from 'react';
 import { motion } from 'framer-motion';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const popModalVar = {
     hidden: {
       opacity:0,
@@ -35,7 +36,6 @@ const InventoryDetail = () => {
         try {
             const data = await axios.get(`${baseUrl()}/inventory/${inventoryId}`,{ signal:abortCont.signal });
             setProduct(data.data);
-            console.log(data.data);
         }
         catch(err) {
             console.log(err);
@@ -44,11 +44,22 @@ const InventoryDetail = () => {
     getDetail();
 
     return () => abortCont.abort();
-  },[])
+  },[inventoryId]);
+
+  const deleteProduct = async() => {
+    try {
+      const data = await axios.delete(`${baseUrl()}/inventory/${inventoryId}`);
+      console.log(data);
+      setShowInventoryDetail(false);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="absolute h-screen bg-gray-900 bg-opacity-50 top-0 w-full left-0 z-50 flex justify-center items-center">
-        <motion.div className="w-1/2 rounded-md bg-gray-100 p-3"
+        <motion.div className="w-1/2 rounded-md bg-gray-100 p-3 relative"
             variants={popModalVar}
             initial="hidden"
             animate="visible"
@@ -65,9 +76,9 @@ const InventoryDetail = () => {
                     <p className="text-xs">{ product.product_description }</p>
                     <label htmlFor="size">Size: { product.product_size }</label>
                     <span className="text-xs">Qty. { product.product_quantity }</span>
-
                 </div>
             </div>
+            <button onClick={deleteProduct} className="absolute bottom-2 right-2 p-2 rounded bg-red-500 text-gray-100 hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500 transition duration-300">Delete</button>
         </motion.div>
     </div>
   )

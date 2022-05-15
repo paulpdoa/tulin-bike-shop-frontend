@@ -10,10 +10,12 @@ import OrderHistory from '../../components/dashboard/orders/OrderHistory';
 import OrderDetailModal from '../../components/modals/OrderDetailModal';
 import Orderhistorydetail from '../../components/modals/admin/Orderhistorydetail';
 import { baseUrl } from '../../helper/baseUrl';
+import CustomOrders from '../../components/dashboard/orders/CustomOrders';
+import CustombikeModal from '../../components/modals/admin/CustombikeModal';
 
 const DashboardOrders = () => {
 
-  const { showModal,idDetail,showOrderDetail } = useContext(GlobalContext);
+  const { showModal,idDetail,showOrderDetail,showCustomDetail } = useContext(GlobalContext);
   const [orderedItems,setOrderedItems] = useState([]);
   const [orderDetail,setOrderDetail] = useState([]);
   const [isLoading,setIsLoading] = useState(true);
@@ -56,12 +58,14 @@ const DashboardOrders = () => {
             placeholder="Enter id here..."
           />
         </div>
-        <div className="grid grid-cols-2 gap-5 mt-10">
+        <div className="grid grid-cols-2 grid-rows-2 gap-5 mt-10">
          <NewOrders foundUniqueId={foundUniqueId} />
          <OrderHistory />
+         <CustomOrders />
         </div>
         { showModal && <OrderDetailModal /> }
         { showOrderDetail && <Orderhistorydetail /> }
+        { showCustomDetail && <CustombikeModal /> }
       </div>
     </>
     );
