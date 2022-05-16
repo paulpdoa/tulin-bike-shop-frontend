@@ -55,7 +55,7 @@ const Conversation = ({ senderName,profileImg,senderId }) => {
           setMessage('');
 
           try {
-            await axios.post('/chat',data);
+            await axios.post(`${baseUrl()}/chat`,data);
           }
           catch(err) {
             console.log(err);

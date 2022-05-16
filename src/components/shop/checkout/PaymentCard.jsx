@@ -57,7 +57,7 @@ const PaymentCard = ({ products,setShowPaypal,setPaymentVal,setShowCod }) => {
                     <FiTruck />
                 </button>
             </section>
-            <button className="w-full bg-gray-900 text-gray-100 font-semibold p-2 mt-5 rounded">Place Order</button>
+            {/* <button className="w-full bg-gray-900 text-gray-100 font-semibold p-2 mt-5 rounded">Place Order</button> */}
         </div>
     </div>
   )

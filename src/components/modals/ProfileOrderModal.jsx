@@ -24,7 +24,7 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
 
   const cancelOrder = async(id) => {
     try {
-      const cancelData = await axios.patch(`${baseUrl()}/cancelorder`,{ id:id });
+      const cancelData = await axios.delete(`${baseUrl()}/cancelorder/${id}`);
       setAlertMssg(cancelData.data.mssg);
       setShowAlert(true);
     }
@@ -56,7 +56,7 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
                 <label htmlFor="email">Email: {item.customer_id.email}</label>
               </div>
               <div className="flex items-center justify-end gap-2">
-                <button onClick={() => cancelOrder(orderId)} className="bg-red-500 text-gray-100 rounded p-2">Cancel Order</button>
+                <button onClick={() => cancelOrder(detailId)} className="bg-red-500 text-gray-100 rounded p-2">Cancel Order</button>
               </div>
             </>
             }

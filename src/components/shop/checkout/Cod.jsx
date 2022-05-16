@@ -4,12 +4,12 @@ import { GlobalContext } from '../../../helper/Context';
 import axios from 'axios';
 import { useNavigate,useParams } from 'react-router-dom';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const Cod = ({ setShowCod,products }) => {
   
   const { setAlertMssg,setShowAlert,totalAmount } = useContext(GlobalContext);
 
   const cartItemId = products.map((product) => product._id);
-  console.log(totalAmount);
 
   const [firstname,setFirstname] = useState('');
   const [lastname,setLastname] = useState('');
@@ -25,7 +25,7 @@ const Cod = ({ setShowCod,products }) => {
   useEffect(() => {
     const abortCont = new AbortController();
     
-    axios.get(`/customer/${id}`,{ signal:abortCont.signal })
+    axios.get(`${baseUrl()}/customer/${id}`,{ signal:abortCont.signal })
     .then((data) => {
       setFirstname(data.data.firstname);
       setLastname(data.data.lastname);

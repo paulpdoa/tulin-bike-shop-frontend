@@ -28,7 +28,9 @@ const AdminLogin = ({ setAdminCookie }) => {
       .then((data) => {
           navigate(data.data.redirect);
           localStorage.setItem('adminName',data.data.adminName);
-          setAdminCookie(Cookies.get('adminJwt'));
+          Cookies.set('adminJwt',data.data.adminJwt, { expires: 31 });
+          setAdminCookie(data.data.adminJwt);
+          window.location.reload(true);
       }).catch(err => {
           setUsernameErr(err.response.data.errors.username);
           setPasswordErr(err.response.data.errors.password);

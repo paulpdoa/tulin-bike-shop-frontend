@@ -37,11 +37,11 @@ const ProfileOrders = () => {
             { isLoading && <h2>Please wait...</h2> }
             { orders.length < 1 ? <p className="text-gray-300 animate-pulse mt-5 font-bold text-3xl">No orders yet...</p> : 
             orders.map((order) => (
-             order.cart_id.length < 1 ? <p className="text-gray-300 animate-pulse mt-5 font-bold text-3xl">No orders yet...</p> :
+            //  order.cart_id.length < 1 ? <p className="text-gray-300 animate-pulse mt-5 font-bold text-3xl">No orders yet...</p> :
               order.cart_id.filter((item) => id === item.customer_id).map((item) => (
                 <div key={item._id} className="flex mt-3 border-b-2 border-gray-400 justify-between gap-2 select-none">
                 <div className="flex gap-2 py-2">
-                  <img className="object-cover w-20 h-20 rounded" src={ `${imgLocation}${item.inventory_id.product_image}` } alt="cycle" />
+                  <img className="object-cover w-20 h-20 rounded" src={ `${imgLocation}${item.inventory_id.product_image}` } alt={ item.inventory_id.product_name } />
                   <div className="flex flex-col">
                     <h2 className="md:text-xl text-base whitespace-nowrap">{ item.inventory_id.product_name }</h2>
                     <span className="text-sm">Description:</span>

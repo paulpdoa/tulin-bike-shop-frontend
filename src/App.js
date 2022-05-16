@@ -50,10 +50,12 @@ import Reservation from './Pages/shop/Reservation';
 import ResetPassword from './Pages/shop/auth/ResetPassword';
 import Checkout from './Pages/shop/Checkout';
 import ProductDetail from './Pages/shop/ProductDetail';
+import CustomUpdates from './components/shop/profile/CustomUpdates';
+import MySchedules from './components/shop/profile/MySchedules';
 
 import { baseUrl } from './helper/baseUrl';
 import { GlobalContext } from './helper/Context';
-import CustomUpdates from './components/shop/profile/CustomUpdates';
+
 
 // const socket = io.connect("http://localhost:8000/");
 const socket = io.connect("https://tulinbikeshop.herokuapp.com/");
@@ -174,6 +176,7 @@ const App = () => {
             <Route path='/profile/' element={ <Profile /> }>
               <Route path=":id" element={ <ProfileDetail /> } />
               <Route path="orders/:id" element={ <ProfileOrders /> } />
+              <Route path="myschedule/:id" element={ <MySchedules /> } />
               <Route path="customize/:id" element={ <CustomUpdates /> } />
               <Route path="history/:id" element={ <OrderHistory /> } />
               <Route path="delete/:id" element={ <ProfileDelete /> } />

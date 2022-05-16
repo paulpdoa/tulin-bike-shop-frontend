@@ -5,6 +5,7 @@ import { GlobalContext } from '../../../helper/Context';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const enterVar = {
     hidden: {
        scale:0
@@ -77,6 +78,7 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
                     setAlertMssg('this time has been occupied, please select another time');
                     setShowAlert(true);
                 } else {
+                   if(Cookies.get('customerJwt')) {
                     const productDetails = new FormData();
                     productDetails.append('concern_image',image);
                     productDetails.append('reserved_time',time);
@@ -88,6 +90,9 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
                     setAlertMssg(postSched.data.mssg);
                     setShowAlert(true);
                     navigate(postSched.data.redirect);
+                   } else {
+                       navigate('/login');
+                   }
                 }
             }
             catch(err) {

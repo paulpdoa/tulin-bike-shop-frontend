@@ -47,9 +47,7 @@ const CartTable = ({ cartContents,setCartContents }) => {
                         <td>₱{ cartContent.inventory_id.product_price.toLocaleString() }</td>
                         <td>
                             <div>
-                                <button onClick={() => quantity > 0 &&  setQuantity(quantity-1)} className="p-2 font-bold bg-gray-800 text-gray-100 rounded-md">-</button>
                                 <span className="font-bold text-xl p-2">{ cartContent.order_quantity }</span>
-                                <button onClick={() => setQuantity(quantity+1)} className="p-2 font-bold  bg-gray-800 text-gray-100 rounded-md">+</button>
                             </div>
                             <button className="text-sm text-red-500" onClick={() => removeItem(cartContent._id)}>Delete Item</button>
                         </td>

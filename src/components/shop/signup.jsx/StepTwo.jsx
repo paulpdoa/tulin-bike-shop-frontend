@@ -51,14 +51,15 @@ const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,prov
         </div>
         <div className="flex gap-3 items-center">
             <div className="flex flex-col gap-2 w-full">
-                <label htmlFor="barangay">Barangay:</label>
-                { city === '' ? <p className="user-auth">Select city first</p> : <select value={barangay} onChange={(e) => setBarangay(e.target.value)} className="user-auth" required>
-                    <option hidden>Select your barangay</option>
-                    { barangays.RECORDS.filter(barangay => barangay.citymunCode === cityCode).map((barangay) => (
-                        <option key={barangay.id} value={ barangay.brgyDesc }>{ barangay.brgyDesc }</option>
+                <label htmlFor="province">Province:</label>
+                <select value={province.toUpperCase()} onChange={(e) => selectProvince(e.target.value)} className="user-auth" required>
+                    <option hidden>Select your province</option>
+                    { provinces.RECORDS.map((province) => (
+                        <option key={province.id} value={ province.provDesc }>{ province.provDesc[0]+province.provDesc.slice(1,province.provDesc.length).toLowerCase() }</option>
                     )) }
-                </select> }
+                </select>
             </div>
+            
             <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="city">City:</label>
                 { province === '' ? <p className="user-auth">Select Province first</p> : <select value={city.toUpperCase()} onChange={(e) => selectCity(e.target.value)} className="user-auth" required>
@@ -71,13 +72,13 @@ const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,prov
         </div>
         <div className="flex gap-3 items-center">
             <div className="flex flex-col gap-2 w-full">
-                <label htmlFor="province">Province:</label>
-                <select value={province.toUpperCase()} onChange={(e) => selectProvince(e.target.value)} className="user-auth" required>
-                    <option hidden>Select your province</option>
-                    { provinces.RECORDS.map((province) => (
-                        <option key={province.id} value={ province.provDesc }>{ province.provDesc[0]+province.provDesc.slice(1,province.provDesc.length).toLowerCase() }</option>
+                <label htmlFor="barangay">Barangay:</label>
+                { city === '' ? <p className="user-auth">Select city first</p> : <select value={barangay} onChange={(e) => setBarangay(e.target.value)} className="user-auth" required>
+                    <option hidden>Select your barangay</option>
+                    { barangays.RECORDS.filter(barangay => barangay.citymunCode === cityCode).map((barangay) => (
+                        <option key={barangay.id} value={ barangay.brgyDesc }>{ barangay.brgyDesc }</option>
                     )) }
-                </select>
+                </select> }
             </div>
             <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="postalcode">Postal Code:</label>

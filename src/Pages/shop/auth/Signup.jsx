@@ -9,6 +9,7 @@ import StepOne from '../../../components/shop/signup.jsx/StepOne';
 import StepTwo from '../../../components/shop/signup.jsx/StepTwo';
 import StepThree from '../../../components/shop/signup.jsx/StepThree';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const Signup = () => {
    
     const [firstname,setFirstname] = useState('');

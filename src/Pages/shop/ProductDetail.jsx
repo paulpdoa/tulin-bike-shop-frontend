@@ -41,14 +41,11 @@ const ProductDetail = () => {
             navigate('/login');
         } else {
             if(quantity > 0) {
-               
                 const data = await axios.post(`${baseUrl()}/cart`,{ productToAdd });
                 setAlertMssg(data.data.mssg);
                 setShowAlert(true);
                 navigate(data.data.redirect);
-                setQuantityErr('');
-            
-                
+                setQuantityErr('');   
             } else {
                 setQuantityErr('your order cannot be zero');
             }
@@ -87,18 +84,25 @@ const ProductDetail = () => {
                         <span className="text-red-500 text-xs absolute -bottom-5">{ quantityErr }</span>
                     </div>
                     <div className="mt-3 flex flex-col">
-                        <label htmlFor="color">Color:</label>
-                        <select className="p-2 outline-none border border-gray-400" onChange={(e) => setColor(e.target.value)} reqiured>
-                        { product.product_color && product.product_color[0].split(",").map(col => (
-                            <>
-                                <option hidden>{ col === '' ? 'No available color' : 'Select color' }</option>
-                                { col === '' ? '' : <option value={col}>{col.slice(0,1).toUpperCase() + col.slice(1,col.length)}</option> }
-                            </>
-                        )) }
-                        </select>
+                    { product.product_color && product.product_color[0] === '' ? '' :
+                        <>
+                            <label htmlFor="color">Color:</label>
+                            <select className="p-2 outline-none border border-gray-400" onChange={(e) => setColor(e.target.value)} required>
+                                <>
+                                    { product.product_color && product.product_color[0].split(",").map(col => (
+                                        <>
+                                            <option hidden>{ col === '' ? 'No available color' : 'Select color' }</option>
+                                            { col === '' ? '' : <option value={col}>{col.slice(0,1).toUpperCase() + col.slice(1,col.length)}</option> }
+                                        </>
+                                    )) }2
+                                </>
+                            </select>
+                        </>
+                    }
                     </div>
                     <div className="flex items-center justify-between mt-16">
                         <button onClick={ product.product_quantity > 0 ? addToCart : () => alert('Out of Stock!') } className="font-semibold bg-orange-400 text-gray-100 p-2 text-sm hover:bg-transparent hover:border hover:border-orange-400 hover:text-orange-400 transition duration-300">Add to Cart</button>
+                       
                         <div className="flex gap-2 items-center">
                             <FacebookShareButton
                                 url={`https://tulin-bike-shop.netlify.app/products/${product._id}`}

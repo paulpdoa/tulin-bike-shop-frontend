@@ -6,6 +6,7 @@ import Calendar from '../../components/shop/scheduling/Calendar';
 import DateInput from '../../components/shop/scheduling/DateInput';
 import ScheduledCustomer from '../../components/shop/scheduling/ScheduledCustomer';
 import { baseUrl } from '../../helper/baseUrl';
+
 const Reservation = () => {
 
     const d = new Date();
@@ -17,21 +18,21 @@ const Reservation = () => {
     const [isAuth,setIsAuth] = useState(false);
     const [date,setDate] = useState(d.getFullYear() + '-' + fixedMonth + '-' + fixedDate);
 
-    const navigate = useNavigate();
-    useEffect(() => {
-      const abortCont = new AbortController();
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //   const abortCont = new AbortController();
       
-      axios.get(`${baseUrl()}/reservation`,{ signal:abortCont.signal })
-      .then((data) => {
-        setIsAuth(data.data.isAuth);
-        navigate(data.data.redirect);
-      })
-      .catch(err => {
-        const mute = err;
-      }) 
+    //   axios.get(`${baseUrl()}/reservation`,{ signal:abortCont.signal })
+    //   .then((data) => {
+    //     setIsAuth(data.data.isAuth);
+    //     navigate(data.data.redirect);
+    //   })
+    //   .catch(err => {
+    //     const mute = err;
+    //   }) 
 
-      return () => abortCont.abort();
-    },[isAuth,navigate])
+    //   return () => abortCont.abort();
+    // },[isAuth,navigate])
     
   return (
       <>

@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useState,useEffect,useContext } from 'react';
 import { baseUrl } from '../../../helper/baseUrl';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import Cookies from 'js-cookie';
 import { GlobalContext } from '../../../helper/Context';
+
 const ProfileDelete = () => {
 
   const { id } = useParams();
@@ -40,6 +42,8 @@ const ProfileDelete = () => {
       .then((data) => {
         setDeleted(data.data.mssg);
         localStorage.removeItem('customer_name');
+        Cookies.remove('customerJwt');
+        Cookies.remove('customerId');
         setTimeout(() => {
           navigate(data.data.redirect);
         },2000)

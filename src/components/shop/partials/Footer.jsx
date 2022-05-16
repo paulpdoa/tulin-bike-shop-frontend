@@ -50,7 +50,7 @@ const Footer = () => {
                     <Link to='/products/parts'>Parts  </Link>
                     <Link to='/products/accessories'>Accessories</Link>
                     <Link to='/customize'>Customize</Link>
-                    <Link to='/schedule'>Schedule</Link>
+                    <Link to='/reservation'>Schedule</Link>
                   </div>
               </div>
               <div>

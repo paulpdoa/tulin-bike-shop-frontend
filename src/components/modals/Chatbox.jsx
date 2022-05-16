@@ -62,7 +62,7 @@ const Chatbox = () => {
 
     // Post to db
     try {
-      await axios.post('/chat',data);
+      await axios.post(`${baseUrl()}/chat`,data);
     }
     catch(err) {
       console.log(err);

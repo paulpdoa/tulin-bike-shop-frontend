@@ -1,4 +1,5 @@
-    
+import { Link } from 'react-router-dom';
+
 const Repair = () => {
   return (
     <section className="content md:h-screen py-20">
@@ -14,7 +15,7 @@ const Repair = () => {
               </div>
               <article className="text-gray-800 px-20 md:w-1/2 w-full py-20 md:py-0">
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat sunt hic dolorum alias, eveniet omnis necessitatibus fugit suscipit aperiam quod?</p>
-                <button className="bg-gray-800 text-gray-200 p-2 w-36 hover:bg-transparent hover:border-2 hover:border-gray-800 hover:text-gray-800 transition duration-300 cursor-pointer mt-5">Schedule now</button>
+                <Link to='/reservation' className="bg-gray-800 text-gray-200 p-2 w-36 hover:bg-transparent hover:border-2 hover:border-gray-800 hover:text-gray-800 transition duration-300 cursor-pointer mt-5">Schedule now</Link>
               </article>
             </div>
         </div>
