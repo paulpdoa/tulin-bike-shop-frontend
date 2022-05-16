@@ -46,6 +46,7 @@ const Login = ({ setCustomerCookie }) => {
             setVerifyId(data.data.verify_id);
             setCustomerCookie(Cookies.get('customerJwt'));
             Cookies.set('customerId',data.data.customerId, { expires: 31 });
+            Cookies.set('customerJwt',data.data.customerJwt, { expires: 31 });
             localStorage.setItem('customer_name',`${data.data.customerFirstname} ${data.data.customerSurname}`);
             setTimeout(() => {
                 navigate(data.data.redirect);
