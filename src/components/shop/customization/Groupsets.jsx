@@ -7,7 +7,7 @@ const Groupsets = () => {
 
     const { setBikeDisplay,prodCode,frameSize,setBuild,setShowSelectedParts } = useContext(GlobalContext);
 
-    const selectGroupset = (id,display,price,name,type,cardDisplay) => {
+    const selectGroupset = (id,display,price,name,type,code,cardDisplay) => {
         const data = {id,display,price,name,type,cardDisplay};
         setBikeDisplay(display);
         setBuild(curr => [...curr,data]);
