@@ -48,6 +48,7 @@ const ProfileSidebar = () => {
             const data = await axios.post(`${baseUrl()}/customer/profilepicture/${id}`,profilePic);
             setAlertMssg(data.data.mssg);
             setShowAlert(true);
+            window.location.reload(true);
             navigate('/');
 
         }
@@ -64,7 +65,7 @@ const ProfileSidebar = () => {
                 <>
                 { displayImage ? 
                     <div className="flex flex-col">
-                        <img className="object-cover rounded-full w-32 h-32 cursor-pointer" src={displayImage} alt="Blank Profile" />
+                        <img className="object-cover rounded-full w-32 h-32 cursor-pointer" src={displayImage} alt="profile display of user" />
                         <input onChange={previewProfilePicture} className="absolute h-full w-full opacity-0" type="file" accept='image/*' />
                         <button onClick={uploadProfilePicture} className="bg-gray-700 rounded p-2 text-gray-100 mt-2 z-50 cursor-pointer">Upload</button>
                     </div> :
@@ -74,7 +75,7 @@ const ProfileSidebar = () => {
                     </> 
                 }
                 </>
-                }
+            }
         </div>
         <ul className="flex flex-col md:gap-5 gap-2 mt-5 text-gray-800 text-lg">
             <Link className="bg-gray-50 md:bg-transparent md:shadow-none md:border-none shadow-2xl border-gray-200 border w-full rounded-md p-3 md:p-0 flex justify-between items-center" onClick={() => setSideTitle('My Account')} to={`/profile/${Cookies.get('customerId')}`}>

@@ -40,10 +40,8 @@ const Alert = () => {
           initial="hidden"
           animate="visible"
         >
-            <span className="text-4xl text-green-500 font-bold"><BsCheckAll /></span>
-            <h1 className="text-green-500 font-bold text-3xl text-center p-2">GREAT!</h1>
             <h1 className="font-semibold text-xl text-center p-2">{ alertMssg }</h1>
-            <button className="p-2 rounded bg-green-500 text-gray-100" onClick={goHome}>Home</button>
+            { window.location.pathname !== '/signup' && <button className="p-2 rounded bg-green-500 text-gray-100" onClick={goHome}>Home</button> }
             <button className="absolute top-2 right-2 text-red-500 text-2xl" onClick={() => setShowAlert(false)}><AiOutlineFullscreenExit /></button>
         </motion.div>
     </div>

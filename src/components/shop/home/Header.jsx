@@ -18,10 +18,10 @@ const Header = () => {
                         <Link to="/products/bikes" className="relative cursor-pointer flex justify-end hover:animate-pulse">
                             <img className="hero--item2" src="/image/hero/hero2.png" alt="hero2" />
                         </Link>
-                        <Link to='/products/accessories' className="relative cursor-pointer flex justify-end hover:animate-pulse">
+                        <Link to='/products/parts' className="relative cursor-pointer flex justify-end hover:animate-pulse">
                             <img className="hero--item3" src="/image/hero/hero3.png" alt="hero3" />
                         </Link>
-                        <Link to="/products/parts" className="relative cursor-pointer flex justify-end hover:animate-pulse">
+                        <Link to="/products/accessories" className="relative cursor-pointer flex justify-end hover:animate-pulse">
                             <img className="hero--item1" src="/image/hero/hero4.png" alt="hero4" />
                         </Link>
                     </div>

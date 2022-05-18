@@ -45,7 +45,7 @@ const VerifyCode = () => {
             },2000)
         })
     } else {
-        setError('The code entered was not matched, please check again');
+        setError('The code entered did not matched, please check again');
     }
   }
 

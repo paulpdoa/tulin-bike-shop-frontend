@@ -33,7 +33,7 @@ const CustomOrders = () => {
   return (
     <div className="p-10 rounded bg-gray-100 col-span-2 text-gray-800 shadow-lg overflow-y-scroll">
         <h1 className="text-2xl uppercase font-semibold">Customized Orders</h1>
-        { bikes.length < 1 ? <h2 className="animate-pulse">No orders yet...</h2> : bikes.map(bike => (
+        { bikes.length < 1 ? <h2 className="animate-pulse text-xl">No orders yet...</h2> : bikes.map(bike => (
           <div className="flex justify-between" key={bike._id}>
             <div className="flex gap-2 items-center mt-4">
                 <img className="object-cover w-full h-20" src={bike.customized_bikeImg} alt="bike" />

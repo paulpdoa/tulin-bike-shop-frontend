@@ -1,16 +1,21 @@
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 import { Helmet } from 'react-helmet';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 import Cookies from 'js-cookie';
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 import StepOne from '../../../components/shop/signup.jsx/StepOne';
 import StepTwo from '../../../components/shop/signup.jsx/StepTwo';
 import StepThree from '../../../components/shop/signup.jsx/StepThree';
+
+import Alert from '../../../components/modals/Alert';
 import { baseUrl } from '../../../helper/baseUrl';
 
 const Signup = () => {
+    
+    const { showAlert } = useContext(GlobalContext);
    
     const [firstname,setFirstname] = useState('');
     const [lastname,setLastname] = useState('')
@@ -156,7 +161,8 @@ const Signup = () => {
                 </div>
             </div>
         </div>
-    </>
+        { showAlert && <Alert /> }
+    </> 
   );
 };
 

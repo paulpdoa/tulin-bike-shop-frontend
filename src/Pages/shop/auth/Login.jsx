@@ -42,16 +42,20 @@ const Login = ({ setCustomerCookie }) => {
         e.preventDefault();
         axios.post(`${baseUrl()}/customerlogin`,{ username,password })
         .then((data) => {
-            setSuccess(data.data.mssg);
-            setVerifyId(data.data.verify_id);
-            setCustomerCookie(Cookies.get('customerJwt'));
-            Cookies.set('customerId',data.data.customerId, { expires: 31 });
-            Cookies.set('customerJwt',data.data.customerJwt, { expires: 31 });
-            localStorage.setItem('customer_name',`${data.data.customerFirstname} ${data.data.customerSurname}`);
-            window.location.reload(true);
-            setTimeout(() => {
-                navigate(data.data.redirect);
-            },2000);
+            if(data.data.mssg === 'this user is not yet verified, please verify your account') {
+                setSuccess(data.data.mssg);
+                setVerifyId(data.data.verify_id);
+            } else {
+                setSuccess(data.data.mssg);
+                setCustomerCookie(Cookies.get('customerJwt'));
+                Cookies.set('customerId',data.data.customerId, { expires: 31 });
+                Cookies.set('customerJwt',data.data.customerJwt, { expires: 31 });
+                localStorage.setItem('customer_name',`${data.data.customerFirstname} ${data.data.customerSurname}`);
+                window.location.reload(true);
+                setTimeout(() => {
+                    navigate(data.data.redirect);
+                },2000);
+            }
         }).catch(err => {
             setUsernameErr(err.response.data.errors.username);
             setPasswordErr(err.response.data.errors.password);

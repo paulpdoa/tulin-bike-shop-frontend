@@ -7,20 +7,15 @@ const ForgotPassword = () => {
 
     const [customer,setCustomer] = useState('');
     const [message,setMessage] = useState('');
-    const [loading,setLoading] = useState(true);
-
-    const navigate = useNavigate();
+    const [loading,setLoading] = useState(false);
 
     const findCustomer = async (e) => {
         e.preventDefault();
+        setLoading(true);
         await axios.get(`${baseUrl()}/customerforgetpassword/${customer}`)
         .then((data) => {
-            setLoading(true);
-            setMessage('Please wait...')
-            setTimeout(() => {
-                setLoading(false);
-                navigate(data.data.redirect);
-            },2000)
+            setLoading(false);
+            setMessage(data.data.mssg);
         }).catch(err => console.log(err))
     }
 
@@ -34,13 +29,14 @@ const ForgotPassword = () => {
                     <img className="w-1/2 object-cover md:block hidden" src="/image/forgot_thumbnail.png" alt="Forgot Password Thumbnail" />
                     <form onSubmit={findCustomer} className="flex flex-col justify-center">
                         <h1 className="md:text-4xl text-3xl text-center md:text-left text-gray-800 font-bold">Forgot your password?</h1>
-                        { loading && <h2 className="text-green-500">{ message }</h2> }
+                        { loading ? <h2 className="text-green-500">Please wait...</h2> : <h2 className="text-green-500">{ message }</h2>}
                         <input 
                             className="rounded-md p-2 mt-5 outline-none border border-gray-300"
                             type="text" 
                             placeholder="Enter your username" 
                             value={customer}
                             onChange={(e) => setCustomer(e.target.value)}
+                            required
                         />
                         <button className="text-gray-100 bg-green-500 tracking-wider p-2 mt-5 rounded">FIND ACCOUNT</button>
                         <Link className="text-center text-blue-500 p-2 mt-4" to='/login'>Back to login</Link>

@@ -42,9 +42,9 @@ const OrderDetailModal = () => {
     return () => abortCont.abort();
   },[idDetail]);
 
-  const markReceivedOrder = async(id) => {
+  const markReceivedOrder = async(id,cartId) => {
     try {
-      const data = await axios.patch(`${baseUrl()}/neworders`,{ id });
+      const data = await axios.patch(`${baseUrl()}/neworders`,{ id,cartId });
       setAlertMssg(data.data.mssg);
       setShowAlert(true);
       setShowModal(false);
@@ -52,7 +52,6 @@ const OrderDetailModal = () => {
     catch(err) {
       console.log(err);
     }
-    
   }
   
   return (
@@ -69,7 +68,6 @@ const OrderDetailModal = () => {
           {orderDetails && orderDetails.map((orderDetail) => (
             orderDetail.cart_id.filter(id => id._id === idDetail).map((orderItem) => (
               <>
-              {console.log(orderDetail)}
                 { isLoading ?
                   <div>
                     <p className="flex gap-2 text-xl"><AiOutlineLoading3Quarters className="animate-spin" />Please wait...</p>
@@ -93,8 +91,8 @@ const OrderDetailModal = () => {
                     <h3 className="text-sm">{orderItem.customer_id.email}</h3>
                   </div>
                   <div className="flex items-center justify-end gap-2 py-14">
-                    <button onClick={() => markReceivedOrder(orderDetail._id)} className="bg-green-500 p-2 rounded">Mark as claimed/delivered</button>
-                    <button onClick={() => console.log('cancel the order')} className="bg-red-500 p-2 rounded">Delete</button>
+                    <button onClick={() => markReceivedOrder(orderDetail._id,orderItem._id)} className="bg-green-500 p-2 rounded">Mark as claimed/delivered</button>
+                    {/* <button onClick={() => console.log('cancel the order')} className="bg-red-500 p-2 rounded">Delete</button> */}
                   </div>
                 </>
                 }

@@ -1,6 +1,7 @@
 import { fetchData } from '../../../helper/fetching';
 import { useEffect,useState } from 'react';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const RecentOrders = () => {
 
   const [recentOrders,setRecentOrders] = useState([]);
@@ -8,7 +9,7 @@ const RecentOrders = () => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetchData({signal:abortCont.signal},`${baseUrl()}/neworders`,setRecentOrders,setIsLoading);
+    fetchData({signal:abortCont.signal},`${baseUrl()}/ordereditem`,setRecentOrders,setIsLoading);
     return () => abortCont.abort();
   },[recentOrders])
 
@@ -16,7 +17,7 @@ const RecentOrders = () => {
     <div className="col-span-2 bg-gray-100 p-10 shadow-lg rounded h-full overflow-y-scroll">
         <h1 className="text-2xl uppercase font-semibold text-gray-800">Recent Orders</h1>
         <section className="flex flex-col gap-5 text-gray-800 mt-5">
-            { isLoading && <h2>Please wait...</h2> }
+            { isLoading && <h2 className="text-xl animate-pulse">Please wait...</h2> }
             { recentOrders.length < 1 ? <h2 className="text-lg animate-pulse text-gray-800">No orders yet...</h2> : 
               recentOrders.map((recent) => (
               recent.cart_id.map((orders) => (

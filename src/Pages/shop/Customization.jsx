@@ -15,7 +15,7 @@ const Customization = () => {
       <>
           <Helmet><title>Tulin Bicycle Shop | Customize</title></Helmet>
           <div className="customize-bg content">
-            <div className="flex items-center md:h-screen h-auto">
+            <div className="flex flex-col md:flex-row items-center md:h-screen h-auto">
               <SidebarMenu />
               <BikeBuilt />
               <CustomButton />

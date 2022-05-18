@@ -34,7 +34,7 @@ const ResetPassword = () => {
                 setPasswordErr('password must be greater than 8 characters');
             } 
 
-            if(password === confirmPass && password.length > 8) {
+            if(password === confirmPass) {
                 setMssg(data.data.mssg)
                 setTimeout(() => {
                     navigate(data.data.redirect);
