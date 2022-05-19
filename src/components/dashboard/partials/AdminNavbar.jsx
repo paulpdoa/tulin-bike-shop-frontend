@@ -32,7 +32,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
     getInventoryItems();
 
     return () => abortCont.abort();
-    },[]);
+    },[products]);
 
     const onLogout = () => {
         axios.get(`${baseUrl()}/adminlogout`)

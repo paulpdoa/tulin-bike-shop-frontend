@@ -21,7 +21,7 @@ const DashboardLayout = ({ adminCookie }) => {
 
     axios.get(`${baseUrl()}/dashboard`,{ signal:abortCont.signal })
     .then((data) => {
-      if(data.data.isAuth === false) {
+      if(!data.data.isAuth) {
         navigate(data.data.redirect);
         setIsAuth(data.data.isAuth)
       } else {
