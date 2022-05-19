@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { useState,useContext } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../helper/Context';
 import SidebarMenu from '../../components/shop/customization/SidebarMenu';
 import BikeBuilt from '../../components/shop/customization/BikeBuilt';
@@ -15,7 +15,7 @@ const Customization = () => {
       <>
           <Helmet><title>Tulin Bicycle Shop | Customize</title></Helmet>
           <div className="customize-bg content">
-            <div className="flex flex-col md:flex-row items-center md:h-screen h-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center md:h-screen h-auto">
               <SidebarMenu />
               <BikeBuilt />
               <CustomButton />

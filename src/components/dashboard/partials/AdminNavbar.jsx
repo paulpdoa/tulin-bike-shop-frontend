@@ -46,6 +46,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
         const searched = e.target.value;
         const foundItem = products.filter(product => product.product_name.toLowerCase().includes(searched.toLowerCase()));
         searched === '' ? setSearchedItems([]) : setSearchedItems(foundItem); 
+        console.log(foundItem);
     }
 
     return (
@@ -62,7 +63,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
             <button className="bg-gray-800 p-2 rounded hover:bg-transparent hover:border hover:border-gray-900 hover:text-gray-900 transition duration-300 text-gray-100">Search</button>
             <div className="absolute top-10 overflow-hidden bg-red-200 rounded-b-md w-[87.5%] shadow-2xl flex flex-col z-[100]">
                 { searchedItems && searchedItems.slice(0,5).map((product) => (
-                    <Link onClick={() => console.log(product._id)} className="bg-white w-full hover:bg-gray-300 p-2 transition duration-300" to={`/dashboard/inventory/${product._id}`} htmlFor="item">{ product.product_name }</Link>
+                    <Link key={product._id} className="bg-white w-full hover:bg-gray-300 p-2 transition duration-300" to={`/dashboard/inventory/${product._id}`} htmlFor="item">{ product.product_name }</Link>
                 )) }
             </div>
         </div>

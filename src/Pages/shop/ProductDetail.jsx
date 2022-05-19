@@ -94,7 +94,7 @@ const ProductDetail = () => {
                                             <option hidden>{ col === '' ? 'No available color' : 'Select color' }</option>
                                             { col === '' ? '' : <option value={col}>{col.slice(0,1).toUpperCase() + col.slice(1,col.length)}</option> }
                                         </>
-                                    )) }2
+                                    )) }
                                 </>
                             </select>
                         </>

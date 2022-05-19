@@ -61,7 +61,11 @@ const ProfileSidebar = () => {
       <nav className="md:col-span-1 col-span-3 md:p-20 p-10">
         <h1 className="font-semibold md:text-4xl text-3xl text-gray-800 whitespace-nowrap">{sideTitle}</h1>
         <div className="overflow-hidden md:flex justify-center relative hidden">
-            { userImg ? <img onClick={previewProfilePicture} className="object-cover rounded-full w-32 h-32 cursor-pointer" src={`${imgProfileLocation}${userImg}`} alt="Blank Profile" /> :
+            { userImg ? 
+            <>
+                <img onClick={previewProfilePicture} className="object-cover rounded-full w-32 h-32 cursor-pointer" src={`${imgProfileLocation}${userImg}`} alt="Blank Profile" />
+                <input onChange={previewProfilePicture} className="absolute h-full w-full opacity-0" type="file" accept='image/*' />
+            </> :
                 <>
                 { displayImage ? 
                     <div className="flex flex-col">

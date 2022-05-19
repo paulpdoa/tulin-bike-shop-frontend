@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
+import { GlobalContext } from '../../../helper/Context';
 import provinces from '../../../json/refprovince.json';
 import barangays from '../../../json/refbrgy.json';
 import cities from '../../../json/refcitymun.json';
 
 const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,province,setProvince,city,setCity,postalCode,setPostalCode,setActiveStep }) => {
+
+  const { setAlertMssg,setShowAlert } = useContext(GlobalContext);  
 
   const [provCode,setProvCode] = useState('');  
   const [cityCode,setCityCode] = useState('');
@@ -29,6 +32,30 @@ const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,prov
       setCity(firstUpper);
       const cityCode = cities.RECORDS.filter(city => city.citymunDesc === cityName).map(city => city.citymunCode);
       setCityCode(cityCode[0]);
+  }
+
+  const goNextStep = () => {
+      if(mobile === '') {
+        setAlertMssg('mobile number cannot be empty');
+        setShowAlert(true);
+      } else if(address === '') {
+        setAlertMssg('address cannot be empty');
+        setShowAlert(true);
+      } else if(province === ''){
+        setAlertMssg('province cannot be empty');
+        setShowAlert(true);
+      } else if(city === '') {
+        setAlertMssg('city cannot be empty');
+        setShowAlert(true);
+      } else if(barangay === '') {
+        setAlertMssg('barangay cannot be empty');
+        setShowAlert(true);
+      } else if(postalCode === '') {
+        setAlertMssg('postal code cannot be empty');
+        setShowAlert(true);
+      } else {
+        setActiveStep('step three')
+      }
   }
 
   return (
@@ -82,7 +109,7 @@ const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,prov
             </div>
             <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="postalcode">Postal Code:</label>
-                <input onKeyPress={(e) => e.key === 'Enter' && setActiveStep('step three')} className="user-auth" type="text"
+                <input onKeyPress={(e) => e.key === 'Enter' && goNextStep()} className="user-auth" type="text"
                     onChange={(e) => setPostalCode(e.target.value)}
                     value={postalCode}
                     required
@@ -93,7 +120,7 @@ const StepTwo = ({ mobile,setMobile,setAddress,address,setBarangay,barangay,prov
             <div onClick={() => setActiveStep('step one')} className="w-32 cursor-pointer text-center flex flex-col mt-3">
                 <span className="bg-gray-900 text-gray-100 p-2 rounded">Previous</span>
             </div>
-            <div onClick={() => setActiveStep('step three')} className="w-32 cursor-pointer text-center flex flex-col mt-3">
+            <div onClick={goNextStep} className="w-32 cursor-pointer text-center flex flex-col mt-3">
                 <span className="bg-gray-900 text-gray-100 p-2 rounded">Next</span>
             </div>
         </div>

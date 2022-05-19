@@ -5,14 +5,16 @@ import { GlobalContext } from '../../../helper/Context';
 
 const Shocks = () => {
 
-    const { setBikeDisplay,setActive,prodCode,setProdCode,frameSize,setBuild } = useContext(GlobalContext);
-
+    const { setBikeDisplay,setActive,prodCode,setProdCode,frameSize,setBuild,setPreviousCode,previousCode } = useContext(GlobalContext);
+    console.log(previousCode);
     const selectShock = (id,display,price,name,type,code,cardDisplay) => {
         const data = {id,display,price,name,type,cardDisplay};
+        const prevData = { type,code };
         setBikeDisplay(display);
         setActive('wheels')
         setProdCode(code);
-        setBuild(curr => [...curr,data])
+        setBuild(curr => [...curr,data]);
+        setPreviousCode(curr => [...curr,prevData]);
     }
     
 

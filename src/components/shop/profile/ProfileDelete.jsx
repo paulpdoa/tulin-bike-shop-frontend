@@ -14,30 +14,30 @@ const ProfileDelete = () => {
   const [pendingCustomer,setPendingCustomer] = useState([]);
   const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
 
-  useEffect(() => {
-    const abortCont = new AbortController();
+  // useEffect(() => {
+  //   const abortCont = new AbortController();
 
-    const checkOrders = async () => {
-      try {
-        const data = await axios.get(`/order/${id}`,{ signal:abortCont.signal });
-        const pendings = data.data.filter(pend => pend.order_status === 'pending');
-        const currentCustomerPending = pendings.filter(pending => pending.customer_id === id);
-        setPendingCustomer(currentCustomerPending);
-      }
-      catch(err) {
-        console.log(err);
-      }
-    }
-    checkOrders();
+  //   const checkOrders = async () => {
+  //     try {
+  //       const data = await axios.get(`/order/${id}`,{ signal:abortCont.signal });
+  //       const pendings = data.data.filter(pend => pend.order_status === 'pending');
+  //       const currentCustomerPending = pendings.filter(pending => pending.customer_id === id);
+  //       setPendingCustomer(currentCustomerPending);
+  //     }
+  //     catch(err) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   checkOrders();
 
-    return () => abortCont.abort();
-  },[id])
+  //   return () => abortCont.abort();
+  // },[id])
 
   const deleteAccount = () => {
-    if(pendingCustomer.length > 0) {
-      setAlertMssg('You have current order, please cancel it first');
-      setShowAlert(true);
-    } else {
+    // if(pendingCustomer.length > 0) {
+    //   setAlertMssg('You have current order, please cancel it first');
+    //   setShowAlert(true);
+    // } else {
       axios.put(`${baseUrl()}/customerdelete/${id}`,{ status:'inactive' })
       .then((data) => {
         setDeleted(data.data.mssg);
@@ -48,7 +48,7 @@ const ProfileDelete = () => {
           navigate(data.data.redirect);
         },2000)
       }).catch((err) => console.log(err));
-    }
+    // }
   }
   console.log(baseUrl());
 

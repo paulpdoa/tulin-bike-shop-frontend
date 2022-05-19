@@ -25,9 +25,9 @@ const ProfileOrderModal = ({ close,detailId,orderId }) => {
   const cancelOrder = async(id) => {
     try {
       const cancelData = await axios.patch(`${baseUrl()}/cancelorder/${id}`);
-      console.log(id);
       setAlertMssg(cancelData.data.mssg);
       setShowAlert(true);
+      close(false);
     }
     catch(err) {
       console.log(err);

@@ -5,13 +5,15 @@ import { useContext } from 'react';
 
 const Groupsets = () => {
 
-    const { setBikeDisplay,prodCode,frameSize,setBuild,setShowSelectedParts } = useContext(GlobalContext);
+    const { setBikeDisplay,prodCode,frameSize,setBuild,setShowSelectedParts,setPreviousCode } = useContext(GlobalContext);
 
     const selectGroupset = (id,display,price,name,type,code,cardDisplay) => {
         const data = {id,display,price,name,type,cardDisplay};
+        const prevData = { type,code };
         setBikeDisplay(display);
         setBuild(curr => [...curr,data]);
         setShowSelectedParts(true);
+        setPreviousCode(curr => [...curr,prevData]);
       }
 
   return (

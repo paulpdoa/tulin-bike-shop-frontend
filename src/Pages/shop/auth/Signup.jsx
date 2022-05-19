@@ -105,9 +105,9 @@ const Signup = () => {
                         <p className="text-sm text-green-500">{ success }</p>
                         <div className="flex items-center justify-center gap-2 mt-5 md:mt-auto">
                         {/* Pages button */}
-                            <button onClick={() => setActiveStep('step one')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step one' && 'bg-gray-300'}`}>1</button>
-                            <button onClick={() => setActiveStep('step two')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step two' && 'bg-gray-300'}`}>2</button>
-                            <button onClick={() => setActiveStep('step three')} className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step three' && 'bg-gray-300'}`}>3</button>
+                            <button className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step one' && 'bg-gray-300 font-bold'}`}>1</button>
+                            <button className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step two' && 'bg-gray-300 font-bold'}`}>2</button>
+                            <button className={`rounded-full w-5 h-5 border border-gray-700 flex justify-center items-center p-1 text-xs ${activeStep === 'step three' && 'bg-gray-300 font-bold'}`}>3</button>
 
                         </div>
                         <form className="flex flex-col gap-2 mt-1">

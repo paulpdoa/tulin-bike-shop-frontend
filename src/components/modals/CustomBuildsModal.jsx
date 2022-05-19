@@ -1,10 +1,7 @@
-import { useContext,useState } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../helper/Context';
 import { AiOutlineClose } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-import axios from 'axios';
-import { baseUrl } from '../../helper/baseUrl';
-import Cookies from 'js-cookie';
 import DownpaymentModal from './DownpaymentModal';
 
 const popVar = {
@@ -45,7 +42,7 @@ const CustomBuildsModal = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <h1 className="text-3xl font-semibold">Selected Parts</h1>
-                    <p>₱{numberFormat.format(totalPrice)}</p>
+                    <p className="font-semibold text-xl">₱{numberFormat.format(totalPrice)}</p>
                 </div>
                 <div className="flex items-center gap-2">
                     { active === "groupset" && <button className="bg-orange-500 text-gray-100 p-2 rounded" onClick={() => setShowDp(true)}>Send your build</button> }
@@ -53,8 +50,8 @@ const CustomBuildsModal = () => {
                 </div>
             </div>
             <div className="flex flex-col gap-2">
-                { builds && builds.map(build => (
-                    <div className="flex gap-2">
+                { builds && builds.map((build,key) => (
+                    <div key={key} className="flex gap-2">
                         <img className="w-28 object-cover h-28" src={build.cardDisplay} alt={build.name} />
                         <div className="flex flex-col">
                             <label htmlFor="name">{build.name}</label>

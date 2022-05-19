@@ -5,15 +5,17 @@ import ChoiceCard from './ChoiceCard';
 
 const Tires = () => {
 
-  const { setBikeDisplay,prodCode,setProdCode,setActive,frameSize,setBuild } = useContext(GlobalContext);
+  const { setBikeDisplay,prodCode,setProdCode,setActive,frameSize,setBuild,setPreviousCode } = useContext(GlobalContext);
 
 
   const selectTire = (id,display,price,name,type,code,cardDisplay) => {
-    setProdCode(code);
     const data = {id,display,price,name,type,cardDisplay};
+    const prevData = { type,code };
     setBikeDisplay(display);
+    setProdCode(code);
     setBuild(curr => [...curr,data]);
     setActive('seat');
+    setPreviousCode(curr => [...curr,prevData]);
   }
   
   return (

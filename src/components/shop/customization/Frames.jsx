@@ -5,15 +5,18 @@ import { GlobalContext } from '../../../helper/Context';
 
 const Frames = () => {
 
-  const { setBikeDisplay,setActive,setProdCode,setFrameSize,setBuild } = useContext(GlobalContext);
+  const { setBikeDisplay,setActive,setProdCode,setFrameSize,setBuild,setPreviousCode } = useContext(GlobalContext);
 
   const selectFrame = (id,display,price,name,type,code,cardDisplay,size) => {
-      const data = {id,display,price,name,type,cardDisplay}; 
+      const data = {id,display,price,name,type,cardDisplay};
+      const prevData = {type,code};
       setActive('fork');    
       setBuild(currPart => [...currPart,data]);
       setBikeDisplay(display);
       setProdCode(code);
       setFrameSize(size);
+      // push code to previous  
+      setPreviousCode(curr => [...curr,prevData]);
   }
     
   return (

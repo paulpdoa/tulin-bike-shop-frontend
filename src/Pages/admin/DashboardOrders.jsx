@@ -50,14 +50,14 @@ const DashboardOrders = () => {
           <h1 className="font-semibold text-4xl text-gray-800 uppercase">Orders</h1>
           <Datetime />
         </div>
-        <div className="flex flex-col mt-5">
+        {/* <div className="flex flex-col mt-5">
           <label htmlFor="search">Search Unique ID:</label>
           <input type="text" 
             className="outline-none p-2 rounded w-1/3 border border-gray-300" 
             onChange={(e) => setFoundUniqueId(e.target.value)} 
             placeholder="Enter id here..."
           />
-        </div>
+        </div> */}
         <div className="grid grid-cols-2 grid-rows-2 gap-5 mt-10">
          <NewOrders foundUniqueId={foundUniqueId} />
          <OrderHistory />

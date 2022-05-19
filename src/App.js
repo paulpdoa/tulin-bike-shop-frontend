@@ -65,6 +65,7 @@ const App = () => {
   const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
   // Customization States
+  const [previousCode,setPreviousCode] = useState([]);
   const [bikeDisplay,setBikeDisplay] = useState('');
   const [active,setActive] = useState('frame');
   const [prodCode,setProdCode] = useState('');
@@ -147,7 +148,8 @@ const App = () => {
         showModal,setShowModal,idDetail,setIdDetail,showSideNav,setShowSideNav,showChatbox,setShowChatbox,alertMssg,setAlertMssg,showAlert,setShowAlert,
         showInventoryDetail,setShowInventoryDetail,inventoryId,setInventoryId,showOrderDetail,setShowOrderDetail,historyOrderId,setHistoryOrderId,numberFormat,
         brandChosen,setBrandChosen,socket,day,totalAmount,setTotalAmount,bikeDisplay,setBikeDisplay,active,setActive,prodCode,setProdCode,frameSize,setFrameSize,
-        build,setBuild,showSelectedParts,setShowSelectedParts,showDp,setShowDp,totalPrice,showCustomDetail,setShowCustomDetail,customId,setCustomId
+        build,setBuild,showSelectedParts,setShowSelectedParts,showDp,setShowDp,totalPrice,showCustomDetail,setShowCustomDetail,customId,setCustomId,previousCode,
+        setPreviousCode      
       }}
       >
         <Routes>

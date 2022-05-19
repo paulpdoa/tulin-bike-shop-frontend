@@ -4,10 +4,10 @@ import { useContext } from "react";
 const BikeBuilt = () => {
 
   const { bikeDisplay } = useContext(GlobalContext);
-
+  
   return (
    <>
-     <div className="p-10 text-gray-100 rounded flex justify-center">
+     <div className="p-10 text-gray-100 rounded flex justify-center w-full">
           { bikeDisplay === '' ? '' : <img className="scale-150 w-1/2" src={bikeDisplay} alt="chosen parts" /> }
     </div> 
    </>

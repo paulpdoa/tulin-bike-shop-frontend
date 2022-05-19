@@ -5,13 +5,14 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 const ExpenseBox = ({ setShowExpenseBox }) => {
   
-  const [amount,setAmount] = useState(0);
-  const { setShowAlert,setAlertMssg } = useContext(GlobalContext); 
+  const [amount,setAmount] = useState();
+  const [total,setTotal] = useState(0);
+  const { setShowAlert,setAlertMssg,numberFormat } = useContext(GlobalContext); 
 
   const submitAmountExpense = async(e) => {
       e.preventDefault();
       try {
-        const data = await axios.post('/expense',{ amount });
+        const data = await axios.post('/expense',{ amount: total });
         setAlertMssg(data.data.mssg);
         setShowAlert(true);
         setShowExpenseBox(data.data.closeModal);
@@ -21,6 +22,11 @@ const ExpenseBox = ({ setShowExpenseBox }) => {
       }
   }
 
+  const computeTotal = () => {
+      const totalAmount = total + Number(amount);
+      setTotal(totalAmount);
+      setAmount('');
+  }
   
   return (
     <div className="absolute flex items-center justify-center top-0 left-0 h-full w-full bg-gray-800 bg-opacity-30">
@@ -31,8 +37,11 @@ const ExpenseBox = ({ setShowExpenseBox }) => {
             </div>
             <form onSubmit={submitAmountExpense}> 
                 <div className="flex flex-col">
-                    <label htmlFor="amount">Amount:</label>
-                    <input onChange={(e) => setAmount(e.target.value)} value={amount} className="outline-none p-2 rounded border border-gray-300" placeholder="Enter total amount" type="number" required />
+                    <label className="font-semibold" htmlFor="amount">Amount: ₱{ numberFormat.format(total) }</label>
+                    <div className="flex flex-col items-start gap-2">
+                        <input onChange={(e) => setAmount(e.target.value)} value={amount} className="outline-none p-2 rounded border border-gray-300" placeholder="Enter total amount" type="number" />
+                        <span onClick={computeTotal} className="bg-green-500 text-gray-100 rounded cursor-pointer p-2">Enter another amount</span>
+                    </div>
                 </div><br/>
                 <button className="bg-green-500 text-gray-100 p-2 rounded float-right">Submit</button>
             </form>

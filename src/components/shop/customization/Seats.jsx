@@ -5,14 +5,16 @@ import { useContext } from 'react';
 
 const Seats = () => {
 
-    const { setBikeDisplay,setActive,prodCode,setProdCode,frameSize,setBuild } = useContext(GlobalContext);
+    const { setBikeDisplay,setActive,prodCode,setProdCode,frameSize,setBuild,setPreviousCode } = useContext(GlobalContext);
 
     const selectSeat = (id,display,price,name,type,code,cardDisplay) => {
         const data = {id,display,price,name,type,cardDisplay};
+        const prevData = { type,code };
         setProdCode(code);
         setActive('groupset');
         setBikeDisplay(display);
         setBuild(curr => [...curr,data]);
+        setPreviousCode(curr => [...curr,prevData]);
       }
 
   return (
