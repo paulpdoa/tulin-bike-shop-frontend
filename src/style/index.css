@@ -13,6 +13,9 @@
   --ff-rockwell:Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
   --ff-rochester:'Rochester', cursive;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 * {
   padding:0;

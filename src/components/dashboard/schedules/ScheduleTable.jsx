@@ -1,10 +1,12 @@
 import { useState,useEffect } from 'react';
 import { fetchData } from '../../../helper/fetching';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
 
     const [details,setDetails] = useState([]);
     const [isLoading,setIsLoading] = useState(true);
+    
     // All schedules
     useEffect(() => {
         const abortCont = new AbortController();
@@ -16,6 +18,7 @@ const ScheduleTable = ({ setShowDetail,setGetDetail }) => {
     // Schedule detail for each customer
     const viewDetail = (id) => {
         const abortCont = new AbortController();
+
         setShowDetail(true);
         fetchData({ signal:abortCont.signal },`${baseUrl()}/schedule/${id}`,setGetDetail,setIsLoading);
        

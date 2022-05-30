@@ -11,6 +11,8 @@ const AdminLogin = ({ setAdminCookie }) => {
   const [usernameErr,setUsernameErr] = useState('');
   const [passwordErr,setPasswordErr] = useState('');
 
+  
+
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -24,7 +26,7 @@ const AdminLogin = ({ setAdminCookie }) => {
 
   const onLogin = (e) => {
       e.preventDefault();
-      axios.post(`${baseUrl()}/adminlogin`,{ username,password })
+      axios.post(`${baseUrl()}/adminlogin`,{ username,password,active_status:true })
       .then((data) => {
           navigate(data.data.redirect);
           localStorage.setItem('adminName',data.data.adminName);

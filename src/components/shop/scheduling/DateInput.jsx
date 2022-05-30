@@ -5,6 +5,7 @@ import { GlobalContext } from '../../../helper/Context';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { baseUrl } from '../../../helper/baseUrl';
+import moment from 'moment';
 
 const enterVar = {
     hidden: {
@@ -26,6 +27,8 @@ const enterVar = {
     }
 }
 
+
+
 const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
 
     const { setAlertMssg,setShowAlert } = useContext(GlobalContext);
@@ -36,6 +39,48 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
     const [displayImage,setDisplayImage] = useState();
     const [concern,setConcern] = useState('');
     const [schedules,setSchedules] = useState([]);
+
+    // Convert to military time
+    // Pag morning, 1 - 12
+    // Pag afternoon 13 - 24 
+    // if number has am, then dont add 12, else 
+    const convertToTwentyFour = 12;
+    const chosenTime = time.split(' ').includes('am') ? Number(time.split(' ')[0]) : Number(time.split(' ')[0]) + convertToTwentyFour;
+    const currentTime = Number(moment().format('H').trim(''));
+    
+    console.log(`Current: ${currentTime}, Chosen: ${chosenTime}`);
+    console.log(currentTime > chosenTime);
+ 
+
+    const badwords = [
+        "tangina",
+        "tanginamo",
+        "pakyu",
+        "gago",
+        "hayop",
+        "hayop ka",
+        "siraulo",
+        "yawa",
+        "fuck you",
+        "asshole",
+        "stupid",
+        "mamatay ka na",
+        "mamatay kana",
+        "tangina mo",
+        "putangina mo",
+        "putanginamo",
+        "tarantado",
+        "bobo",
+        "tanga",
+        "inutil",
+        "bullshit",
+        "motherfucker",
+        "fuck",
+        "fucker",
+        "tanginang",
+        "ulol",
+        "ulul"
+    ]
 
     // Checks date today to compare with actual input by user for validation purposes
     const presentDay = `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? 0 + '' + Number(new Date().getMonth() + 1) : Number(new Date().getMonth() + 1)}-${new Date().getDate()}`;
@@ -64,45 +109,55 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
     }
     
     const navigate = useNavigate();
-
+    console.log(chosenTime < currentTime);
+    console.log(chosenTime, currentTime);
     const onSchedule = async (e) => {
         e.preventDefault();
         
         // Prevent the user to schedule a behind date
-        if(new Date(chosenDate) < new Date(presentDay)) {
-            setAlertMssg('Please select date today or the next days');
+        // Limit the user sa pagmumura
+        if(currentTime > chosenTime) {
+            setAlertMssg('Sorry, please select a proper time. Time cannot be behind the current time');
             setShowAlert(true);
         } else {
-            try {
-                if(schedules.includes(time)) {
-                    setAlertMssg('this time has been occupied, please select another time');
+            if(new Date(chosenDate) < new Date(presentDay)) {
+                setAlertMssg('Please select date today or the next days');
+                setShowAlert(true);
+            } else {
+                if(concern.split(' ').some(word => badwords.includes(word))) {
+                    setAlertMssg('putting bad words is not allowed, please be respectful');
                     setShowAlert(true);
                 } else {
-                   if(Cookies.get('customerJwt')) {
-                    const productDetails = new FormData();
-                    productDetails.append('concern_image',image);
-                    productDetails.append('reserved_time',time);
-                    productDetails.append('reserved_date',chosenDate);
-                    productDetails.append('customer_concern',concern);
-                    productDetails.append('customer_id',Cookies.get('customerId'));
-                    
-                    const postSched = await axios.post(`${baseUrl()}/schedule`,productDetails);
-                    setAlertMssg(postSched.data.mssg);
-                    setShowAlert(true);
-                    navigate(postSched.data.redirect);
-                   } else {
-                       navigate('/login');
-                   }
-                }
-            }
-            catch(err) {
-                const mute = err;
+                    try {
+                        if(schedules.includes(time)) {
+                            setAlertMssg('this time is not allowed, please select another');
+                            setShowAlert(true);
+                        } else {
+                            if(Cookies.get('customerJwt')) {
+                                const productDetails = new FormData();
+                                productDetails.append('concern_image',image);
+                                productDetails.append('reserved_time',time);
+                                productDetails.append('reserved_date',chosenDate);
+                                productDetails.append('customer_concern',concern);
+                                productDetails.append('customer_id',Cookies.get('customerId'));
+                                
+                                const postSched = await axios.post(`${baseUrl()}/schedule`,productDetails);
+                                setAlertMssg(postSched.data.mssg);
+                                setShowAlert(true);
+                                navigate(postSched.data.redirect);
+                                } else {
+                                    navigate('/login');
+                                }
+                            }
+                        }   
+                    catch(err) {
+                        const mute = err;
+                    }
+                } 
             }
         }
-
-        
     }
-
+    
   return (
     <>
         <form onSubmit={onSchedule} encType="multipart/form-data" className="bg-white border border-gray-200 rounded-md shadow-lg w-full p-10 md:col-span-2 col-span-1 md:-mt-16 mt-0">
@@ -114,10 +169,10 @@ const DateInput = ({today: chosenDate,hour,minute,setToday}) => {
                 <label htmlFor="date">Time:</label>
                 <select required value={time} onChange={(e) => setTime(e.target.value)} className="outline-none p-2 border border-gray-400 rounded" name="time">
                     <option hidden>Select time</option>
-                    <option value="8:00am - 10:00am">8:00am - 10:00am</option>
-                    <option value="10:00am - 12:00pm">10:00am - 12:00am</option>
-                    <option value="1:00pm - 3:00pm">1:00pm - 3:00pm</option>
-                    <option value="3:00pm - 5:00pm">3:00pm - 5:00pm</option>
+                    <option value="8 : 00 am - 10 : 00 am">8:00am - 10:00am</option>
+                    <option value="10 : 00 am - 12 : 00 pm">10:00am - 12:00pm</option>
+                    <option value="1 : 00 pm - 3 : 00pm">1:00pm - 3:00pm</option>
+                    <option value="3 : 00 pm - 5 : 00pm">3:00pm - 5:00pm</option>
                 </select>
                
             </section>

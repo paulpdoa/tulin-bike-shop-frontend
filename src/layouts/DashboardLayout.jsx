@@ -6,6 +6,7 @@ import { baseUrl } from "../helper/baseUrl";
 import AdminNavbar from "../components/dashboard/partials/AdminNavbar";
 import Sidebar from "../components/dashboard/partials/Sidebar";
 import Alert from "../components/modals/admin/Alert";
+import Cookies from 'js-cookie';
 
 const DashboardLayout = ({ adminCookie }) => {
 
@@ -17,21 +18,26 @@ const DashboardLayout = ({ adminCookie }) => {
   // To protect dashboard routes
   const navigate = useNavigate();
   useEffect(() => {
-    const abortCont = new AbortController();
+    // const abortCont = new AbortController();
 
-    axios.get(`${baseUrl()}/dashboard`,{ signal:abortCont.signal })
-    .then((data) => {
-      if(!data.data.isAuth) {
-        navigate(data.data.redirect);
-        setIsAuth(data.data.isAuth)
-      } else {
-        setIsAuth(data.data.isAuth)
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    return () => abortCont.abort();
+    // axios.get(`${baseUrl()}/dashboard`,{ signal:abortCont.signal })
+    // .then((data) => {
+    //   if(!data.data.isAuth) {
+    //     navigate(data.data.redirect);
+    //     setIsAuth(data.data.isAuth)
+    //   } else {
+    //     setIsAuth(data.data.isAuth)
+    //   }
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
+    // return () => abortCont.abort();
+    if(Cookies.get('adminJwt') !== undefined) {
+      setIsAuth(true);
+    } else {
+      navigate('/adminlogin');
+    }
     
   },[isAuth,navigate])
 
@@ -41,7 +47,8 @@ const DashboardLayout = ({ adminCookie }) => {
       <div className={`content ${!showSidebar ? 'ml-0' : 'ml-72'}`}>
         <div className={`w-full relative ${showSidebar ? 'max-content' : ''}`}>
             <AdminNavbar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
-            { isAuth ? <Outlet /> : <h1>Verifying User</h1> }
+            {/* { isAuth ? <Outlet /> : <h1>Verifying User</h1> } */}
+            <Outlet />
         </div>
       </div>
       { showAlert && <Alert /> }

@@ -22,9 +22,9 @@ const Messages = ({ senders,setSenderName,setProfileImg,setSenderEmail,setSender
 
   return (
     <div className="w-1/3 border-r border-gray-600 overflow-y-scroll">
-        <div className="flex items-center gap-2 overflow-hidden">
+        {/* <div className="flex items-center gap-2 overflow-hidden">
             <input onChange={handleSearch} className="p-2 outline-none rounded" type="search" placeholder="Search name" />
-        </div>
+        </div> */}
         { senders && senders.map((sender) => (
             <>
                 { sender && 

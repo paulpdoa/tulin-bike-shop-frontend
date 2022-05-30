@@ -40,6 +40,7 @@ const Signup = () => {
     const [passLimitErr,setPassLimitErr] = useState('');
 
     const [activeStep,setActiveStep] = useState('step one'); 
+    const [agree,setAgree] = useState(false);
 
     const navigate = useNavigate();
 
@@ -59,26 +60,31 @@ const Signup = () => {
                 setPassErr('');
             },2000);
         } else {
-            try {
-                const data = await axios.post(`${baseUrl()}/customer`,{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password });
-                setSuccess(data.data.mssg);
-                setTimeout(() => {
-                    navigate(data.data.redirect);
-                },2000);
-                setIsLoading(false);
-            }
-            catch(err) {
-                setEmailErr(err.response.data.errors.email);
-                setPassLimitErr(err.response.data.errors.password);
-                setUsernameErr(err.response.data.errors.username);
-                setMobileErr(err.response.data.errors.mobile);
-                setTimeout(() => {
-                    setEmailErr('');
-                    setUsernameErr('');
-                    setPassLimitErr('');
-                    setMobileErr('');
-                },2000)
-                setIsLoading(false);
+            if(!agree) {
+                alert('please check agreement');
+                console.log(agree);
+            } else {
+                try {
+                    const data = await axios.post(`${baseUrl()}/customer`,{ firstname,lastname,username,email,mobile,address,barangay,city,province,postalCode,password });
+                    setSuccess(data.data.mssg);
+                    setTimeout(() => {
+                        navigate(data.data.redirect);
+                    },2000);
+                    setIsLoading(false);
+                }
+                catch(err) {
+                    setEmailErr(err.response.data.errors.email);
+                    setPassLimitErr(err.response.data.errors.password);
+                    setUsernameErr(err.response.data.errors.username);
+                    setMobileErr(err.response.data.errors.mobile);
+                    setTimeout(() => {
+                        setEmailErr('');
+                        setUsernameErr('');
+                        setPassLimitErr('');
+                        setMobileErr('');
+                    },2000)
+                    setIsLoading(false);
+                }
             }
         }
     }
@@ -154,6 +160,8 @@ const Signup = () => {
                                 passErr={passErr}
                                 setActiveStep={setActiveStep}
                                 onSignup={onSignup}
+                                agree={agree}
+                                setAgree={setAgree}
                             /> }
                         </form>
                         <p className="text-xs mt-10 block md:hidden">Already have an account? <Link className="text-blue-500" to='/login'>login here</Link></p>

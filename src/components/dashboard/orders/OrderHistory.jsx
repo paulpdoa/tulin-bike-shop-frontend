@@ -28,7 +28,7 @@ const OrderHistory = () => {
   },[orders])
 
   const viewOrderDetail = (id) => {
-    setShowOrderDetail(true)
+    setShowOrderDetail(true);
     setHistoryOrderId(id);
   }
 

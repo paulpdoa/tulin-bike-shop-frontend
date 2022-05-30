@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { baseUrl } from '../../../helper/baseUrl';
+import Cookies from 'js-cookie';
 
 const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
 
@@ -39,6 +40,7 @@ const AdminNavbar = ({ setShowSidebar,showSidebar }) => {
         .then((data) => {
             navigate(data.data.redirect);
             localStorage.removeItem('adminName');
+            Cookies.remove('adminJwt');
         }).catch(err => console.log(err))
     }
 

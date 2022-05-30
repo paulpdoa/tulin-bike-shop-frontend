@@ -8,7 +8,7 @@ const ContactDetails = () => {
                 <div className="flex flex-col gap-5 items-center text-lg mt-5">
                     <p className="w-4/5 text-center">05 Lt. Aster Street, Sta. Cecilia 1 Subdivision, Tanza, Cavite 4108 Cavite</p>
                     <a href="#">tulinbikeshop@gmail.com</a>
-                    <p>482-3491-31</p>
+                    <p>(046)418-9524</p>
                 </div>
             </div>
         </div>

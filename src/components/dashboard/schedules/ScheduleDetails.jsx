@@ -2,6 +2,7 @@ import { AiOutlineCloseCircle,AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useEffect,useState } from 'react';
 import { putData } from '../../../helper/fetching';
 import { baseUrl } from '../../../helper/baseUrl';
+
 const ScheduleDetails = ({ setShowDetail,getDetail }) => {
    
     const imgLocation = 'https://tulinbikeshop.herokuapp.com/uploads/schedule/'

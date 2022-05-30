@@ -29,7 +29,7 @@ const TopProduct = () => {
     <section className="content py-20 md:py-0">
         <div className="max-content flex flex-col items-center justify-center md:h-screen">
             <div className="flex justify-center">
-                <h1 className="md:text-5xl text-4xl border-b-8 border-gray-300">Our Latest <span className="font-bold">Products</span></h1>
+                <h1 className="md:text-5xl text-4xl border-b-8 border-gray-300">Our Offered <span className="font-bold">Bicycles</span></h1>
             </div>
             <div className="flex flex-col md:flex-row gap-3 justify-around items-center py-20 md:w-full w-4/5">
               { topProducts.slice(0,4).map((topProduct) => (

@@ -2,7 +2,9 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../helper/Context';
 import { AiOutlineClose } from 'react-icons/ai';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import DownpaymentModal from './DownpaymentModal';
+import Cookies from 'js-cookie';
 
 const popVar = {
     hidden: {
@@ -26,11 +28,19 @@ const popVar = {
 
 const CustomBuildsModal = () => {
 
-    
-
     const { build:builds,setShowSelectedParts,numberFormat,active,setShowDp,showDp } = useContext(GlobalContext);
     const totalPrice = builds.reduce((total,build) => total + build.price ,0);
 
+    const navigate = useNavigate();
+
+    const sendBuildToAdmin = () => {
+        if(Cookies.get('customerJwt') !== undefined) {
+            setShowDp(true);
+        } else {
+            navigate('/login');
+        }
+    }
+ 
   return (
     <div className="bg-gray-800 text-gray-100 absolute w-full h-screen flex justify-center items-center bg-opacity-50 left-0">
         { showDp ? <DownpaymentModal /> : 
@@ -45,7 +55,7 @@ const CustomBuildsModal = () => {
                     <p className="font-semibold text-xl">₱{numberFormat.format(totalPrice)}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    { active === "groupset" && <button className="bg-orange-500 text-gray-100 p-2 rounded" onClick={() => setShowDp(true)}>Send your build</button> }
+                    { active === "groupset" && <button className="bg-orange-500 text-gray-100 p-2 rounded" onClick={sendBuildToAdmin}>Send your build</button> }
                     <button className="group" onClick={() => setShowSelectedParts(false)}><AiOutlineClose className="group-hover:scale-150 transition duration-300" /></button>
                 </div>
             </div>
